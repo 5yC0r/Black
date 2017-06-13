@@ -12,4 +12,14 @@ public class Cliente {
     int dni;
     int edad;
     
+    public Cliente(){
+        this.nombresApellidos = "";
+        this.telefonoContacto = "";
+        this.direccion = "";
+        this.fechaNacimiento = "";
+        this.correo = "";
+        
+        this.dni = 1;
+        this.edad = 1;
+    }
 }
