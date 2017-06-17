@@ -62,7 +62,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
@@ -70,7 +69,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
@@ -465,9 +463,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem23.setText("Mantenimiento de Almacen");
         jMenu9.add(jMenuItem23);
 
-        jMenuItem24.setText("Listado de Productos");
-        jMenu9.add(jMenuItem24);
-
         jMenu6.add(jMenu9);
 
         jMenu10.setText("Categoria");
@@ -494,13 +489,10 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu7.setText("Reportes");
 
-        jMenuItem16.setText("Reporte de Clientes");
-        jMenu7.add(jMenuItem16);
-
         jMenuItem17.setText("Reporte de Ventas");
         jMenu7.add(jMenuItem17);
 
-        jMenuItem19.setText("Reporte de Trabajadores");
+        jMenuItem19.setText("Reporte de Compras");
         jMenu7.add(jMenuItem19);
 
         jMenuItem18.setText("Reporte de Almacen");
@@ -576,7 +568,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
@@ -585,7 +576,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem3;
