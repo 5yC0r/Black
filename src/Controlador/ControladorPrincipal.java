@@ -5,8 +5,10 @@ import Vistas.Paneles.PanelDatosEmpresa;
 import Vistas.Paneles.PanelListadoClientes;
 import Vistas.Paneles.PanelRegistroCliente;
 import Vistas.Paneles.PanelRegistroTrabajador;
+import Vistas.Paneles.PanelListadoTrabajadores;
 import Vistas.Paneles.PanelUsuariosSistema;
-import Vistas.Paneles.PanelVentas;
+import Vistas.Paneles.PanelRegistroVentas;
+// import Vistas.Paneles.PanelRegistroVentas;
 import Vistas.Principal;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -25,6 +27,7 @@ public class ControladorPrincipal implements ActionListener{
         principal.miVenta.addActionListener(this);
         principal.miListadoClientes.addActionListener(this);
         principal.miDatosEmpresa.addActionListener(this);
+        principal.miListadoTrabajadores.addActionListener(this);
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ControladorPrincipal implements ActionListener{
                     principal.panelPrincipal.repaint();
                 }else{
                     if(ae.getSource() == principal.btnVenta || ae.getSource() == principal.miVenta){
-                        PanelVentas pv = new PanelVentas();
+                        PanelRegistroVentas pv = new PanelRegistroVentas();
                         pv.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                         principal.panelPrincipal.removeAll();
                         principal.panelPrincipal.add(pv, BorderLayout.CENTER);
@@ -82,6 +85,16 @@ public class ControladorPrincipal implements ActionListener{
                                 pde.setLocation(5,5);
                                 principal.panelPrincipal.revalidate();
                                 principal.panelPrincipal.repaint();
+                                }else{
+                                    if(ae.getSource() == principal.miListadoTrabajadores){
+                                    PanelListadoTrabajadores plt = new PanelListadoTrabajadores();
+                                    plt.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
+                                    principal.panelPrincipal.removeAll();
+                                    principal.panelPrincipal.add(plt, BorderLayout.CENTER);
+                                    plt.setLocation(5,5);
+                                    principal.panelPrincipal.revalidate();
+                                    principal.panelPrincipal.repaint();
+                                }
                             }
                         }
                     }

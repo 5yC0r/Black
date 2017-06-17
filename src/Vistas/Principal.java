@@ -46,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
         miUsuariosSistema = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         miRegistrarTrabajador = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        miListadoTrabajadores = new javax.swing.JMenuItem();
         miDatosEmpresa = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miAgregarCliente = new javax.swing.JMenuItem();
@@ -410,8 +410,8 @@ public class Principal extends javax.swing.JFrame {
         miRegistrarTrabajador.setText("Registro de Trabajadores");
         jMenu5.add(miRegistrarTrabajador);
 
-        jMenuItem12.setText("Listado de Trabajadores");
-        jMenu5.add(jMenuItem12);
+        miListadoTrabajadores.setText("Listado de Trabajadores");
+        jMenu5.add(miListadoTrabajadores);
 
         jMenu2.add(jMenu5);
 
@@ -565,7 +565,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem17;
@@ -587,6 +586,7 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem miAgregarCliente;
     public javax.swing.JMenuItem miDatosEmpresa;
     public javax.swing.JMenuItem miListadoClientes;
+    public javax.swing.JMenuItem miListadoTrabajadores;
     public javax.swing.JMenuItem miRegistrarTrabajador;
     public javax.swing.JMenuItem miUsuariosSistema;
     public javax.swing.JMenuItem miVenta;
