@@ -32,6 +32,8 @@ public class ControladorLogin implements ActionListener{
             if(rpta == 1){
                 principal.setVisible(true);
                 principal.setLocationRelativeTo(null);
+                principal.setExtendedState(Principal.MAXIMIZED_BOTH);
+                principal.setResizable(false);
                 login.dispose();
             }else{
                 System.out.println("datos erroneos");
