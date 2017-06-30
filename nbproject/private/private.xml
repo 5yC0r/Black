@@ -2,20 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Vistas/Paneles/PanelListadoProveedores.java</file>
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Controlador/ControladorPrincipal.java</file>
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Vistas/Principal.java</file>
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Modelo/DAO/EmpleadoDAO.java</file>
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Controlador/ControladorLogin.java</file>
-        <file>file:/C:/Users/MARIANA/Downloads/SISTEMA%20BB/-B4k-b--master/src/Controlador/ControladorBienvenida.java</file>
-    </open-files>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/BlackBar/src/Vistas/Paneles/PanelBonosyComisiones.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/BlackBar/src/Modelo/Conexion.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/BlackBar/src/Modelo/Usuario.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/BlackBar/src/Modelo/Empleado.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/ClienteDAO.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
