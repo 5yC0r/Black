@@ -25,7 +25,7 @@ public class EmpleadoDAO {
         String fechaPago,
         String hobby,
         char sexo,
-        char tipo,
+        //char tipo,
         int dni,
         int edad,
         float sueldo
@@ -49,7 +49,7 @@ public class EmpleadoDAO {
             ps.setString(8, fechaPago);
             ps.setString(9, hobby);
             ps.setString(10, String.valueOf(sexo));
-            ps.setString(11, String.valueOf(tipo));
+            //ps.setString(11, String.valueOf(tipo));
             ps.setInt(12, dni);
             ps.setInt(13, edad);
             ps.setFloat(14, sueldo);

@@ -14,6 +14,7 @@ public class Producto {
     int categoria;
     int stockProducto;
     int puntoPedidoPdto;
+    String numeroBoleta;
     
     ArrayList <PrecioProducto> listaPrecios;
     
@@ -28,6 +29,7 @@ public class Producto {
         categoria = 0;
         stockProducto = 0;
         puntoPedidoPdto= 0;
+        numeroBoleta ="";
         
         listaPrecios = new ArrayList();
     }
