@@ -6,9 +6,9 @@
         <group>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Vistas/Paneles/PanelRegistroVentas.java</file>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/EmpleadoDAO.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Cliente.java</file>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Vistas/Paneles/PanelRecarga.java</file>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Venta.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/VentaDAO.java</file>
         </group>
     </open-files>
 </project-private>

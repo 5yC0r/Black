@@ -35,7 +35,7 @@ public class CompraDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO compra"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

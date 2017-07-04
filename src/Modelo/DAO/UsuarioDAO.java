@@ -21,9 +21,8 @@ public class UsuarioDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO usuario"
-                    + "VALUES()"
-                    + "(?,?)";
+            String consulta = "INSERT INTO usuario (usuario,password)"
+                    + "VALUES (?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, usuario);

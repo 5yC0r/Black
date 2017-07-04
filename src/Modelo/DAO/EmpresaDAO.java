@@ -40,7 +40,7 @@ public class EmpresaDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO empresa"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

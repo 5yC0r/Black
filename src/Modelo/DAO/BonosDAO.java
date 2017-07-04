@@ -32,7 +32,7 @@ public class BonosDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO bono"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

@@ -34,7 +34,7 @@ public class ProveedorDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO proveedor"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

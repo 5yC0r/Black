@@ -33,7 +33,7 @@ public class ComisionesDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO comision"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

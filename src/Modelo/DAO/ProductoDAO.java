@@ -39,7 +39,7 @@ public class ProductoDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO producto"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

@@ -33,7 +33,7 @@ public class VentaDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO venta"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
