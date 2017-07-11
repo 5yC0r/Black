@@ -4,11 +4,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Vistas/Paneles/PanelRegistroVentas.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/EmpleadoDAO.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Vistas/Paneles/PanelRecarga.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Venta.java</file>
-            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/VentaDAO.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/DAO/UsuarioDAO.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Conexion.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Modelo/Usuario.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/-B4k-b-/src/Vistas/Paneles/PanelRegistroTrabajador.java</file>
         </group>
     </open-files>
 </project-private>
