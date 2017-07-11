@@ -1,13 +1,18 @@
 
 package Vistas;
 
+import javax.swing.ImageIcon;
+
 public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal1
      */
     public Principal() {
+        
         initComponents();
+        ImageIcon playBtn2 = new ImageIcon(getClass().getResource("/imagenes/products1.png"));
+        btnRegistroProducto.setRolloverIcon(playBtn2);
         //this.setExtendedState(MAXIMIZED_BOTH);
     }
 
