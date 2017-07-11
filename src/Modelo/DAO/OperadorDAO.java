@@ -29,7 +29,7 @@ public class OperadorDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO operador"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

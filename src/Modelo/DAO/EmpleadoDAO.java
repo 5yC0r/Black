@@ -35,7 +35,7 @@ public class EmpleadoDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO empleado"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

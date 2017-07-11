@@ -31,7 +31,7 @@ public class RecargaDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO recarga"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

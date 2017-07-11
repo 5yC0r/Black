@@ -1,16 +1,21 @@
 
 package Controlador;
 
+import Modelo.DAO.UsuarioDAO;
 import Vistas.Paneles.*;
 import Vistas.Principal;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
 public class ControladorPrincipal implements ActionListener{
     
     Principal principal;
+    int banderaGuardar = 0;
+    JInternalFrame internalFrameActual;
     
     public void darEventoBotones(){
         principal.btnAgregarCliente.addActionListener(this);
@@ -20,6 +25,7 @@ public class ControladorPrincipal implements ActionListener{
         principal.btnMiCompra.addActionListener(this);
         principal.btnCumpleaños.addActionListener(this);//falta usarla
         principal.btnNuevaRecarga.addActionListener(this);
+        principal.btnGuardar.addActionListener(this);
         
         principal.miAgregarCliente.addActionListener(this);
         principal.miRegistrarTrabajador.addActionListener(this);
@@ -35,15 +41,15 @@ public class ControladorPrincipal implements ActionListener{
         principal.misPromociones.addActionListener(this);
         principal.miRegistroProducto.addActionListener(this);
         principal.miListadoProducto.addActionListener(this);
-        principal.miNuevaCategoria.addActionListener(this);    
-        principal.miModificarCategoria.addActionListener(this);   
-        principal.miRegistroProveedor.addActionListener(this);          
-        principal.miListadoProveedores.addActionListener(this);        
-        principal.miReporteVentas.addActionListener(this);              
-        principal.miReporteCompras.addActionListener(this);                
-        principal.miNuevaCompra.addActionListener(this);                        
-        principal.miListadoCompras.addActionListener(this);                                
-        principal.miEmisionComprobante.addActionListener(this);                                         
+        principal.miNuevaCategoria.addActionListener(this);
+        principal.miModificarCategoria.addActionListener(this);
+        principal.miRegistroProveedor.addActionListener(this);
+        principal.miListadoProveedores.addActionListener(this);
+        principal.miReporteVentas.addActionListener(this);
+        principal.miReporteCompras.addActionListener(this);
+        principal.miNuevaCompra.addActionListener(this);
+        principal.miListadoCompras.addActionListener(this);
+        principal.miEmisionComprobante.addActionListener(this);                                     
     }
 
     @Override
@@ -73,11 +79,13 @@ public class ControladorPrincipal implements ActionListener{
         }else{
             if(ae.getSource() == principal.miRegistrarTrabajador){
                 PanelRegistroTrabajador prt = new PanelRegistroTrabajador();
+                banderaGuardar = 1;
+                setPanelActual(prt);
                 //prt.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                 principal.panelPrincipal.removeAll();
                 //principal.panelPrincipal.add(prt, BorderLayout.CENTER);
                 this.principal.panelPrincipal.add(prt);
-            prt.show();
+                prt.show();
                 prt.setLocation(5,5);
                 principal.panelPrincipal.revalidate();
                 principal.panelPrincipal.repaint();
@@ -313,6 +321,22 @@ public class ControladorPrincipal implements ActionListener{
                                 principal.panelPrincipal.revalidate();
                                 principal.panelPrincipal.repaint();
                                 }
+                            else{
+                                if(ae.getSource() == principal.btnGuardar){
+                                    if(banderaGuardar == 1){
+                                        PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
+                                        String usuario = prt.jtfUsuario.getText();
+                                        String clave = prt.jtfClaveUsuario.getText();
+
+                                        UsuarioDAO usuarioDao = new UsuarioDAO();
+                                        try {
+                                            usuarioDao.registrarNuevoUsuario(usuario, clave);
+                                        } catch (SQLException ex) {
+                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                    }
+                                }
+                            }
                             }
                             }
                             }
@@ -344,5 +368,8 @@ public class ControladorPrincipal implements ActionListener{
     public void setPrincipal(Principal principal) {
         this.principal = principal;
     }
-
+    
+    public void setPanelActual (JInternalFrame jif){
+        this.internalFrameActual = jif;
+    }
 }

@@ -35,7 +35,7 @@ public class ComprobanteDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO comprobante"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

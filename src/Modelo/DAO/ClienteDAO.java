@@ -27,7 +27,7 @@ public class ClienteDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO cliente"
-                    + "VALUES()"
+                    + "VALUES"
                     + "(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
