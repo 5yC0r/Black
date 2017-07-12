@@ -16,15 +16,16 @@ public class EmpleadoDAO {
     
     public void registrarNuevoEmpleado(
         String nombresApellidos, 
-        String telefonoContacto, 
+        String telefonoContacto,
+        String celular,
         String telefonoReferencia,
         String direccion,
         String fechaNacimiento,
         String correo,
         String numeroCuenta,
-        String fechaPago,
+        int fechaPago,
         String hobby,
-        char sexo,
+        String sexo,
         //char tipo,
         int dni,
         int edad,
@@ -34,22 +35,21 @@ public class EmpleadoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO empleado"
-                    + "VALUES"
-                    + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO empleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,edad,sueldo)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombresApellidos);
             ps.setString(2, telefonoContacto);
-            ps.setString(3, telefonoReferencia);
-            ps.setString(4, direccion);
-            ps.setString(5, fechaNacimiento);
-            ps.setString(6, correo);
-            ps.setString(7, numeroCuenta);
-            ps.setString(8, fechaPago);
-            ps.setString(9, hobby);
-            ps.setString(10, String.valueOf(sexo));
-            //ps.setString(11, String.valueOf(tipo));
+            ps.setString(3, celular);
+            ps.setString(4, telefonoReferencia);
+            ps.setString(5, direccion);
+            ps.setString(6, fechaNacimiento);
+            ps.setString(7, correo);
+            ps.setString(8, numeroCuenta);
+            ps.setInt(9, fechaPago);
+            ps.setString(10, hobby);
+            ps.setString(11, sexo);
             ps.setInt(12, dni);
             ps.setInt(13, edad);
             ps.setFloat(14, sueldo);

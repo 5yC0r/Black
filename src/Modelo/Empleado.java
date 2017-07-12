@@ -11,10 +11,10 @@ public class Empleado {
     String fechaNacimiento;
     String correo;
     String numeroCuenta;
-    String fechaPago;
+    int fechaPago;
     String hobby;
     
-    char sexo;
+    String sexo;
     //char tipo;  //persona natural o juridica/* esto es para cliente*/
     
     int dni;
@@ -33,10 +33,10 @@ public class Empleado {
         this.fechaNacimiento = "";
         this.correo = "";
         this.numeroCuenta = "";
-        this.fechaPago = "";
+        this.fechaPago = 0;
         this.hobby = "";
         
-        this.sexo = ' ';
+        this.sexo = "";
         //this.tipo = ' ';
         
         this.dni = 1231;
