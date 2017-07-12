@@ -11,7 +11,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         
         initComponents();
+        ImageIcon playBtn1 = new ImageIcon(getClass().getResource("/imagenes/save1.png"));
         ImageIcon playBtn2 = new ImageIcon(getClass().getResource("/imagenes/products1.png"));
+        btnGuardar.setRolloverIcon(playBtn1);
         btnRegistroProducto.setRolloverIcon(playBtn2);
         //this.setExtendedState(MAXIMIZED_BOTH);
     }

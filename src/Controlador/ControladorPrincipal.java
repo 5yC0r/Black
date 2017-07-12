@@ -324,16 +324,10 @@ public class ControladorPrincipal implements ActionListener{
                             else{
                                 if(ae.getSource() == principal.btnGuardar){
                                     if(banderaGuardar == 1){
-                                        PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
-                                        String usuario = prt.jtfUsuario.getText();
-                                        String clave = prt.jtfClaveUsuario.getText();
-
-                                        UsuarioDAO usuarioDao = new UsuarioDAO();
-                                        try {
-                                            usuarioDao.registrarNuevoUsuario(usuario, clave);
-                                        } catch (SQLException ex) {
-                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+                                        //PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
+                                        ControladorTrabajador ct = new ControladorTrabajador();
+                                        ct.setPanelRegistroTrabajador(internalFrameActual);
+                                        ct.insertarDatos();
                                     }
                                 }
                             }
