@@ -5,13 +5,13 @@ public class Usuario {
     //atributos
     String usuario;
     String contraseña;
-    String tipo;
+    String tipoUsuario;
     String fechaRegistro;
 
     public Usuario(String usuario, String contraseña) {
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.tipo = "";
+        this.tipoUsuario = "";
         this.fechaRegistro = "" ;
                 
         

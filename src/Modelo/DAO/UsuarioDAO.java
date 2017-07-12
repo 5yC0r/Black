@@ -15,18 +15,22 @@ public class UsuarioDAO {
     
     public void registrarNuevoUsuario(
         String usuario,
-        String password
+        String password,
+        String fechaRegistro,
+        String tipoUsuario
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO usuario (usuario,password)"
-                    + "VALUES (?,?)";
+            String consulta = "INSERT INTO usuario (usuario,password,fechaRegistro,tipoUsuario)"
+                    + "VALUES (?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, usuario);
             ps.setString(2, password);
+            ps.setString(3, fechaRegistro);
+            ps.setString(4, tipoUsuario );
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar usuario: "+e.toString());
