@@ -1,6 +1,8 @@
 
 package Modelo;
 
+import java.io.FileInputStream;
+
 public class Empresa {
     String nombre;
     String razonSocial;
@@ -8,11 +10,11 @@ public class Empresa {
     String ruc;
     String direccion;
     String telefono;
-    String email;   //Correo electronico
-    String web;     //Direccion url de pagina web
+    String celular;
+    String correoElectronico;   //Correo electronico
+    String paginaWeb;     //Direccion url de pagina web
     
-    String logo;    //Ruta del archivo de foto 
-    
+    FileInputStream foto;    //Ruta del archivo de foto 
     String descripcion; 
     
     public Empresa(){
@@ -22,11 +24,11 @@ public class Empresa {
         ruc = "";
         direccion = "";
         telefono = "";
-        email = "";
-        web = "";
+        celular = "";
+        correoElectronico = "";
+        paginaWeb = "";
         
-        logo = "";
-        
+        foto = null;        
         descripcion = "";
     }
 }

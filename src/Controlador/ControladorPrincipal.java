@@ -15,6 +15,7 @@ public class ControladorPrincipal implements ActionListener{
     
     Principal principal;
     int banderaGuardar = 0;
+    int v = 0;
     JInternalFrame internalFrameActual;
     
     public void darEventoBotones(){
@@ -68,11 +69,15 @@ public class ControladorPrincipal implements ActionListener{
         
         if(ae.getSource() == principal.btnAgregarCliente || ae.getSource() == principal.miAgregarCliente){
             PanelRegistroCliente prc = new PanelRegistroCliente();
+            banderaGuardar = 1;
+            v=1;
+            setPanelActual(prc);
             //prc.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
             principal.panelPrincipal.removeAll();
             //principal.panelPrincipal.add(prc, BorderLayout.CENTER);
             this.principal.panelPrincipal.add(prc);
             prc.show();
+            
             prc.setLocation(5,5);
             principal.panelPrincipal.revalidate();
             principal.panelPrincipal.repaint();
@@ -80,12 +85,14 @@ public class ControladorPrincipal implements ActionListener{
             if(ae.getSource() == principal.miRegistrarTrabajador){
                 PanelRegistroTrabajador prt = new PanelRegistroTrabajador();
                 banderaGuardar = 1;
+                v=2;
                 setPanelActual(prt);
                 //prt.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                 principal.panelPrincipal.removeAll();
                 //principal.panelPrincipal.add(prt, BorderLayout.CENTER);
                 this.principal.panelPrincipal.add(prt);
                 prt.show();
+                
                 prt.setLocation(5,5);
                 principal.panelPrincipal.revalidate();
                 principal.panelPrincipal.repaint();
@@ -96,7 +103,7 @@ public class ControladorPrincipal implements ActionListener{
                     principal.panelPrincipal.removeAll();
                     //principal.panelPrincipal.add(pus, BorderLayout.CENTER);
                     this.principal.panelPrincipal.add(pus);
-            pus.show();
+                    pus.show();
                     pus.setLocation(5,5);
                     principal.panelPrincipal.revalidate();
                     principal.panelPrincipal.repaint();
@@ -125,6 +132,9 @@ public class ControladorPrincipal implements ActionListener{
                         }else{
                             if(ae.getSource() == principal.miDatosEmpresa){
                                 PanelDatosEmpresa pde = new PanelDatosEmpresa();
+                                banderaGuardar = 1;
+                                v=4;
+                                setPanelActual(pde);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -158,8 +168,11 @@ public class ControladorPrincipal implements ActionListener{
                             }else{
                             if(ae.getSource() == principal.miBonosyComisiones){
                                 PanelBonosyComisiones pbc = new PanelBonosyComisiones();
+                                banderaGuardar = 1;
+                                v=3;
+                                setPanelActual(pbc);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
-                                //principal.panelPrincipal.removeAll();
+                                principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                 pbc.setLocation(5,5);
                                 this.principal.panelPrincipal.add(pbc);
@@ -324,10 +337,41 @@ public class ControladorPrincipal implements ActionListener{
                             else{
                                 if(ae.getSource() == principal.btnGuardar){
                                     if(banderaGuardar == 1){
-                                        //PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
-                                        ControladorTrabajador ct = new ControladorTrabajador();
-                                        ct.setPanelRegistroTrabajador(internalFrameActual);
-                                        ct.insertarDatos();
+                                        if(v == 1){
+                                            PanelRegistroCliente prc = (PanelRegistroCliente) internalFrameActual;
+                                            ControladorCliente cc = new ControladorCliente();
+                                            cc.setPanelRegistroCliente(internalFrameActual);
+                                            cc.insertarDatos();
+                                            }
+                                        else{
+                                            if(v == 2){
+                                            PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
+                                            ControladorTrabajador ct = new ControladorTrabajador();
+                                            ct.setPanelRegistroTrabajador(internalFrameActual);
+                                            ct.insertarDatos();
+                                            }
+                                            else{
+                                                if(v == 3){
+                                            PanelBonosyComisiones pbc = (PanelBonosyComisiones) internalFrameActual;
+                                            ControladorIncentivos ci = new ControladorIncentivos();
+                                            ci.setPanelBonosyComisiones(internalFrameActual);
+                                            ci.insertarDatos();
+                                            }
+                                            else{
+                                                    if(v == 4){
+                                            PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
+                                            ControladorEmpresa ce = new ControladorEmpresa();
+                                            ce.setPanelDatosEmpresa(internalFrameActual);
+                                            ce.insertarDatos();
+                                            }
+                                            else{
+
+                                            }
+                                            }
+                                            }
+                                           
+                                        }
+                                                                                                                   
                                     }
                                 }
                             }

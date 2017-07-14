@@ -8,6 +8,7 @@ import Modelo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.io.FileInputStream;
 
 /**
  *
@@ -28,20 +29,20 @@ public class EmpresaDAO {
         String ruc,
         String direccion,
         String telefono,
-        String email,   //Correo electronico
-        String web,     //Direccion url de pagina web
-
-        String logo,    //Ruta del archivo de foto 
-
+        String celular,
+        String correoElectronico,
+        String paginaWeb,     //Direccion url de pagina web
+        //String imagenLogo,    //Ruta del archivo de foto 
+        FileInputStream foto,
+       int longFoto,
         String descripcion
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO empresa"
-                    + "VALUES"
-                    + "(?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO empresa(nombre,razonSocial,representanteLegal,ruc,direccion,telefono,celular,correoElectronico,paginaWeb,foto,descripcion)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombre);
@@ -50,10 +51,11 @@ public class EmpresaDAO {
             ps.setString(4, ruc);
             ps.setString(5, direccion);
             ps.setString(6, telefono);
-            ps.setString(7, email);
-            ps.setString(8, web);
-            ps.setString(9, logo);
-            ps.setString(10, descripcion);
+            ps.setString(7, celular);
+            ps.setString(8, correoElectronico);
+            ps.setString(9, paginaWeb);
+            ps.setBlob(10, foto, longFoto);
+            ps.setString(11, descripcion);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar datos de la empresa: "+e.toString());

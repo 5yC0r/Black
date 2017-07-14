@@ -3,23 +3,35 @@ package Modelo;
 
 public class Cliente {
     //Atributos
+    String tipoCliente;
+    String tipoDoc;
+    String numDoc;
+    String razonSocial;
     String nombresApellidos;
-    String telefonoContacto;
-    String direccion;
     String fechaNacimiento;
-    String correo;
-    
-    int dni;
-    int edad;
+    String sexoCliente;
+    String telefonoCliente;
+    String celularCliente;
+    String correoCliente;
+    String direccion;
+
+    String vendedor;
+    String fechaRegistroCliente;
     
     public Cliente(){
+        this.tipoCliente = "";
+        this.tipoDoc = "";
+        this.numDoc = "";
+        this.razonSocial = "";
         this.nombresApellidos = "";
-        this.telefonoContacto = "";
-        this.direccion = "";
         this.fechaNacimiento = "";
-        this.correo = "";
-        
-        this.dni = 1;
-        this.edad = 1;
+        this.sexoCliente = "";
+        this.telefonoCliente = "";
+        this.celularCliente = "";
+        this.correoCliente = "";
+        this.direccion = "";
+                
+        this.vendedor = "";
+        this.fechaRegistroCliente = "";
     }
 }

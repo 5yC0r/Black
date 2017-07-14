@@ -24,6 +24,7 @@ public class Empleado {
     
     
     
+    
     public Empleado(){
         this.nombresApellidos = "";
         this.telefonoContacto = "";
@@ -43,5 +44,7 @@ public class Empleado {
         this.edad = 1;
         
         this.sueldo = 0.0f;
+        
+        
     }
 }
