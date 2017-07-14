@@ -1,157 +1,93 @@
--- phpMyAdmin SQL Dump
--- version 4.0.9
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2017 a las 01:32:27
--- Versión del servidor: 5.5.34
--- Versión de PHP: 5.4.22
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: basebb
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.0.17-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `basebb`
+-- Table structure for table `empleado`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cliente`
---
-
-CREATE TABLE IF NOT EXISTS `cliente` (
-  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoCliente` varchar(15) NOT NULL,
-  `tipoDoc` varchar(15) NOT NULL,
-  `numDoc` varchar(20) NOT NULL,
-  `razonSocial` varchar(50) DEFAULT NULL,
-  `nombresApellidos` varchar(50) DEFAULT NULL,
-  `fechaNacimiento` varchar(15) DEFAULT NULL,
-  `sexoCliente` varchar(12) DEFAULT NULL,
-  `telefonoCliente` varchar(20) DEFAULT NULL,
-  `celularCliente` varchar(20) DEFAULT NULL,
-  `correoCliente` varchar(40) DEFAULT NULL,
-  `direccion` varchar(60) DEFAULT NULL,
-  `vendedor` varchar(50) NOT NULL,
-  `fechaRegistroCliente` varchar(15) NOT NULL,
-  PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `cliente`
---
-
-INSERT INTO `cliente` (`idCliente`, `tipoCliente`, `tipoDoc`, `numDoc`, `razonSocial`, `nombresApellidos`, `fechaNacimiento`, `sexoCliente`, `telefonoCliente`, `celularCliente`, `correoCliente`, `direccion`, `vendedor`, `fechaRegistroCliente`) VALUES
-(1, 'Persona Natural', 'DNI', '47328084', '-', 'mariana meliza ejdkk', '24/09/1992', 'Femenino', '-', '984858696', 'askasjakls', 'sajdkdkn', 'wsjkdnwldedlwk', '13/07/2017'),
-(2, 'Persona Natural', 'DNI', '5421', 'dfddfff', '-', '19/09/1990', 'Masculino', '-', '5475', 'ghjkldfgbhnjkl', 'hnjsdffffd', 'SDDJJDKKJ', '13/07/2017'),
-(3, 'Persona Natural', 'DNI', '5421', 'dfddfff', '-', '19/09/1990', 'Masculino', '-', '5475', 'ghjkldfgbhnjkl', 'hnjsdffffd', 'SDDJJDKKJ', '13/07/2017');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empleado`
---
-
-CREATE TABLE IF NOT EXISTS `empleado` (
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  `dniTrabajador` int(10) NOT NULL,
   `nombresApellidos` varchar(50) NOT NULL,
-  `telefonoContacto` varchar(20) NOT NULL,
+  `telefonoContacto` varchar(15) NOT NULL,
   `celular` varchar(20) NOT NULL,
   `telefonoReferencia` varchar(20) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `fechaNacimiento` varchar(12) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `numeroCuenta` varchar(20) NOT NULL,
-  `fechaPago` int(4) NOT NULL,
-  `hobby` varchar(30) NOT NULL,
-  `sexo` varchar(12) NOT NULL,
-  `dni` int(12) NOT NULL,
+  `numeroCuenta` varchar(30) NOT NULL,
+  `fechaPago` varchar(4) NOT NULL,
+  `hobby` varchar(20) NOT NULL,
+  `sexo` char(2) NOT NULL,
   `edad` int(4) NOT NULL,
   `sueldo` float NOT NULL,
-  PRIMARY KEY (`dni`)
+  PRIMARY KEY (`dniTrabajador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `empleado`
+-- Dumping data for table `empleado`
 --
 
-INSERT INTO `empleado` (`nombresApellidos`, `telefonoContacto`, `celular`, `telefonoReferencia`, `direccion`, `fechaNacimiento`, `correo`, `numeroCuenta`, `fechaPago`, `hobby`, `sexo`, `dni`, `edad`, `sueldo`) VALUES
-('maria del barrio cepeda bosques', '102050', '987821589', '985695874', 'los alurekes 1546', '02/08/1992', 'maajahd@gmail.com', '170-2569874-2589', 5, 'cantar', 'Femenino', 10203040, 25, 850),
-('mariana meliza segura mendoza', '402121', '987821639', '985362861', 'mz p lt 2  sect 3 alto trujillo', '24/09/1992', 'marianamsm.24@gmail.com', '170-15264-458 bcp', 12, 'escuchar musica', 'Femenino', 47328084, 24, 850.6);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empresa`
---
-
-CREATE TABLE IF NOT EXISTS `empresa` (
-  `nombre` varchar(50) NOT NULL,
-  `razonSocial` varchar(60) NOT NULL,
-  `representanteLegal` varchar(50) NOT NULL,
-  `ruc` varchar(15) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `celular` varchar(20) NOT NULL,
-  `correoElectronico` varchar(30) NOT NULL,
-  `paginaWeb` varchar(30) NOT NULL,
-  `foto` longblob NOT NULL,
-  `descripcion` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `incentivo`
+-- Table structure for table `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `incentivo` (
-  `tipoIncentivo` varchar(15) NOT NULL,
-  `nombreIncentivo` varchar(30) NOT NULL,
-  `cantidadIncentivo` varchar(8) NOT NULL,
-  `sueldoVenta` varchar(15) NOT NULL,
-  `estadoIncentivo` varchar(12) NOT NULL,
-  `descripcionIncentivo` varchar(150) NOT NULL,
-  `fechaIncentivo` varchar(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `incentivo`
---
-
-INSERT INTO `incentivo` (`tipoIncentivo`, `nombreIncentivo`, `cantidadIncentivo`, `sueldoVenta`, `estadoIncentivo`, `descripcionIncentivo`, `fechaIncentivo`) VALUES
-('Bono', 'zjxnxkjznckn', '20%', 'Sueldo', 'Activado', 'dffm,fndmdnffdfdfs', '13/07/2017');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE IF NOT EXISTS `usuario` (
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `fechaRegistro` varchar(12) NOT NULL,
-  `tipoUsuario` varchar(15) NOT NULL,
+  `FechaRegistro` varchar(12) DEFAULT NULL,
+  `Cargo` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `usuario`, `password`, `fechaRegistro`, `tipoUsuario`) VALUES
-(6, 'alex', '102030', 'dd/MM/yyyy', 'Trabajador'),
-(11, 'tefa', '121416', '11/07/2017', 'Trabajador'),
-(13, 'mariana', '102030', '12/07/2017', 'Trabajador');
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'jflion','654321','',''),(2,'jesus','321456',NULL,NULL);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Dumping routines for database 'basebb'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-07-03 23:46:33
