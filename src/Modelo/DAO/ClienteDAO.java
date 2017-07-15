@@ -1,16 +1,17 @@
 
 package Modelo.DAO;
 
+import Modelo.Cliente;
 import Modelo.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ClienteDAO {
-    Conexion conexion;
     
     public ClienteDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarNuevoCliente(
@@ -29,7 +30,7 @@ public class ClienteDAO {
         String vendedor,
         String fechaRegistroCliente
     ) throws SQLException{
-        
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
@@ -64,4 +65,45 @@ public class ClienteDAO {
             }
         }
     }
+    
+    public Cliente obtenerCliente(int codCliente) throws SQLException{
+        Conexion conexion = new Conexion();
+        Cliente cliente = new Cliente();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM cliente where idCliente='"+codCliente+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cliente.setTipoCliente(rs.getString(2));
+                cliente.setTipoDoc(rs.getString(3));
+                cliente.setNumDoc(rs.getString(4));
+                cliente.setRazonSocial(rs.getString(5));
+                cliente.setNombresApellidos(rs.getString(6));
+                cliente.setFechaNacimiento(rs.getString(7));
+                cliente.setSexoCliente(rs.getString(8));
+                cliente.setTelefonoCliente(rs.getString(9));
+                cliente.setCelularCliente(rs.getString(10));
+                cliente.setCorreoCliente(rs.getString(11));
+                cliente.setDireccion(rs.getString(12));
+                cliente.setVendedor(rs.getString(13));
+                cliente.setFechaRegistroCliente(rs.getString(14));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos de cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        System.out.println(cliente.getNombresApellidos());
+        System.out.println(cliente.getFechaRegistroCliente());
+        return cliente;
+    }
 }
+

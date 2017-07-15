@@ -98,8 +98,8 @@ public class EmpleadoDAO {
                 accesoBD.close();
             }
         }
-        System.out.println(empleado.getNombresApellidos());
-        System.out.println(empleado.getFechaNacimiento());
+        //System.out.println(empleado.getNombresApellidos());
+        //System.out.println(empleado.getFechaNacimiento());
         return empleado;
     }
     
@@ -145,6 +145,31 @@ public class EmpleadoDAO {
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al actualizar empleado: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+    }
+    
+    
+    public void eliminarEmpleado() throws SQLException{
+        int codEmpleado = 1;
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "UPDATE empleado SET estado = '0'"
+                    + "WHERE codEmpleado = ? ";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ps.setInt(1, codEmpleado);
+            ps.execute();            
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar empleado: "+e.toString());
         }finally{
             if (ps != null) {
                 ps.close();

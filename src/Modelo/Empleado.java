@@ -19,6 +19,8 @@ public class Empleado {
     int dni;
     
     float sueldo;
+    
+    int estado;     //Activo o no - para hacer la eliminacion logica
 
     public Empleado(){
         this.codEmpleado = 0;
@@ -38,6 +40,8 @@ public class Empleado {
         this.dni = 1231;
        
         this.sueldo = 0.0f;
+        
+        this.estado = 1;
     }
 
     public int getCodEmpleado() {
@@ -151,4 +155,13 @@ public class Empleado {
     public void setSueldo(float sueldo) {
         this.sueldo = sueldo;
     } 
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+    
 }
