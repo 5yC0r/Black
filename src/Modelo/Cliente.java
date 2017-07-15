@@ -15,7 +15,6 @@ public class Cliente {
     String correoCliente;
     String direccion;
 
-    String vendedor;
     String fechaRegistroCliente;
     
     public Cliente(){
@@ -31,7 +30,6 @@ public class Cliente {
         this.correoCliente = "";
         this.direccion = "";
                 
-        this.vendedor = "";
         this.fechaRegistroCliente = "";
     }
 }

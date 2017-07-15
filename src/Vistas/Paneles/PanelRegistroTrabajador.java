@@ -94,6 +94,9 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Edad:");
 
+        jtfEdadTrab.setEditable(false);
+        jtfEdadTrab.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel3.setText("Dirección:");
 
         jLabel5.setText("Teléfono Fijo:");

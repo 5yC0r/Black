@@ -1,14 +1,10 @@
 
 package Controlador;
 
-import Modelo.DAO.UsuarioDAO;
 import Vistas.Paneles.*;
 import Vistas.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
 public class ControladorPrincipal implements ActionListener{

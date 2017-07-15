@@ -138,11 +138,6 @@ public class Principal extends javax.swing.JFrame {
         btnVenta.setInheritsPopupMenu(true);
         btnVenta.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVentaMouseEntered(evt);
-            }
-        });
 
         btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/18871160_1323438661074741_1415227982_n.png"))); // NOI18N
         btnReporte.setText("Reporte");
@@ -268,11 +263,6 @@ public class Principal extends javax.swing.JFrame {
         jButton2.setIconTextGap(1);
         jButton2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -450,11 +440,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.add(miVenta);
 
         miListadoVentas.setText("Listado de Ventas");
-        miListadoVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListadoVentasActionPerformed(evt);
-            }
-        });
         jMenu4.add(miListadoVentas);
 
         miEmisionComprobante.setText("Emision de Comprobante");
@@ -466,11 +451,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu16.add(miNuevaRecarga);
 
         miOperadorTel.setText("Operadores Tel.");
-        miOperadorTel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miOperadorTelActionPerformed(evt);
-            }
-        });
         jMenu16.add(miOperadorTel);
 
         jMenu4.add(jMenu16);
@@ -561,22 +541,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentaMouseEntered
-        System.out.println("has pasado por encima");//por si deseamos crear un efecto "hover"
-    }//GEN-LAST:event_btnVentaMouseEntered
-
-    private void miOperadorTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOperadorTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miOperadorTelActionPerformed
-
-    private void miListadoVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoVentasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miListadoVentasActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregarCliente;
