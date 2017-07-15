@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2017 a las 05:49:41
+-- Tiempo de generación: 15-07-2017 a las 18:32:18
 -- Versión del servidor: 10.0.17-MariaDB
 -- Versión de PHP: 5.6.14
 
@@ -72,16 +72,17 @@ CREATE TABLE `empleado` (
   `hobby` varchar(30) NOT NULL,
   `sexo` varchar(12) NOT NULL,
   `dni` int(12) NOT NULL,
-  `sueldo` float NOT NULL
+  `sueldo` float NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`codEmpleado`, `nombresApellidos`, `telefonoContacto`, `celular`, `telefonoReferencia`, `direccion`, `fechaNacimiento`, `correo`, `numeroCuenta`, `fechaPago`, `hobby`, `sexo`, `dni`, `sueldo`) VALUES
-(1, 'maria del barrio cepeda bosques', '102050', '987821589', '985695874', 'los alurekes 1546', '02/08/1992', 'maajahd@gmail.com', '170-2569874-2589', 5, 'cantar', 'Femenino', 10203040, 850),
-(2, 'anito julio', '66666', '', '', '', '', '', '', 0, '', 'na', 0, 0);
+INSERT INTO `empleado` (`codEmpleado`, `nombresApellidos`, `telefonoContacto`, `celular`, `telefonoReferencia`, `direccion`, `fechaNacimiento`, `correo`, `numeroCuenta`, `fechaPago`, `hobby`, `sexo`, `dni`, `sueldo`, `estado`) VALUES
+(1, 'maria del barrio cepeda bosques', '102050', '987821589', '985695874', 'los alurekes 1546', '02/08/1992', 'maajahd@gmail.com', '170-2569874-2589', 5, 'cantar', 'Femenino', 10203040, 850, 0),
+(2, 'anito julio', '66666', '', '', '', '', '', '', 0, '', 'na', 0, 0, 1);
 
 -- --------------------------------------------------------
 
