@@ -156,13 +156,12 @@ public class EmpleadoDAO {
     }
     
     
-    public void eliminarEmpleado() throws SQLException{
-        int codEmpleado = 1;
+    public void eliminarEmpleado(int codEmpleado) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "UPDATE empleado SET estado = '0'"
+            String consulta = "UPDATE empleado SET estadoEmpleado = '0'"
                     + "WHERE codEmpleado = ? ";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);

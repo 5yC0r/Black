@@ -105,5 +105,83 @@ public class ClienteDAO {
         System.out.println(cliente.getFechaRegistroCliente());
         return cliente;
     }
+    
+    public void actualizarCliente(
+        //int codCliente,
+        String tipoCliente,
+        String tipoDoc,
+        String numDoc,
+        String razonSocial,
+        String nombresApellidos,
+        String fechaNacimiento,
+        String sexoCliente,
+        String telefonoCliente,
+        String celularCliente,
+        String correoCliente,
+        String direccion,
+
+        String vendedor,
+        String fechaRegistroCliente
+    ) throws SQLException{
+        int codCliente = 1;
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "UPDATE cliente SET tipoCliente = ?, tipoDoc = ?, numDoc = ? ,razonSocial = ?,nombresApellidos = ?,fechaNacimiento = ?,sexoCliente = ?,telefonoCliente = ?,celularCliente = ?,correoCliente = ?,direccion = ?,vendedor = ?,fechaRegistroCliente = ?"
+                    + "WHERE codCliente = ? ";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ps.setString(1, tipoCliente);
+            ps.setString(2, tipoDoc);
+            ps.setString(3, numDoc);
+            ps.setString(4, razonSocial);
+            ps.setString(5, nombresApellidos);
+            ps.setString(6, fechaNacimiento);
+            ps.setString(7, sexoCliente);
+            ps.setString(8, telefonoCliente);
+            ps.setString(9, celularCliente);
+            ps.setString(10, correoCliente);
+            ps.setString(11, direccion);
+            
+            ps.setString(12, vendedor);
+            ps.setString(13, fechaRegistroCliente);
+            ps.setInt(14, codCliente);
+            ps.execute();            
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+    }
+    
+    public void eliminarCliente(int codCliente) throws SQLException{
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "UPDATE cliente SET estadoCliente = '0'"
+                    + "WHERE codCliente = ? ";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ps.setInt(1, codCliente);
+            ps.execute();            
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+    }
 }
 
