@@ -25,19 +25,19 @@ public class ControladorLogin implements ActionListener{
             String user = login.tfUsuario.getText();
             String contra = String.valueOf(login.tfContra.getPassword());
             
-            usuario = new Usuario(user, contra);
+            //usuario = new Usuario(user, contra);
             
-            int rpta = usuario.validarUsuario(user, contra);
+            //int rpta = usuario.validarUsuario(user, contra);
             
-            if(rpta == 1){
+            //if(rpta == 1){
                 principal.setVisible(true);
                 principal.setLocationRelativeTo(null);
                 principal.setExtendedState(Principal.MAXIMIZED_BOTH);
                 principal.setResizable(false);
                 login.dispose();
-            }else{
+            //}else{
                 System.out.println("datos erroneos");
-            }
+            //}
             
         }else{
             if(ae.getSource() == login.btnSalir){
