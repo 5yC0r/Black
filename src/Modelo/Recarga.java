@@ -11,12 +11,12 @@ package Modelo;
 public class Recarga {
     
     String numeroCelular;
-    int operador;
-    float importe;
+    String nombreOperador;
+    float cantidadRecargada;
    
     public Recarga(){
         this.numeroCelular = "";
-        this.operador = 1;
-        this.importe = 0.1f;
+        this.nombreOperador = "";
+        this.cantidadRecargada = 0.1f;
     }
 }

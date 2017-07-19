@@ -21,6 +21,7 @@ public class ControladorEmpresa {
     
     PanelDatosEmpresa pde;
     DateFormat df = DateFormat.getDateInstance();
+    String rutaImagen ="";
     
     public void setPanelDatosEmpresa(JInternalFrame jif) {
         this.pde = (PanelDatosEmpresa) jif;
@@ -39,15 +40,12 @@ public class ControladorEmpresa {
             String celular = pde.jtfCelular.getText();
             String correoElectronico = pde.jtfCorreoElectronico.getText();
             String paginaWeb = pde.jtfPaginaWeb.getText();     //Direccion url de pagina web
-            FileInputStream foto = pde.fis;   //Ruta del archivo de foto
-            int longFoto = pde.longitudImage;
+            String foto = rutaImagen;   //Ruta del archivo de foto
             String descripcion = pde.jtaDescripcion.getText();
 
-            //String descripcionIncentivo = pbc.jtfDescripcionIncentivo.getText();
-            //String fechaIncentivo = df.format(pbc.jdcFechaIncentivo.getDate());
         
         try {
-            empresaDao.registrarDatosEmpresa(nombre,razonSocial,representanteLegal,ruc,direccion,telefono,celular,correoElectronico,paginaWeb,foto,longFoto,descripcion);
+            empresaDao.registrarDatosEmpresa(nombre,razonSocial,representanteLegal,ruc,direccion,telefono,celular,correoElectronico,paginaWeb,foto,descripcion);
         } catch (SQLException ex) {
            
              Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);

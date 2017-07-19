@@ -32,9 +32,7 @@ public class EmpresaDAO {
         String celular,
         String correoElectronico,
         String paginaWeb,     //Direccion url de pagina web
-        //String imagenLogo,    //Ruta del archivo de foto 
-        FileInputStream foto,
-       int longFoto,
+        String foto,    //Ruta del archivo de foto 
         String descripcion
     ) throws SQLException{
         
@@ -54,7 +52,7 @@ public class EmpresaDAO {
             ps.setString(7, celular);
             ps.setString(8, correoElectronico);
             ps.setString(9, paginaWeb);
-            ps.setBlob(10, foto, longFoto);
+            ps.setString(10, foto);
             ps.setString(11, descripcion);
             ps.execute();            
         } catch (SQLException e) {

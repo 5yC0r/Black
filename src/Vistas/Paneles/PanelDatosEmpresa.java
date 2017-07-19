@@ -24,9 +24,7 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelDatosEmpresa1
      */
-    public FileInputStream fis;
-    public int longitudImage;
-    
+      
     public PanelDatosEmpresa() {
         initComponents();
     }
@@ -284,25 +282,19 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
     private void jbSubirLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSubirLogoActionPerformed
        
         JFileChooser archivo = new JFileChooser();
-        int ventana = archivo.showOpenDialog(null);
+            int ventana = archivo.showOpenDialog(null);
+        
         if(ventana == JFileChooser.APPROVE_OPTION)
         {
-            try {
-                // File file = archivo.getSelectedFile();
-                 fis = new FileInputStream(archivo.getSelectedFile());
-                 this.longitudImage = (int)archivo.getSelectedFile().length();
+                File file = archivo.getSelectedFile();
+                String rutaImagen = String.valueOf(file);
+                System.out.println(rutaImagen);
                 
-                    Image icono = ImageIO.read(archivo.getSelectedFile()).getScaledInstance(ImagenLogo.getWidth(),ImagenLogo.getHeight(), Image.SCALE_DEFAULT);
-                    ImagenLogo.setIcon(new ImageIcon(icono));
-                    ImagenLogo.updateUI();
-                 
-                 
-            } catch (IOException ex) {
-                    ex.printStackTrace();
-                    //Logger.getLogger(PanelDatosEmpresa.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-            
+                Image icono = getToolkit().getImage(rutaImagen);
+                icono = icono.getScaledInstance(ImagenLogo.getWidth(), ImagenLogo.getHeight(), Image.SCALE_DEFAULT);
+                ImagenLogo.setIcon(new ImageIcon(icono));
+                  
+             
         }
     }//GEN-LAST:event_jbSubirLogoActionPerformed
 

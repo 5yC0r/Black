@@ -178,6 +178,9 @@ public class ControladorPrincipal implements ActionListener{
                             }else{
                             if(ae.getSource() == principal.miNuevaRecarga || ae.getSource() == principal.btnNuevaRecarga){
                                 PanelRecarga pnr = new PanelRecarga();
+                                banderaGuardar=1;
+                                v=6;
+                                setPanelActual(pnr);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -189,6 +192,9 @@ public class ControladorPrincipal implements ActionListener{
                             }else{
                             if(ae.getSource() == principal.miOperadorTel){
                                 AgregarOperador pao = new AgregarOperador();
+                                banderaGuardar = 1;
+                                v=5;
+                                setPanelActual(pao);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -233,6 +239,9 @@ public class ControladorPrincipal implements ActionListener{
                                 }else{
                             if(ae.getSource() == principal.miNuevaCategoria){
                                 PanelNuevaCategoria pnc = new PanelNuevaCategoria();
+                                banderaGuardar = 1;
+                                v=7;
+                                setPanelActual(pnc);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -316,6 +325,7 @@ public class ControladorPrincipal implements ActionListener{
                                 plc.setLocation(5,5);
                                 this.principal.panelPrincipal.add(plc);
                                 plc.show();
+                                
                                 principal.panelPrincipal.revalidate();
                                 principal.panelPrincipal.repaint();
                                 }else{
@@ -336,32 +346,56 @@ public class ControladorPrincipal implements ActionListener{
                                         if(v == 1){
                                             PanelRegistroCliente prc = (PanelRegistroCliente) internalFrameActual;
                                             ControladorCliente cc = new ControladorCliente();
-                                            cc.setPanelRegistroCliente(internalFrameActual);
+                                            cc.setPanelRegistroCliente(prc);
                                             cc.insertarDatos();
                                             }
                                         else{
                                             if(v == 2){
                                             PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
                                             ControladorTrabajador ct = new ControladorTrabajador();
-                                            ct.setPanelRegistroTrabajador(internalFrameActual);
+                                            ct.setPanelRegistroTrabajador(prt);
                                             ct.insertarDatos();
                                             }
                                             else{
                                                 if(v == 3){
                                             PanelBonosyComisiones pbc = (PanelBonosyComisiones) internalFrameActual;
                                             ControladorIncentivos ci = new ControladorIncentivos();
-                                            ci.setPanelBonosyComisiones(internalFrameActual);
+                                            ci.setPanelBonosyComisiones(pbc);
                                             ci.insertarDatos();
                                             }
                                             else{
                                                     if(v == 4){
                                             PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
                                             ControladorEmpresa ce = new ControladorEmpresa();
-                                            ce.setPanelDatosEmpresa(internalFrameActual);
+                                            ce.setPanelDatosEmpresa(pde);
                                             ce.insertarDatos();
                                             }
                                             else{
+                                                        if(v == 5){
+                                            AgregarOperador pao = (AgregarOperador) internalFrameActual;
+                                            ControladorOperador co = new ControladorOperador();
+                                            co.setAgregarOperador(pao);
+                                            co.insertarDatos();
+                                            }
+                                            else{
+                                                            if(v == 6){
+                                            PanelRecarga pnr = (PanelRecarga) internalFrameActual;
+                                            ControladorRecarga cr = new ControladorRecarga();
+                                            cr.setPanelRecarga(pnr);
+                                            cr.insertarDatos();
+                                            }
+                                            else{
+                                                               if(v == 7){
+                                            PanelNuevaCategoria pnc= (PanelNuevaCategoria) internalFrameActual;
+                                            ControladorCategoria cc = new ControladorCategoria();
+                                            cc.setPanelNuevaCategoria(pnc);
+                                            cc.insertarDatos();
+                                            }
+                                            else{
 
+                                            }
+                                            }
+                                            }
                                             }
                                             }
                                             }

@@ -23,21 +23,20 @@ public class RecargaDAO {
     
     public void registrarRecarga(
         String numeroCelular,
-        int operador,
-        float importe
+        String nombreOperador,
+        float cantidadRecargada
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO recarga"
-                    + "VALUES"
-                    + "(?,?,?)";
+            String consulta = "INSERT INTO recarga(numeroCelular,nombreOperador,cantidadRecargada)"
+                    + "VALUES(?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, numeroCelular);
-            ps.setInt(2, operador);
-            ps.setFloat(3, importe);
+            ps.setString(2, nombreOperador);
+            ps.setFloat(3, cantidadRecargada);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar la recarga: "+e.toString());
