@@ -63,7 +63,7 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
         jtaDescripcion = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        ImagenLogo = new javax.swing.JLabel();
+        lblImagenLogo = new javax.swing.JLabel();
         jbSubirLogo = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
 
@@ -185,39 +185,32 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ImagenLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImagenLogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblImagenLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagenLogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jbSubirLogo.setText("Subir");
-        jbSubirLogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSubirLogoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ImagenLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jbSubirLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 18, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(lblImagenLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jbSubirLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(ImagenLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(lblImagenLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbSubirLogo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel12.setText("Logo");
@@ -273,33 +266,13 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbSubirLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSubirLogoActionPerformed
-       
-        JFileChooser archivo = new JFileChooser();
-            int ventana = archivo.showOpenDialog(null);
-        
-        if(ventana == JFileChooser.APPROVE_OPTION)
-        {
-                File file = archivo.getSelectedFile();
-                String rutaImagen = String.valueOf(file);
-                System.out.println(rutaImagen);
-                
-                Image icono = getToolkit().getImage(rutaImagen);
-                icono = icono.getScaledInstance(ImagenLogo.getWidth(), ImagenLogo.getHeight(), Image.SCALE_DEFAULT);
-                ImagenLogo.setIcon(new ImageIcon(icono));
-                  
-             
-        }
-    }//GEN-LAST:event_jbSubirLogoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel ImagenLogo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -327,5 +300,6 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfRepresentanteLegal;
     public javax.swing.JTextField jtfRuc;
     public javax.swing.JTextField jtfTelefono;
+    public javax.swing.JLabel lblImagenLogo;
     // End of variables declaration//GEN-END:variables
 }

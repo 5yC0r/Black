@@ -14,6 +14,8 @@ public class ControladorPrincipal implements ActionListener{
     int v = 0;
     JInternalFrame internalFrameActual;
     
+    ControladorEmpresa ce;
+    
     public void darEventoBotones(){
         principal.btnAgregarCliente.addActionListener(this);
         principal.btnRegistroProducto.addActionListener(this);
@@ -128,6 +130,9 @@ public class ControladorPrincipal implements ActionListener{
                         }else{
                             if(ae.getSource() == principal.miDatosEmpresa){
                                 PanelDatosEmpresa pde = new PanelDatosEmpresa();
+                                ce = new ControladorEmpresa();
+                                ce.setPanelDatosEmpresa(pde);
+                                ce.darEventoABotones();
                                 banderaGuardar = 1;
                                 v=4;
                                 setPanelActual(pde);
@@ -365,9 +370,9 @@ public class ControladorPrincipal implements ActionListener{
                                             }
                                             else{
                                                     if(v == 4){
-                                            PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
-                                            ControladorEmpresa ce = new ControladorEmpresa();
-                                            ce.setPanelDatosEmpresa(pde);
+                                            //PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
+                                            //ControladorEmpresa ce = new ControladorEmpresa();
+                                            //ce.setPanelDatosEmpresa(pde);
                                             ce.insertarDatos();
                                             }
                                             else{
