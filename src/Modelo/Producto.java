@@ -6,29 +6,28 @@ import java.util.ArrayList;
 public class Producto {
     String codigoProducto;
     String nombreProducto;
-    String descripcionProducto;
-    String marcaProducto;
-    String fechaRegistroPdto;
-    String fechaVencimientoPdto;
-    
-    int categoria;
-    int stockProducto;
-    int puntoPedidoPdto;
+    String marca;
+    String descripcion;
+    String categoria;
+    String fechaVencimiento;
+    int stock;
+    int puntoPedido;
     String numeroBoleta;
+    String fechaRegistro;
     
     ArrayList <PrecioProducto> listaPrecios;
     
     public Producto(){
         codigoProducto = "";
         nombreProducto= "";
-        descripcionProducto = "";
-        marcaProducto = "";
-        fechaRegistroPdto= "";
-        fechaVencimientoPdto = "";
+        descripcion = "";
+        marca = "";
+        fechaRegistro = "";
+        fechaVencimiento = "";
         
-        categoria = 0;
-        stockProducto = 0;
-        puntoPedidoPdto= 0;
+        categoria = "";
+        stock = 0;
+        puntoPedido= 0;
         numeroBoleta ="";
         
         listaPrecios = new ArrayList();

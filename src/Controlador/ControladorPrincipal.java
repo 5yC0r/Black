@@ -211,6 +211,9 @@ public class ControladorPrincipal implements ActionListener{
                             }else{
                             if(ae.getSource() == principal.misPromociones){
                                 PanelPromociones pp = new PanelPromociones();
+                                banderaGuardar = 1;
+                                v = 9;
+                                setPanelActual(pp);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -222,6 +225,9 @@ public class ControladorPrincipal implements ActionListener{
                                 }else{
                             if(ae.getSource() == principal.miRegistroProducto || ae.getSource() == principal.btnRegistroProducto ){
                                 PanelRegistroProducto prp = new PanelRegistroProducto();
+                                banderaGuardar = 1;
+                                v = 10;
+                                setPanelActual(prp);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -269,6 +275,9 @@ public class ControladorPrincipal implements ActionListener{
                                 }else{
                             if(ae.getSource() == principal.miRegistroProveedor){
                                 PanelRegistroProveedor prp = new PanelRegistroProveedor();
+                                banderaGuardar = 1;
+                                v =8;
+                                setPanelActual(prp);
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -397,7 +406,31 @@ public class ControladorPrincipal implements ActionListener{
                                             cc.insertarDatos();
                                             }
                                             else{
+                                                     if(v == 8){
+                                                PanelRegistroProveedor prp= (PanelRegistroProveedor) internalFrameActual;
+                                                ControladorProveedor cp = new ControladorProveedor();
+                                                cp.setPanelRegistroProveedor(prp);
+                                                cp.insertarDatos();
+                                                }
+                                                else{
+                                                         if(v == 9){
+                                                PanelPromociones pp= (PanelPromociones) internalFrameActual;
+                                                ControladorPromocion cp = new ControladorPromocion();
+                                                cp.setPanelPromociones(pp);
+                                                cp.insertarDatos();
+                                                }
+                                                else{
+                                                    if(v == 10){
+                                                PanelRegistroProducto prp= (PanelRegistroProducto) internalFrameActual;
+                                                ControladorProducto cp = new ControladorProducto();
+                                                cp.setPanelRegistroProducto(prp);
+                                                cp.insertarDatos();
+                                                }
+                                                else{
 
+                                                }
+                                                }
+                                                }
                                             }
                                             }
                                             }
