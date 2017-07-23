@@ -2,21 +2,25 @@
 package Modelo;
 
 public class Comprobante {
-    int tipoComprobante;    //Solo un numero para diferenciar cada tipo
-    int estadoComprobante;
-    int tipoMoneda;
+    String tipoComprobante;    //Solo un numero para diferenciar cada tipo
+    int serie;
+    int coorrelativo;
     int igv;
-    
-    String numeroComprobante;
     String fechaEmision;
+    int codigoCliente;
+    int codigoVenta;
+    float subtotalComprobante;
+    float totalComprobante;
     
     public Comprobante(){
-        tipoComprobante = 0;
-        estadoComprobante = 0;
-        tipoMoneda = 0;
+        tipoComprobante = "";
+        serie = 0;
+        coorrelativo = 0;
         igv = 0;
-        
-        numeroComprobante = "";
         fechaEmision = "";
+        codigoCliente = 0;
+        codigoVenta = 0;
+        subtotalComprobante = 0.1f;
+        totalComprobante = 0.1f;
     }
 }

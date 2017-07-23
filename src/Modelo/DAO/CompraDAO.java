@@ -22,33 +22,31 @@ public class CompraDAO {
     
     public void registrarCompra(
         String numeroComprobante,
-        String comprador,
-        int  proveedor,// seleccionar combobox
+        String proveedor,
         String vendedor,
         String fechaCompra,
-        int tipoPago,
+        String tipoPago,
         int diasPago,
-        float importePagar
-    ) throws SQLException{
+        float totalPago
+        ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO compra"
-                    + "VALUES"
-                    + "(?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO compra(numeroComprobante,proveedor,vendedor,fechaCompra,tipoPago,diasPago,totalPago)"
+                    + "VALUES(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, numeroComprobante);
-            ps.setString(2, comprador);
+            ps.setString(2, proveedor);
             ps.setString(3, vendedor);
             ps.setString(4, fechaCompra);
-            ps.setInt(5, tipoPago);
+            ps.setString(5, tipoPago);
             ps.setInt(6, diasPago);
-            ps.setFloat(7, importePagar);
+            ps.setFloat(7,totalPago);
             ps.execute();            
         } catch (SQLException e) {
-            System.out.println("Error al registrar la compra: "+e.toString());
+            System.out.println("Error al registrar datos de la compra: "+e.toString());
         }finally{
             if (ps != null) {
                 ps.close();

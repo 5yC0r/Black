@@ -38,7 +38,7 @@ public class ControladorProducto {
             String fechaVencimiento = df.format(prp.jtfFechaVencimiento.getDate());
             int stock = Integer.parseInt(prp.jtfStock.getText());
             int puntoPedido = Integer.parseInt(prp.jtfPuntoPedido.getText());
-            String numeroBoleta = prp.jtfNumeroBoletaProducto.getText();
+            String numeroBoleta = "";// ya no se ingresa por c/producto pertenece a diferentes boletas
             String fechaRegistro = df.format(prp.jdcFechaRegistroProducto.getDate());
 
         
