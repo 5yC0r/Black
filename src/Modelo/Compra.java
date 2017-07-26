@@ -11,22 +11,20 @@ package Modelo;
 public class Compra {
     
     String numeroComprobante;
-    String comprador;
-    int  proveedor;// seleccionar combobox
+    String proveedor;
     String vendedor;
     String fechaCompra;
-    int tipoPago;
+    String tipoPago;
     int diasPago;
-    float importePagar;
-   
+    float totalPago;
+       
     public Compra(){
-        this.numeroComprobante = "";
-        this.comprador = "";
-        this.proveedor = 1;
+        this.numeroComprobante = "";        
+        this.proveedor = "";
         this.vendedor = "";
         this.fechaCompra = "";
-        this.tipoPago = 1;
+        this.tipoPago = "";
         this.diasPago = 1;
-        this.importePagar = 0.1f;
+        this.totalPago = 0.1f;
     }
 }

@@ -4,17 +4,29 @@ package Modelo;
 import java.util.ArrayList;
 
 public class Venta {
-    int numeroVenta;
     
+    //int codigoVenta; // se generara automaticamente con el increment
     String fechaVenta;
-    String resposableVenta;
+    int responsableVenta;    
+    int codigoCliente;
+    //String nombreCliente;
+    float subTotalVenta;
+    float descuento;
+    float totalNetoVenta;
     
-    ArrayList <Producto> listaProductos;
+    
+       
+    ArrayList <Producto> listaProductosVendidos;
     
     public Venta(){
-        numeroVenta = 0;
+        //codigoVenta = 0;
         fechaVenta = "";
-        resposableVenta= "";
-        listaProductos = new ArrayList();
+        responsableVenta = 0;
+        codigoCliente = 0;
+       // nombreCliente = "";
+        subTotalVenta = 0.1f;
+        descuento = 0.1f;
+        totalNetoVenta = 0.1f;
+        listaProductosVendidos = new ArrayList();
     }
 }

@@ -23,23 +23,31 @@ public class VentaDAO {
     
     public void registrarVenta(
         
-        int numeroVenta,
+        //int codigoVenta,
         String fechaVenta,
-        String resposableVenta
+        int responsableVenta,    
+        int codigoCliente,
+        //String nombreCliente,
+        float subTotalVenta,
+        float descuento,
+        float totalNetoVenta
             
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO venta"
-                    + "VALUES"
-                    + "(?,?,?)";
+            String consulta = "INSERT INTO venta(fechaVenta,responsableVenta,codigoCliente,subtotalVenta,descuento,totalNetoVenta)"
+                    + "VALUES(?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
-            ps.setInt(1, numeroVenta);
-            ps.setString(2, fechaVenta);
-            ps.setString(3, resposableVenta);
+            //ps.setInt(1, codigoVenta);
+            ps.setString(1, fechaVenta);
+            ps.setInt(2, responsableVenta);
+            ps.setInt(3, codigoCliente);
+            ps.setFloat(4, subTotalVenta);
+            ps.setFloat(5, descuento);
+            ps.setFloat(6, totalNetoVenta);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar los datos del proveedor: "+e.toString());

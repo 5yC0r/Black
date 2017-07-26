@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class ProveedorDAO {
     
-    Conexion conexion;
+   Conexion conexion;
     
     public ProveedorDAO(){
         conexion = new Conexion();
@@ -23,26 +23,25 @@ public class ProveedorDAO {
     
     public void registrarProveedor(
         String nombreProveedor,
-        String direccionProveedor,
-        String numTelfProveedor,  //fijo
-        String numCelfProveedor,    //Celular
-        String numCuentaProveedor
+        String direccion,
+        String telefono,  //fijo
+        String celular,    //Celular
+        String numeroCuenta
             
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO proveedor"
-                    + "VALUES"
-                    + "(?,?,?,?,?)";
+            String consulta = "INSERT INTO proveedor(nombreProveedor,direccion,telefono,celular,numeroCuenta)"
+                    + "VALUES(?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombreProveedor);
-            ps.setString(2,direccionProveedor );
-            ps.setString(3, numTelfProveedor);
-            ps.setString(4, numCelfProveedor);
-            ps.setString(5, numCuentaProveedor);
+            ps.setString(2,direccion );
+            ps.setString(3, telefono);
+            ps.setString(4, celular);
+            ps.setString(5, numeroCuenta);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar los datos del proveedor: "+e.toString());

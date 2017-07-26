@@ -24,6 +24,8 @@ public class PromocionDAO {
     public void registrarPromocion(
         String nombrePromocion,
         String descripcion,
+        String categoria,
+        String producto,
         int unidades,
         float importe
     ) throws SQLException{
@@ -31,15 +33,16 @@ public class PromocionDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO promocion"
-                    + "VALUES"
-                    + "(?,?,?,?)";
+            String consulta = "INSERT INTO promocion(nombrePromocion,descripcion,categoria,producto,unidades,importe)"
+                    + "VALUES(?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombrePromocion);
             ps.setString(2, descripcion);
-            ps.setInt(3, unidades);
-            ps.setFloat(4, importe);
+            ps.setString(3, categoria);
+            ps.setString(4, producto);
+            ps.setInt(5, unidades);
+            ps.setFloat(6, importe);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar la promoción: "+e.toString());
