@@ -25,7 +25,6 @@ public class EmpleadoDAO {
         int fechaPago,
         String hobby,
         String sexo,
-
         int dni,
         float sueldo
     ) throws SQLException{
@@ -34,7 +33,7 @@ public class EmpleadoDAO {
         PreparedStatement ps = null;
         try {
             String consulta = "INSERT INTO empleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,sueldo)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombresApellidos);

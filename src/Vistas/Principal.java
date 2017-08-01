@@ -56,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        SalirDelSistema = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miUsuariosSistema = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -100,6 +100,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu12);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SGV17(Sistema de Gestión de Ventas)");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -406,8 +407,13 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator1);
 
-        jMenuItem4.setText("Salir del sistema");
-        jMenu1.add(jMenuItem4);
+        SalirDelSistema.setText("Salir del sistema");
+        SalirDelSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirDelSistemaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(SalirDelSistema);
 
         menuBarPrincipal.add(jMenu1);
 
@@ -561,7 +567,12 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void SalirDelSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirDelSistemaActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_SalirDelSistemaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem SalirDelSistema;
     public javax.swing.JButton btnAgregarCliente;
     public javax.swing.JButton btnCumpleaños;
     public javax.swing.JButton btnGuardar;
@@ -598,7 +609,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;

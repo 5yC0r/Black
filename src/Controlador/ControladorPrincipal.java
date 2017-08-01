@@ -6,12 +6,14 @@ import Vistas.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class ControladorPrincipal implements ActionListener{
     
     Principal principal;
     int banderaGuardar = 0;
     int v = 0;
+    int msj;
     JInternalFrame internalFrameActual;
     
     ControladorEmpresa ce;
@@ -370,7 +372,12 @@ public class ControladorPrincipal implements ActionListener{
                                             PanelRegistroCliente prc = (PanelRegistroCliente) internalFrameActual;
                                             ControladorCliente cc = new ControladorCliente();
                                             cc.setPanelRegistroCliente(prc);
+                                            msj=JOptionPane.showConfirmDialog(null,"¿Está seguro que desea guardar los datos?","REGISTRE CORRECTAMENTE",JOptionPane.YES_NO_OPTION);
+                                            if(msj==0){
                                             cc.insertarDatos();
+                                            prc.dispose();
+                                            }                                        
+                                            
                                             }
                                         else{
                                             if(v == 2){
