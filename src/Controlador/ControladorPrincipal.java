@@ -1,12 +1,17 @@
 
 package Controlador;
 
+import Modelo.DAO.ClienteDAO;
 import Vistas.Paneles.*;
 import Vistas.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ControladorPrincipal implements ActionListener{
     
@@ -128,7 +133,35 @@ public class ControladorPrincipal implements ActionListener{
                             principal.panelPrincipal.removeAll();
                             //principal.panelPrincipal.add(plc, BorderLayout.CENTER);
                             this.principal.panelPrincipal.add(plc);
-                             plc.show();
+                            ClienteDAO clienteDao = new ClienteDAO();
+                            DefaultTableModel modeloTabla = new DefaultTableModel();
+                            modeloTabla.addColumn("Tipo de documento");
+                            modeloTabla.addColumn("Número de documento");
+                            modeloTabla.addColumn("Nombres y apellidos");
+                            modeloTabla.addColumn("Fecha registro cliente");
+                            plc.tableClientes.setModel(modeloTabla);
+                            Object [] columna = new Object[4];
+                            
+                            int numRegistros = 0;
+                            try {
+                                numRegistros = clienteDao.listarClientes().size();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            for (int i = 0; i < numRegistros; i++) {
+                                try {
+                                    columna[0] = clienteDao.listarClientes().get(i).getTipoDoc();
+                                    columna[1] = clienteDao.listarClientes().get(i).getNumDoc();
+                                    columna[2] = clienteDao.listarClientes().get(i).getNombresApellidos();
+                                    columna[3] = clienteDao.listarClientes().get(i).getFechaRegistroCliente();
+                                    
+                                    modeloTabla.addRow(columna);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                            
+                            plc.show();
                             plc.setLocation(5,5);
                             principal.panelPrincipal.revalidate();
                             principal.panelPrincipal.repaint();

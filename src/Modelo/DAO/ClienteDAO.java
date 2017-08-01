@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteDAO {
     
@@ -182,6 +183,39 @@ public class ClienteDAO {
                 accesoBD.close();
             }
         }
+    }
+    
+    public ArrayList<Cliente> listarClientes() throws SQLException{
+        ArrayList<Cliente> listaClientes = new ArrayList();
+        Cliente cliente;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT tipoDoc, numDoc, nombresApellidos, fechaRegistroCliente FROM cliente";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cliente = new Cliente();
+                cliente.setTipoDoc(rs.getString(1));
+                cliente.setNumDoc(rs.getString(2));
+                cliente.setNombresApellidos(rs.getString(3));
+                cliente.setFechaRegistroCliente(rs.getString(4));
+                listaClientes.add(cliente);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaClientes;
     }
 }
 
