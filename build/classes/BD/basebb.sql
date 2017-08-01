@@ -44,12 +44,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`nombre`, `razonSocial`, `representanteLegal`, `ruc`, `direccion`, `telefono`, `celular`, `correoElectronico`, `paginaWeb`, `foto`, `descripcion`) VALUES
-('ertyuiop', 'tyulñ', 'tyuiloñ', 'tyuil', 'gtyhujkilñ', 'gyhjkl', 'ghjk,l', 'gfthyujkilopñ', 'gbhjk,l.ñ', '', 'jk,l.ñ{'),
-('', '', '', '', '', '', '', '', '', '', ''),
-('', '', '', '', '', '', '', '', '', '', ''),
-('', '', '', '', '', 'dfghjkl', '', '', '', '', ''),
-('', '', '', '', '', '', '', '', '', 'C:\\Users\\MARIANA\\Downloads\\SISTEMA BB FINAL\\-B4k-b-\\src\\imagenes\\bb.jpg', '');
+
 
 -- --------------------------------------------------------
 
@@ -72,7 +67,7 @@ CREATE TABLE `incentivo` (
 --
 
 INSERT INTO `incentivo` (`tipoIncentivo`, `nombreIncentivo`, `cantidadIncentivo`, `sueldoVenta`, `estadoIncentivo`, `descripcionIncentivo`, `fechaIncentivo`) VALUES
-('Bono', 'zjxnxkjznckn', '20%', 'Sueldo', 'Activado', 'dffm,fndmdnffdfdfs', '13/07/2017');
+('Bono', 'bono por 28 de julio', '20%', 'Sueldo', 'Activado', 'solo se adiciona si tiene las mayores ventas', '13/07/2017');
 
 -- --------------------------------------------------------
 
@@ -105,7 +100,7 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`codEmpleado`, `nombresApellidos`, `telefonoContacto`, `celular`, `telefonoReferencia`, `direccion`, `fechaNacimiento`, `correo`, `numeroCuenta`, `fechaPago`, `hobby`, `sexo`, `dni`, `sueldo`, `estadoEmpleado`) VALUES
-(1, 'maria del barrio cepeda bosques', '102050', '987821589', '985695874', 'los alurekes 1546', '02/08/1992', 'maajahd@gmail.com', '170-2569874-2589', 5, 'cantar', 'Femenino', 10203040, 850, 0),
+(1, 'maria  cepeda bosques', '102050', '987821589', '985695874', 'los alurekes 1546', '02/08/1992', 'maajahd@gmail.com', '170-2569874-2589', 5, 'cantar', 'Femenino', 10203040, 850, 0),
 (2, 'anito julio', '66666', '', '', '', '', '', '', 0, '', 'na', 0, 0, 1);
 
 -- --------------------------------------------------------

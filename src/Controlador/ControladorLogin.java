@@ -42,7 +42,8 @@ public class ControladorLogin implements ActionListener{
         }else{
             if(ae.getSource() == login.btnSalir){
                 //cerrar ventana
-                System.out.println("hola");
+                //System.out.println("hola");
+                System.exit(0);
             }
         }
     }
