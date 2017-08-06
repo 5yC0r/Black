@@ -24,15 +24,21 @@ public class ControladorRecarga {
     
     public void insertarDatos() {
     
+        int codOperador = 0;
         String numeroCelular = pr.jtfNumeroCelular.getText();
         String nombreOperador = pr.jcbOperador.getSelectedItem().toString();
         float cantidadRecargada = Float.parseFloat(pr.jtfCantidadRecargada.getText());
        
 
          RecargaDAO recargaDao = new RecargaDAO();
+         
         
         try {
-            recargaDao.registrarRecarga(numeroCelular,nombreOperador,cantidadRecargada);
+            codOperador = recargaDao.obtenerCodigo(nombreOperador);
+            System.out.println(codOperador);
+            recargaDao.obtenerCodigo(nombreOperador);
+            
+            recargaDao.registrarRecarga(numeroCelular,codOperador,cantidadRecargada);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

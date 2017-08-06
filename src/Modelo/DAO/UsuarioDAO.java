@@ -1,16 +1,61 @@
 
 package Modelo.DAO;
 
+import Modelo.Cliente;
 import Modelo.Conexion;
+import Modelo.Empleado;
 import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UsuarioDAO {
     
     public UsuarioDAO(){
+    }
+    
+    public int validarUsuario(String usuario, String contraseña) throws SQLException{
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        Usuario usu = new Usuario();
+        
+        try {
+            String consulta = "SELECT * FROM usuario where usuario='"+usuario+"' && password ='"+contraseña+"'&& tipoUsuario ='Administrador'" ;
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                usu.setUsuario(rs.getString(2));
+                usu.setPassword(rs.getString(3));
+                usu.setFechaRegistro(rs.getString(4));
+                usu.setTipoUsuario(rs.getString(5));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos de usuario: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        System.out.println(usu.getUsuario());
+        System.out.println(usu.getPassword());
+        
+        
+       if(usu.getUsuario().equals(usuario) && usu.getPassword().equals(contraseña)){
+                       
+           return 1;
+           //System.out.println("1");
+        }else{
+            return 0;
+           //System.out.println("0");
+        }
     }
     
     public void registrarNuevoUsuario(
@@ -122,5 +167,77 @@ public class UsuarioDAO {
                 accesoBD.close();
             }
         }
+    }
+    
+    public int obtenerCodigo(String usuario, String contraseña) throws SQLException{
+        Conexion conexion = new Conexion();
+        Usuario usu = new Usuario();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM usuario where usuario='"+usuario+"' && password ='"+contraseña+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                usu.setCodUsuario(rs.getInt(1));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo =usu.getCodUsuario();
+             
+            // System.out.println(codigo);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    public String obtenerNombre(int codUsuario) throws SQLException{
+        Conexion conexion = new Conexion();
+        Empleado empleado = new Empleado();
+        String nombre = "";
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM empleado where codUsuario ='"+codUsuario+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                empleado.setNombresApellidos(rs.getString(2));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             nombre = empleado.getNombresApellidos();
+             
+             //System.out.println(nombre);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return nombre;
     }
 }

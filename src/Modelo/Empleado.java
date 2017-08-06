@@ -15,11 +15,9 @@ public class Empleado {
     int fechaPago;
     String hobby;
     String sexo;
-  
     int dni;
-    
     float sueldo;
-    
+    int codUsuario;
     int estado;     //Activo o no - para hacer la eliminacion logica
 
     public Empleado(){
@@ -40,7 +38,7 @@ public class Empleado {
         this.dni = 1231;
        
         this.sueldo = 0.0f;
-        
+        this.codUsuario = 0;
         this.estado = 1;
     }
 
@@ -162,6 +160,14 @@ public class Empleado {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+    
+    public int getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
     }
     
 }

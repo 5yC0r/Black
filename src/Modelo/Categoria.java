@@ -9,20 +9,31 @@ package Modelo;
  * @author MARIANA
  */
 public class Categoria {
+
+    public int getCodCategoria() {
+        return codCategoria;
+    }
+
+    public void setCodCategoria(int codCategoria) {
+        this.codCategoria = codCategoria;
+    }
+
+    public String getNombreNuevaCategoria() {
+        return nombreNuevaCategoria;
+    }
+
+    public void setNombreNuevaCategoria(String nombreNuevaCategoria) {
+        this.nombreNuevaCategoria = nombreNuevaCategoria;
+    }
      
+    
+    int codCategoria;
     String nombreNuevaCategoria;
-    String nombrePrecio1;
-    String nombrePrecio2;
-    String nombrePrecio3;
-    String nombrePrecio4;
     
     
     public Categoria(){
         
-        nombreNuevaCategoria="";
-        nombrePrecio1="";
-        nombrePrecio2="";
-        nombrePrecio3="";
-        nombrePrecio4="";
+        this.codCategoria = 0;
+        this.nombreNuevaCategoria = "";
     }
 }

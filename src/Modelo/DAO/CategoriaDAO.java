@@ -20,26 +20,18 @@ public class CategoriaDAO {
 
 
 public void registrarCategoria(
-        String nombreNuevaCategoria,
-        String nombrePrecio1,
-        String nombrePrecio2,
-        String nombrePrecio3,
-        String nombrePrecio4
+        String nombreNuevaCategoria
         
     ) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO categoria(nombreNuevaCategoria,nombrePrecio1,nombrePrecio2,nombrePrecio3,nombrePrecio4)"
-                    + "VALUES(?,?,?,?,?)";
+            String consulta = "INSERT INTO categoria(nombreNuevaCategoria)"
+                    + "VALUES(?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombreNuevaCategoria);
-            ps.setString(2, nombrePrecio1);
-            ps.setString(3, nombrePrecio2);
-            ps.setString(4, nombrePrecio3);
-            ps.setString(5, nombrePrecio4);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar los datos de Categoría: "+e.toString());

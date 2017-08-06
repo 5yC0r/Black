@@ -14,8 +14,10 @@ public class Cliente {
     String celularCliente;
     String correoCliente;
     String direccion;
+
     
-    String vendedor;
+    
+    int codEmpleado;
     String fechaRegistroCliente;
     
     public Cliente(){
@@ -31,7 +33,7 @@ public class Cliente {
         this.correoCliente = "";
         this.direccion = "";
         
-        this.vendedor = "";
+        this.codEmpleado = 0;
         this.fechaRegistroCliente = "";
     }
 
@@ -123,13 +125,6 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public String getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(String vendedor) {
-        this.vendedor = vendedor;
-    }
 
     public String getFechaRegistroCliente() {
         return fechaRegistroCliente;
@@ -138,5 +133,14 @@ public class Cliente {
     public void setFechaRegistroCliente(String fechaRegistroCliente) {
         this.fechaRegistroCliente = fechaRegistroCliente;
     }
+    
+    public int getCodEmpleado() {
+        return codEmpleado;
+    }
+
+    public void setCodEmpleado(int codEmpleado) {
+        this.codEmpleado = codEmpleado;
+    }
+
     
 }

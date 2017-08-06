@@ -28,14 +28,14 @@ public class ClienteDAO {
         String correoCliente,
         String direccion,
 
-        String vendedor,
+        int codEmpleado,
         String fechaRegistroCliente
     ) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO cliente(tipoCliente,tipoDoc,numDoc,razonSocial,nombresApellidos,fechaNacimiento,sexoCliente,telefonoCliente,celularCliente,correoCliente,direccion,vendedor,fechaRegistroCliente)"
+            String consulta = "INSERT INTO cliente(tipoCliente,tipoDoc,numDoc,razonSocial,nombresApellidos,fechaNacimiento,sexoCliente,telefonoCliente,celularCliente,correoCliente,direccion,codEmpleado,fechaRegistroCliente)"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
@@ -51,7 +51,7 @@ public class ClienteDAO {
             ps.setString(10, correoCliente);
             ps.setString(11, direccion);
             
-            ps.setString(12, vendedor);
+            ps.setInt(12, codEmpleado);
             ps.setString(13, fechaRegistroCliente);
             ps.execute();            
         } catch (SQLException e) {
@@ -89,7 +89,7 @@ public class ClienteDAO {
                 cliente.setCelularCliente(rs.getString(10));
                 cliente.setCorreoCliente(rs.getString(11));
                 cliente.setDireccion(rs.getString(12));
-                cliente.setVendedor(rs.getString(13));
+                cliente.setCodEmpleado(rs.getInt(13));
                 cliente.setFechaRegistroCliente(rs.getString(14));
             }
         } catch (SQLException e) {
@@ -121,7 +121,7 @@ public class ClienteDAO {
         String correoCliente,
         String direccion,
 
-        String vendedor,
+        int codEmpleado,
         String fechaRegistroCliente
     ) throws SQLException{
         int codCliente = 1;
@@ -145,7 +145,7 @@ public class ClienteDAO {
             ps.setString(10, correoCliente);
             ps.setString(11, direccion);
             
-            ps.setString(12, vendedor);
+            ps.setInt(12, codEmpleado);
             ps.setString(13, fechaRegistroCliente);
             ps.setInt(14, codCliente);
             ps.execute();            

@@ -4,10 +4,14 @@
  */
 package Modelo.DAO;
 
+import Modelo.Cliente;
 import Modelo.Conexion;
+import Modelo.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -61,4 +65,38 @@ public class VentaDAO {
             }
         }
     }
+    
+    public ArrayList<Venta> listarVentas() throws SQLException{
+        ArrayList<Venta> listaVentas = new ArrayList();
+        Venta venta;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT codigoVenta,codigoCliente,totalNetoVenta,fechaVenta FROM venta";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                venta = new Venta();
+                venta.setCodigoVenta(rs.getInt(1));
+                venta.setCodigoCliente(rs.getInt(2));
+                venta.setTotalNetoVenta(rs.getFloat(3));
+                venta.setFechaVenta(rs.getString(4));
+                listaVentas.add(venta);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaVentas;
+    }
+    
 }

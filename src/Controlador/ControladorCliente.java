@@ -5,6 +5,9 @@
 package Controlador;
 
 import Modelo.DAO.ClienteDAO;
+import Modelo.DAO.EmpleadoDAO;
+import Modelo.DAO.UsuarioDAO;
+import Modelo.Usuario;
 import Vistas.Paneles.PanelRegistroCliente;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -19,6 +22,7 @@ import javax.swing.JInternalFrame;
 public class ControladorCliente {
     
     PanelRegistroCliente prc;
+    Usuario usu = new Usuario();
     DateFormat df = DateFormat.getDateInstance();
     
     public void setPanelRegistroCliente(JInternalFrame jif) {
@@ -26,7 +30,13 @@ public class ControladorCliente {
     }
     
     public void insertarDatos(){
-                
+        
+        ClienteDAO clienteDao = new ClienteDAO();
+        EmpleadoDAO empleadoDao = new EmpleadoDAO();
+        
+        int codEmpleado=0;
+         this.prc.jtfVendedor.setText("Fernada Ganoza");
+        
         String tipoCliente = prc.jcbTipoCliente.getSelectedItem().toString();
         String tipoDoc = prc.jcbTipoDoc.getSelectedItem().toString();
         String numDoc = prc.jtfNumDoc.getText();
@@ -42,10 +52,13 @@ public class ControladorCliente {
         String vendedor = prc.jtfVendedor.getText();
         String fechaRegistroCliente = df.format(prc.jdcFechaRegistro.getDate());
         
-        ClienteDAO clienteDao = new ClienteDAO();
+        
         
         try {
-            clienteDao.registrarNuevoCliente(tipoCliente,tipoDoc,numDoc,razonSocial,nombresApellidos,fechaNacimiento,sexoCliente,telefonoCliente,celularCliente,correoCliente,direccion,vendedor,fechaRegistroCliente);
+            
+            
+            codEmpleado = empleadoDao.obtenerCodigo(vendedor);
+            clienteDao.registrarNuevoCliente(tipoCliente,tipoDoc,numDoc,razonSocial,nombresApellidos,fechaNacimiento,sexoCliente,telefonoCliente,celularCliente,correoCliente,direccion,codEmpleado,fechaRegistroCliente);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

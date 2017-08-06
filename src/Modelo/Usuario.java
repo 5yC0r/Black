@@ -2,13 +2,23 @@
 package Modelo;
 
 public class Usuario {
+
+    public int getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
+    }
     //atributos
+    int codUsuario;
     String usuario;
     String password;
     String tipoUsuario;
     String fechaRegistro;
 
     public Usuario() {
+        this.codUsuario = 0;
         this.usuario = "";
         this.password = "";
         this.tipoUsuario = "";
@@ -46,13 +56,5 @@ public class Usuario {
     public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    
-    
-    public int validarUsuario(String usuario, String contraseña){
-       if("admin".equals(usuario) && "123456".equals(contraseña)){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
+   
 }

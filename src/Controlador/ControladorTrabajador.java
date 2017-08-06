@@ -37,18 +37,18 @@ public class ControladorTrabajador {
         String numeroCuenta = prt.jtfNumCuentaTrab.getText();
         int fechaPago = Integer.parseInt(prt.jtfFechaPago.getText());
         String hobby = prt.jtfHobbyTrab.getText();
-
         String sexo = prt.jcbSexoTrab.getSelectedItem().toString();
-
-        int dni = Integer.parseInt(prt.jtfDniTrab.getText());
-        
+        int dni = Integer.parseInt(prt.jtfDniTrab.getText());        
         float sueldo = Float.parseFloat(prt.jtfSueldoTrab.getText());
+       
         
         UsuarioDAO usuarioDao = new UsuarioDAO();
         EmpleadoDAO empleadoDao = new EmpleadoDAO();
         try {
             usuarioDao.registrarNuevoUsuario(usuario, clave, fechaRegistro, tipoUsuario);
-            empleadoDao.registrarNuevoEmpleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,sueldo);
+            int codUsuario = usuarioDao.obtenerCodigo(usuario, clave);
+            System.out.println(codUsuario);
+            empleadoDao.registrarNuevoEmpleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,sueldo,codUsuario);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

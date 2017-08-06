@@ -5,8 +5,10 @@
 package Modelo.DAO;
 
 import Modelo.Conexion;
+import Modelo.Operador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -15,27 +17,28 @@ import java.sql.SQLException;
  */
 public class RecargaDAO {
     
-    private final Conexion conexion;
+    
     
     public RecargaDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarRecarga(
         String numeroCelular,
-        String nombreOperador,
+        int codOperador,
         float cantidadRecargada
     ) throws SQLException{
         
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO recarga(numeroCelular,nombreOperador,cantidadRecargada)"
+            String consulta = "INSERT INTO recarga(numeroCelular,codOperador,cantidadRecargada)"
                     + "VALUES(?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, numeroCelular);
-            ps.setString(2, nombreOperador);
+            ps.setInt(2, codOperador);
             ps.setFloat(3, cantidadRecargada);
             ps.execute();            
         } catch (SQLException e) {
@@ -50,4 +53,43 @@ public class RecargaDAO {
             }
         }
     }
+    
+    public int obtenerCodigo(String nombreOperador) throws SQLException{
+        Conexion conexion = new Conexion();
+        Operador operador = new Operador();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM operador where nombreOperador ='"+nombreOperador+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                operador.setCodOperador(rs.getInt(1));
+                operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = operador.getCodOperador();
+             
+            // System.out.println(codigo);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    
+    
 }

@@ -1,12 +1,14 @@
 
 package Modelo.DAO;
 
+import Modelo.Cliente;
 import Modelo.Conexion;
 import Modelo.Empleado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EmpleadoDAO {
     
@@ -26,14 +28,15 @@ public class EmpleadoDAO {
         String hobby,
         String sexo,
         int dni,
-        float sueldo
+        float sueldo,
+        int codUsuario
     ) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO empleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,sueldo)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO empleado(nombresApellidos,telefonoContacto,celular,telefonoReferencia, direccion,fechaNacimiento,correo,numeroCuenta, fechaPago, hobby, sexo,dni,sueldo,codUsuario)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombresApellidos);
@@ -49,6 +52,7 @@ public class EmpleadoDAO {
             ps.setString(11, sexo);
             ps.setInt(12, dni);
             ps.setFloat(13, sueldo);
+            ps.setFloat(14, codUsuario);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar empleado: "+e.toString());
@@ -177,4 +181,110 @@ public class EmpleadoDAO {
             }
         }
     }
+    
+        
+    public ArrayList<Empleado> listarTrabajadores() throws SQLException{
+        ArrayList<Empleado> listaTrabajadores = new ArrayList();
+        Empleado empleado;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT nombresApellidos,dni,fechaNacimiento,fechaPago FROM empleado";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                empleado = new Empleado();
+                empleado.setNombresApellidos(rs.getString(1));
+                empleado.setDni(rs.getInt(2));
+                empleado.setFechaNacimiento(rs.getString(3));
+                empleado.setFechaPago(rs.getInt(4));
+                listaTrabajadores.add(empleado);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaTrabajadores;
+    }
+    
+    public int obtenerCodigo(String vendedor) throws SQLException{
+        Conexion conexion = new Conexion();
+        Empleado empleado = new Empleado();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM empleado where nombresApellidos ='"+vendedor+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                empleado.setCodEmpleado(rs.getInt(1));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = empleado.getCodEmpleado();
+             
+             System.out.println(codigo);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    /*public String obtenerNombre(int codUsuario) throws SQLException{
+        Conexion conexion = new Conexion();
+        Empleado empleado = new Empleado();
+        String nombre = "";
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM empleado where codUsuario ='"+codUsuario+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                empleado.setNombresApellidos(rs.getString(2));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             nombre = empleado.getNombresApellidos();
+             
+             System.out.println(nombre);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return nombre;
+    }*/
 }

@@ -5,10 +5,12 @@
 package Modelo.DAO;
 
 import Modelo.Conexion;
+import Modelo.Empresa;
+import Vistas.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.io.FileInputStream;
+import java.sql.ResultSet;
 
 /**
  *
@@ -16,10 +18,11 @@ import java.io.FileInputStream;
  */
 public class EmpresaDAO {
     
-    Conexion conexion;
+    
+    Login login = new Login();
     
     public EmpresaDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarDatosEmpresa(
@@ -35,7 +38,7 @@ public class EmpresaDAO {
         String foto,    //Ruta del archivo de foto 
         String descripcion
     ) throws SQLException{
-        
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
@@ -67,4 +70,39 @@ public class EmpresaDAO {
             }
         }
     }
+    
+    public void obtenerDatos() throws SQLException{
+        Conexion conexion = new Conexion();
+        Empresa empresa = new Empresa();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM empresa where codEmpresa='1'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                empresa.setRazonSocial(rs.getString(3));
+                empresa.setLocalidad(rs.getString(7));
+            }
+            
+            login.NombreEmpresa.setText(empresa.getRazonSocial());
+            login.LocalidadEmpresa.setText(empresa.getLocalidad());
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos de cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        
+       
+        System.out.println(empresa.getRazonSocial());
+        System.out.println(empresa.getLocalidad());
+        
+     }
 }

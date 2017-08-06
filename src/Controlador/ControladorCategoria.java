@@ -27,15 +27,11 @@ public class ControladorCategoria {
     public void insertarDatos() {
     
         String nombreNuevaCategoria = pnc.jtfNombreNuevaCategoria.getText();
-        String nombrePrecio1 = pnc.jtfNombrePrecio1.getText();
-        String nombrePrecio2 = pnc.jtfNombrePrecio2.getText();
-        String nombrePrecio3 = pnc.jtfNombrePrecio3.getText();
-        String nombrePrecio4 = pnc.jtfNombrePrecio4.getText();
        
         CategoriaDAO categoriaDao = new CategoriaDAO();
         
         try {
-            categoriaDao.registrarCategoria(nombreNuevaCategoria,nombrePrecio1,nombrePrecio2,nombrePrecio3,nombrePrecio4);
+            categoriaDao.registrarCategoria(nombreNuevaCategoria);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
