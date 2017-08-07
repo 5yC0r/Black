@@ -27,6 +27,7 @@ public class Incentivos {
         this.estadoIncentivo = "";
         this.fechaIncentivo = "";
         this.descripcionIncentivo = "";
+        this.fechaIncentivo = "";
 
     }
 }

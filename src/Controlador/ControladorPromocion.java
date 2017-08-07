@@ -29,13 +29,13 @@ public class ControladorPromocion {
             
             String nombrePromocion = pp.jtfNombrePromocion.getText();
             String descripcion = pp.jtpDescripcion.getText();
-            String categoria = pp.jcbCategoriaProducto.getSelectedItem().toString();
-            String producto = pp.jcbProducto.getSelectedItem().toString();
+//            String categoria = pp.jcbCategoriaProducto.getSelectedItem().toString();
+            int codProducto = pp.jcbProducto.getSelectedIndex();
             int unidades = Integer.parseInt(pp.jtfUnidades.getText());
             float importe = Float.parseFloat(pp.jtfImporte.getText());       
         
         try {
-            promocionDao.registrarPromocion(nombrePromocion,descripcion,categoria,producto,unidades,importe);
+            promocionDao.registrarPromocion(nombrePromocion,descripcion,codProducto,unidades,importe);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

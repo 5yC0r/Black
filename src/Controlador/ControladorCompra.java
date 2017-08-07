@@ -28,8 +28,9 @@ public class ControladorCompra {
     public void insertarDatos() {
     
         String numeroComprobante = pnc.jtfNumeroComprobante.getText();
-        String proveedor = pnc.jcbProveedor.getSelectedItem().toString();
-        String vendedor = pnc.jtfNombreVendedor.getText();
+        int codProveedor = pnc.jcbProveedor.getSelectedIndex();
+//        String vendedor = pnc.jtfNombreVendedor.getText();
+        int codEmpleado =1; //revisar ojo
         String fechaCompra = df.format(pnc.jdcFechaCompra.getDate());
         String tipoPago = pnc.jcbTipoPago.getSelectedItem().toString();
         int diasPago = Integer.parseInt(pnc.jtfDiasPago.getText());
@@ -38,7 +39,7 @@ public class ControladorCompra {
         CompraDAO compraDao = new CompraDAO();
         
         try {
-            compraDao.registrarCompra(numeroComprobante,proveedor,vendedor,fechaCompra,tipoPago,diasPago,totalPago);
+            compraDao.registrarCompra(numeroComprobante,codProveedor,codEmpleado,fechaCompra,tipoPago,diasPago,totalPago);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

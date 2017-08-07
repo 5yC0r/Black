@@ -13,7 +13,7 @@ public class Promocion {
     String nombrePromocion;
     String descripcion;
     String categoria;
-    String producto;
+    int codProducto;
     int unidades;
     float importe;
    
@@ -21,7 +21,7 @@ public class Promocion {
         this.nombrePromocion = "";
         this.descripcion = "";
         this.categoria = "";
-        this.producto = "";
+        this.codProducto = 1;
         this.unidades = 1;
         this.importe = 0.1f;
 

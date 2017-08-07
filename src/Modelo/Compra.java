@@ -11,8 +11,8 @@ package Modelo;
 public class Compra {
     
     String numeroComprobante;
-    String proveedor;
-    String vendedor;
+    int codProveedor;
+    int codEmpleado;
     String fechaCompra;
     String tipoPago;
     int diasPago;
@@ -20,8 +20,8 @@ public class Compra {
        
     public Compra(){
         this.numeroComprobante = "";        
-        this.proveedor = "";
-        this.vendedor = "";
+        this.codProveedor = 0;
+        this.codEmpleado = 0;
         this.fechaCompra = "";
         this.tipoPago = "";
         this.diasPago = 1;

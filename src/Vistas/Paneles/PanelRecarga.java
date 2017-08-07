@@ -7,11 +7,9 @@ package Vistas.Paneles;
 import Controlador.ControladorPrincipal;
 import Modelo.Conexion;
 import Modelo.Recarga;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +31,7 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
             
             conexion = new Conexion();
             java.sql.Connection accesoBD = null;
-        Statement ps = null;
+            Statement ps = null;
             
         try{
             //conexion = new Conexion();

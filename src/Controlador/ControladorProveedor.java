@@ -30,12 +30,13 @@ public class ControladorProveedor {
         String telefono = prp.jtfTelefonoProveedor.getText();
         String celular = prp.jtfCelularProveedor.getText();
         String numeroCuenta = prp.jtfNumeroCuenta.getText();
-        
+        String diaPedido1 = "Lunes";
+        String diaPedido2 = "Martes";
        
         ProveedorDAO proveedorDao = new ProveedorDAO();
         
         try {
-            proveedorDao.registrarProveedor(nombreProveedor,direccion,telefono,celular,numeroCuenta);
+            proveedorDao.registrarProveedor(nombreProveedor,direccion,telefono,celular,numeroCuenta,diaPedido1,diaPedido2);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

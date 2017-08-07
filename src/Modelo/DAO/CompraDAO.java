@@ -22,8 +22,8 @@ public class CompraDAO {
     
     public void registrarCompra(
         String numeroComprobante,
-        String proveedor,
-        String vendedor,
+        int codProveedor,
+        int codEmpleado,
         String fechaCompra,
         String tipoPago,
         int diasPago,
@@ -33,13 +33,13 @@ public class CompraDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO compra(numeroComprobante,proveedor,vendedor,fechaCompra,tipoPago,diasPago,totalPago)"
+            String consulta = "INSERT INTO compra(numeroComprobante,codProveedor,codEmpleado,fechaCompra,tipoPago,diasPago,totalPago)"
                     + "VALUES(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, numeroComprobante);
-            ps.setString(2, proveedor);
-            ps.setString(3, vendedor);
+            ps.setInt(2, codProveedor);
+            ps.setInt(3, codEmpleado);
             ps.setString(4, fechaCompra);
             ps.setString(5, tipoPago);
             ps.setInt(6, diasPago);

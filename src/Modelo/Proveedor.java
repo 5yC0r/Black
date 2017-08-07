@@ -1,7 +1,7 @@
 
 package Modelo;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Proveedor {
     String nombreProveedor;
@@ -9,8 +9,10 @@ public class Proveedor {
     String telefono;    //fijo
     String celular;    //Celular
     String numeroCuenta; 
+    String diaPedido1;
+    String diaPedido2;
     
-    ArrayList <Integer> diasPedido;     //1: lunes | 2: martes ...
+//    ArrayList <Integer> diasPedido;     //1: lunes | 2: martes ...
     
     public Proveedor(){
         nombreProveedor = "";
@@ -18,7 +20,9 @@ public class Proveedor {
         telefono = "";
         celular = "";
         numeroCuenta = "";
-        diasPedido = new ArrayList();
+//        diasPedido = new ArrayList();
+        diaPedido1 ="";
+        diaPedido2 ="";
     }
     
 }
