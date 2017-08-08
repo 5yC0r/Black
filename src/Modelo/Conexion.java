@@ -10,8 +10,8 @@ public class Conexion {
     Connection con;
     String driver = "com.mysql.jdbc.Driver";
     String usuario = "root";
-    String pass = "123456789";
-    String bd = "basebb";
+    String pass = "";
+    String bd = "basebb1";
     String url = "jdbc:mysql://localhost:3306/"+bd;
     
 //    String usuario = "nuevospa_apadri";

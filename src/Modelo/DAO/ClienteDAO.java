@@ -67,13 +67,13 @@ public class ClienteDAO {
         }
     }
     
-    public Cliente obtenerCliente(int codCliente) throws SQLException{
+    public Cliente obtenerCliente(String numDocCliente) throws SQLException{
         Conexion conexion = new Conexion();
         Cliente cliente = new Cliente();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT * FROM cliente where idCliente='"+codCliente+"'";
+            String consulta = "SELECT * FROM cliente where numDoc='"+numDocCliente+"'";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
@@ -122,15 +122,16 @@ public class ClienteDAO {
         String direccion,
 
         int codEmpleado,
-        String fechaRegistroCliente
+        String fechaRegistroCliente,
+        String numDocAntiguo
     ) throws SQLException{
-        int codCliente = 1;
+
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "UPDATE cliente SET tipoCliente = ?, tipoDoc = ?, numDoc = ? ,razonSocial = ?,nombresApellidos = ?,fechaNacimiento = ?,sexoCliente = ?,telefonoCliente = ?,celularCliente = ?,correoCliente = ?,direccion = ?,vendedor = ?,fechaRegistroCliente = ?"
-                    + "WHERE codCliente = ? ";
+            String consulta = "UPDATE cliente SET tipoCliente = ?, tipoDoc = ?, numDoc = ? ,razonSocial = ?,nombresApellidos = ?,fechaNacimiento = ?,sexoCliente = ?,telefonoCliente = ?,celularCliente = ?,correoCliente = ?,direccion = ?,codEmpleado = ?,fechaRegistroCliente = ?"
+                    + "WHERE numDoc = ? ";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, tipoCliente);
@@ -147,7 +148,7 @@ public class ClienteDAO {
             
             ps.setInt(12, codEmpleado);
             ps.setString(13, fechaRegistroCliente);
-            ps.setInt(14, codCliente);
+            ps.setString(14, numDocAntiguo);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al actualizar cliente: "+e.toString());
