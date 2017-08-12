@@ -185,7 +185,9 @@ public class ControladorPrincipal implements ActionListener {
                         if (ae.getSource() == principal.miListadoClientes) {
                             PanelListadoClientes plc = new PanelListadoClientes();
                             v = 14;
-
+                            ControladorListaClientes clc = new ControladorListaClientes();
+                            clc.setPlc(plc);
+                            clc.darEventoBotones();
                             //plc.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                             principal.panelPrincipal.removeAll();
                             //principal.panelPrincipal.add(plc, BorderLayout.CENTER);
