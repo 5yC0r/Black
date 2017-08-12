@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.DAO.*;
+import Vistas.Login;
 import Vistas.Paneles.*;
 import Vistas.Principal;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,13 @@ public class ControladorPrincipal implements ActionListener {
     int msj;
     JInternalFrame internalFrameActual;
 
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+    
+    Login login;
+    
+    
     ControladorEmpresa ce;
     
     String numDocActualizar = "";
@@ -60,6 +68,8 @@ public class ControladorPrincipal implements ActionListener {
         principal.miNuevaCompra.addActionListener(this);
         principal.miListadoCompras.addActionListener(this);
         principal.miEmisionComprobante.addActionListener(this);
+        
+        
     }
 
     @Override
@@ -81,6 +91,13 @@ public class ControladorPrincipal implements ActionListener {
             banderaGuardar = 1;
             v = 1;
             setPanelActual(prc);
+            UsuarioDAO usuarioDao = new UsuarioDAO();
+            try {
+                prc.jtfVendedor.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //prc.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
             principal.panelPrincipal.removeAll();
             //principal.panelPrincipal.add(prc, BorderLayout.CENTER);
@@ -101,7 +118,6 @@ public class ControladorPrincipal implements ActionListener {
                 //principal.panelPrincipal.add(prt, BorderLayout.CENTER);
                 this.principal.panelPrincipal.add(prt);
                 prt.show();
-
                 prt.setLocation(5, 5);
                 principal.panelPrincipal.revalidate();
                 principal.panelPrincipal.repaint();
@@ -147,6 +163,16 @@ public class ControladorPrincipal implements ActionListener {
                         banderaGuardar = 1;
                         v = 12;
                         setPanelActual(prv);
+                        UsuarioDAO usuarioDao = new UsuarioDAO();
+                        VentaDAO ventaDao = new VentaDAO();
+                        try {
+                            int id = ventaDao.obtenerUltimo()+1;
+                            prv.jtfCodigoVenta.setText(Integer.toString(id));
+                            prv.jtfResponsableVenta.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         //pv.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                         principal.panelPrincipal.removeAll();
                         //principal.panelPrincipal.add(pv, BorderLayout.CENTER);
@@ -276,8 +302,8 @@ public class ControladorPrincipal implements ActionListener {
                                         }
                                         for (int i = 0; i < numRegistros; i++) {
                                             try {
-                                                columna[0] = ventaDao.listarVentas().get(i).getCodigoVenta();
-                                                columna[1] = ventaDao.listarVentas().get(i).getCodigoCliente();
+                                                columna[0] = ventaDao.listarVentas().get(i).getCodVenta();
+                                                columna[1] = ventaDao.listarVentas().get(i).getCodCliente();
                                                 columna[2] = ventaDao.listarVentas().get(i).getTotalNetoVenta();
                                                 columna[3] = ventaDao.listarVentas().get(i).getFechaVenta();
 
@@ -306,9 +332,15 @@ public class ControladorPrincipal implements ActionListener {
                                         } else {
                                             if (ae.getSource() == principal.miNuevaRecarga || ae.getSource() == principal.btnNuevaRecarga) {
                                                 PanelRecarga pnr = new PanelRecarga();
+                                                AgregarOperador pao = new AgregarOperador();
                                                 banderaGuardar = 1;
                                                 v = 6;
-                                                setPanelActual(pnr);
+                                                pnr.btnAgregarOperador.addActionListener(this);
+                                                if(ae.getSource() == pnr.btnAgregarOperador){
+                                                    pnr.dispose();                                                    
+                                                    pao.setVisible(true);
+                                                }
+                                                setPanelActual(pnr);                                       
                                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                 principal.panelPrincipal.removeAll();
                                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -351,6 +383,13 @@ public class ControladorPrincipal implements ActionListener {
                                                             banderaGuardar = 1;
                                                             v = 10;
                                                             setPanelActual(prp);
+                                                            UsuarioDAO usuarioDao = new UsuarioDAO();
+                                                            try {
+                                                                prp.jtfResponsable.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
+
+                                                            } catch (SQLException ex) {
+                                                                Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                            }
                                                             //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                             principal.panelPrincipal.removeAll();
                                                             //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -472,8 +511,8 @@ public class ControladorPrincipal implements ActionListener {
                                                                                     }
                                                                                     for (int i = 0; i < numRegistros; i++) {
                                                                                         try {
-                                                                                            columna[0] = ventaDao.listarVentas().get(i).getCodigoVenta();
-                                                                                            columna[1] = ventaDao.listarVentas().get(i).getCodigoCliente();
+                                                                                            columna[0] = ventaDao.listarVentas().get(i).getCodVenta();
+                                                                                            columna[1] = ventaDao.listarVentas().get(i).getCodCliente();
                                                                                             columna[2] = ventaDao.listarVentas().get(i).getTotalNetoVenta();
                                                                                             columna[3] = ventaDao.listarVentas().get(i).getFechaVenta();
 
@@ -528,6 +567,59 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                     banderaGuardar = 1;
                                                                                                     v = 13;
                                                                                                     setPanelActual(pec);
+                                                                                                    //UsuarioDAO usuarioDao = new UsuarioDAO();
+                                                                                                    ComprobanteDAO comprobanteDao = new ComprobanteDAO();
+                                                                                                    /*try {
+                                                                                                        int id = Integer.parseInt(comprobanteDao.obtenerUltimo())+1;
+                                                                                                        String serie = String.valueOf(id);
+                                                                                                         int tam =serie.length();
+                                                                                                        if(tam == 1){
+                                                                                                        serie = "00"+serie;
+                                                                                                        pec.jtfSerieComprobante.setText(serie);
+                                                                                                        }else{
+                                                                                                            if(tam == 2){
+                                                                                                            serie = "0"+serie;
+                                                                                                            pec.jtfSerieComprobante.setText(serie);
+                                                                                                            }else{
+                                                                                                                pec.jtfSerieComprobante.setText(serie);
+                                                                                                            }
+                                                                                                        }
+                                                                                                        int id = Integer.parseInt(comprobanteDao.obtenerUltimoCorrelativo())+1;
+                                                                                                        String coo = String.valueOf(id);
+                                                                                                        pec.jtfCorrelativoComprobante.setText(coo);
+                                                                                                        int tamc =coo.length();
+                                                                                                        if(tamc == 1){
+                                                                                                            coo = "0000000"+coo;
+                                                                                                        }
+                                                                                                        else{
+                                                                                                            if(tamc == 2){
+                                                                                                                coo = "000000"+coo;
+                                                                                                            }
+                                                                                                            else{
+                                                                                                                if(tamc == 3)
+                                                                                                                {coo = "00000"+coo;}
+                                                                                                                else{
+                                                                                                                    if(tamc == 4){coo = "0000"+coo;}
+                                                                                                                    else{
+                                                                                                                        if(tamc == 5)
+                                                                                                                        {coo = "000"+coo;}
+                                                                                                                        else{
+                                                                                                                            if(tamc == 6)
+                                                                                                                            {coo = "00"+coo;}
+                                                                                                                            else{
+                                                                                                                                if(tamc == 7){coo = "0"+coo;}
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                        
+                                                                                                        //prv.jtfResponsableVenta.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
+
+                                                                                                    } catch (SQLException ex) {
+                                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                    }*/
                                                                                                     //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                                                                     principal.panelPrincipal.removeAll();
                                                                                                     //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -542,14 +634,28 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                             if (v == 1) {
                                                                                                                 PanelRegistroCliente prc = (PanelRegistroCliente) internalFrameActual;
                                                                                                                 ControladorCliente cc = new ControladorCliente();
+                                                                                                                if ("".equals(prc.jtfNumDoc.getText()) || "".equals(prc.jtfNumDoc.getText()) || "".equals(prc.jtfNumDoc.getText())) {
+                                                                                                                        JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                    } else {
+                                                                                                                    
                                                                                                                 cc.setPanelRegistroCliente(prc);
-                                                                                                                cc.insertarDatos();
+                                                                                                                                                                                                                             cc.insertarDatos();
                                                                                                                 msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                 if (msj == 0) {
+                                                                                                                    prc.jcbSexoCliente.setSelectedItem("Seleccione");
+                                                                                                                    prc.jcbTipoCliente.setSelectedItem("Seleccione");                                                                                               
+                                                                                                                    prc.jcbTipoDoc.setText("");
+                                                                                                                    prc.jdcFechaNacimiento.setCalendar(null);                                                                                                                    
                                                                                                                     prc.jtfCelularCliente.setText("");
                                                                                                                     prc.jtfCorreoCliente.setText("");
+                                                                                                                    prc.jtfDireccionCliente.setText("");
+                                                                                                                    prc.jtfNombresApellidos.setText("");
+                                                                                                                    prc.jtfNumDoc.setText("");
+                                                                                                                    prc.jtfRazonSocial.setText("");
+                                                                                                                    prc.jtfTelefonoCliente.setText("");                                                                                
                                                                                                                 } else {
                                                                                                                     prc.dispose();
+                                                                                                                }
                                                                                                                 }
                                                                                                             } else {
                                                                                                                 if (v == 2) {
@@ -564,12 +670,13 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                         msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                         if (msj == 0) {
                                                                                                                             prt.jtfApellidosNombres.setText("");
+                                                                                                         
                                                                                                                             prt.jtfCelularTrab.setText("");
                                                                                                                             prt.jtfClaveUsuario.setText("");
                                                                                                                             prt.jtfCorreoTrab.setText("");
                                                                                                                             prt.jtfDireccionTrab.setText("");
                                                                                                                             prt.jtfDniTrab.setText("");
-                                                                                                                            prt.jtfDniTrab.setText("");
+                                                                                                                            
                                                                                                                             prt.jtfEdadTrab.setText("");
                                                                                                                             prt.jtfFechaPago.setText("");
                                                                                                                             prt.jtfHobbyTrab.setText("");
@@ -578,6 +685,10 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                             prt.jtfTelRefTrab.setText("");
                                                                                                                             prt.jtfTelefonoTrab.setText("");
                                                                                                                             prt.jtfUsuario.setText("");
+                                                                                                                            prt.jcbCargoTrabajador.setSelectedItem("Seleccione");
+                                                                                                                            prt.jcbSexoTrab.setSelectedItem("Seleccione");
+                                                                                                                            prt.jdcFechNacTrab.setCalendar(null);
+                                                                                                                          
                                                                                                                         } else {
                                                                                                                             prt.dispose();
                                                                                                                         }
@@ -587,8 +698,39 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                     if (v == 3) {
                                                                                                                         PanelBonosyComisiones pbc = (PanelBonosyComisiones) internalFrameActual;
                                                                                                                         ControladorIncentivos ci = new ControladorIncentivos();
-                                                                                                                        ci.setPanelBonosyComisiones(pbc);
-                                                                                                                        ci.insertarDatos();
+                                                                                                                        if ("".equals(pbc.jtfNombreIncentivo.getText())) {
+                                                                                                                        JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                        } else {
+
+                                                                                                                            ci.setPanelBonosyComisiones(pbc);
+                                                                                                                            ci.insertarDatos();
+                                                                                                                            msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                            if (msj == 0) {
+                                                                                                                                /*pbc..jtfApellidosNombres.setText("");
+
+                                                                                                                                prt.jtfCelularTrab.setText("");
+                                                                                                                                prt.jtfClaveUsuario.setText("");
+                                                                                                                                prt.jtfCorreoTrab.setText("");
+                                                                                                                                prt.jtfDireccionTrab.setText("");
+                                                                                                                                prt.jtfDniTrab.setText("");
+
+                                                                                                                                prt.jtfEdadTrab.setText("");
+                                                                                                                                prt.jtfFechaPago.setText("");
+                                                                                                                                prt.jtfHobbyTrab.setText("");
+                                                                                                                                prt.jtfNumCuentaTrab.setText("");
+                                                                                                                                prt.jtfSueldoTrab.setText("");
+                                                                                                                                prt.jtfTelRefTrab.setText("");
+                                                                                                                                prt.jtfTelefonoTrab.setText("");
+                                                                                                                                prt.jtfUsuario.setText("");
+                                                                                                                                prt.jcbCargoTrabajador.setSelectedItem("Seleccione");
+                                                                                                                                prt.jcbSexoTrab.setSelectedItem("Seleccione");
+                                                                                                                                prt.jdcFechNacTrab.setCalendar(null);*/
+
+                                                                                                                            } else {
+                                                                                                                                pbc.dispose();
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        
                                                                                                                     } else {
                                                                                                                         if (v == 4) {
                                                                                                                             //PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
@@ -599,59 +741,130 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                             if (v == 5) {
                                                                                                                                 AgregarOperador pao = (AgregarOperador) internalFrameActual;
                                                                                                                                 ControladorOperador co = new ControladorOperador();
-                                                                                                                                co.setAgregarOperador(pao);
-                                                                                                                                co.insertarDatos();
-                                                                                                                                msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
-                                                                                                                                if (msj == 0) {
-                                                                                                                                    pao.jtfNombreOperador.setText("");
-
+                                                                                                                                if ("".equals(pao.jtfNombreOperador.getText())) {
+                                                                                                                                    JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                                 } else {
-                                                                                                                                    pao.dispose();
+                                                                                                                                    co.setAgregarOperador(pao);
+                                                                                                                                    co.insertarDatos();                                                                                                                                
+                                                                                                                                    msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                    if (msj == 0) {
+                                                                                                                                        pao.jtfNombreOperador.setText("");
+
+                                                                                                                                    } else {
+                                                                                                                                        pao.dispose();
+                                                                                                                                    }
                                                                                                                                 }
                                                                                                                             } else {
                                                                                                                                 if (v == 6) {
                                                                                                                                     PanelRecarga pnr = (PanelRecarga) internalFrameActual;
                                                                                                                                     ControladorRecarga cr = new ControladorRecarga();
-                                                                                                                                    cr.setPanelRecarga(pnr);
+                                                                                                                                    /*if(ae.getSource() == pnr.btnAgregarOperador){
+                                                                                                                                        //abrir ventana principal
+                                                                                                                                        AgregarOperador ao = new AgregarOperador();
+                                                                                                                                        ao.setVisible(true);
+                                                                                                                                        }*/
+                                                                                                                                    if ("".equals(pnr.jtfNumeroCelular.getText())) {
+                                                                                                                                        JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                    } else {
+                                                                                                                                        cr.setPanelRecarga(pnr);
                                                                                                                                     cr.insertarDatos();
                                                                                                                                     msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                                     if (msj == 0) {
-                                                                                                                                        pnr.jtfCantidadRecargada.setText("");
+                                                                                                                                        pnr.jtfCantidadRecargada.setText("");                                                                                                                                        
                                                                                                                                         pnr.jtfNumeroCelular.setText("");
                                                                                                                                     } else {
                                                                                                                                         pnr.dispose();
                                                                                                                                     }
+                                                                                                                                    }
+                                                                                                                                    
 
                                                                                                                                 } else {
                                                                                                                                     if (v == 7) {
                                                                                                                                         PanelNuevaCategoria pnc = (PanelNuevaCategoria) internalFrameActual;
                                                                                                                                         ControladorCategoria cc = new ControladorCategoria();
-                                                                                                                                        cc.setPanelNuevaCategoria(pnc);
-                                                                                                                                        cc.insertarDatos();
-                                                                                                                                        msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
-                                                                                                                                        if (msj == 0) {
-                                                                                                                                            pnc.jtfNombreNuevaCategoria.setText("");
+                                                                                                                                        
+                                                                                                                                        if ("".equals(pnc.jtfNombreNuevaCategoria.getText())) {
+                                                                                                                                            JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                                         } else {
-                                                                                                                                            pnc.dispose();
+                                                                                                                                            cc.setPanelNuevaCategoria(pnc);
+                                                                                                                                            cc.insertarDatos();
+                                                                                                                                            msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                            if (msj == 0) {
+                                                                                                                                                pnc.jtfNombreNuevaCategoria.setText("");
+                                                                                                                                            } else {
+                                                                                                                                                pnc.dispose();
+                                                                                                                                            }
                                                                                                                                         }
                                                                                                                                     } else {
                                                                                                                                         if (v == 8) {
                                                                                                                                             PanelRegistroProveedor prp = (PanelRegistroProveedor) internalFrameActual;
                                                                                                                                             ControladorProveedor cp = new ControladorProveedor();
-                                                                                                                                            cp.setPanelRegistroProveedor(prp);
-                                                                                                                                            cp.insertarDatos();
+                                                                                                                                            
+                                                                                                                                            if ("".equals(prp.jtfNombreProveedor.getText())) {
+                                                                                                                                                JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                            } else {
+                                                                                                                                                cp.setPanelRegistroProveedor(prp);
+                                                                                                                                                cp.insertarDatos();
+                                                                                                                                                msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                                if (msj == 0) {
+                                                                                                                                                    prp.jtfCelularProveedor.setText("");
+                                                                                                                                                    prp.jtfDireccionProveedor.setText("");
+                                                                                                                                                    prp.jtfNombreProveedor.setText("");
+                                                                                                                                                    prp.jtfNumeroCuenta.setText("");
+                                                                                                                                                    prp.jtfPedido1.setText("");
+                                                                                                                                                    prp.jtfPedido2.setText("");
+                                                                                                                                                    prp.jtfTelefonoProveedor.setText("");
+
+                                                                                                                                                } else {
+                                                                                                                                                    prp.dispose();
+                                                                                                                                                }
+                                                                                                                                            }
                                                                                                                                         } else {
                                                                                                                                             if (v == 9) {
                                                                                                                                                 PanelPromociones pp = (PanelPromociones) internalFrameActual;
                                                                                                                                                 ControladorPromocion cp = new ControladorPromocion();
+                                                                                                                                                if ("".equals(pp.jtfNombrePromocion.getText())) {
+                                                                                                                                                JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                            } else {
                                                                                                                                                 cp.setPanelPromociones(pp);
                                                                                                                                                 cp.insertarDatos();
+                                                                                                                                                msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                                if (msj == 0) {
+                                                                                                                                                    /*prp.jtfCelularProveedor.setText("");
+                                                                                                                                                    prp.jtfDireccionProveedor.setText("");
+                                                                                                                                                    prp.jtfNombreProveedor.setText("");
+                                                                                                                                                    prp.jtfNumeroCuenta.setText("");
+                                                                                                                                                    prp.jtfPedido1.setText("");
+                                                                                                                                                    prp.jtfPedido2.setText("");
+                                                                                                                                                    prp.jtfTelefonoProveedor.setText("");*/
+
+                                                                                                                                                } else {
+                                                                                                                                                    pp.dispose();
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                                
                                                                                                                                             } else {
                                                                                                                                                 if (v == 10) {
+                                                                                                                                                    int i;
                                                                                                                                                     PanelRegistroProducto prp = (PanelRegistroProducto) internalFrameActual;
                                                                                                                                                     ControladorProducto cp = new ControladorProducto();
+                                                                                                                                                    PrecioProductoDAO precioDao = new PrecioProductoDAO();
+                                                                                                                                                    //ControladorPrecios cpr = new ControladorPrecios();
                                                                                                                                                     cp.setPanelRegistroProducto(prp);
                                                                                                                                                     cp.insertarDatos();
+                                                                                                                                                    /*for(i =0 ; i< prp.tablePrecios.getRowCount() ; i++){
+                                                                                                                                                        System.out.println(prp.tablePrecios.getValueAt(i,0));
+                                                                                                                                                        try {
+                                                                                                                                                            precioDao.registrarPreciosProducto((prp.tablePrecios.getValueAt(i,0).toString()), (Float)(prp.tablePrecios.getValueAt(i,1)),(Float)(prp.tablePrecios.getValueAt(i,2)),1);
+                                                                                                                                                        } catch (SQLException ex) {
+                                                                                                                                                            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                        }
+                                                                                                                                                        } */
+                                                                                                                                                    /*if(prp.tablePrecios.getRowCount()>0){
+                                                                                                                                                        System.out.println(""+prp.tablePrecios.getValueAt(0, 0));
+                                                                                                                                                    }else{
+                                                                                                                                                         JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                                    }*/
                                                                                                                                                 } else {
                                                                                                                                                     if (v == 11) {
                                                                                                                                                         PanelNuevaCompra pnc = (PanelNuevaCompra) internalFrameActual;
@@ -709,6 +922,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                 numDocActualizar = cliente.getNumDoc();
                                                                                                                 prc.jtfNumDoc.setText(cliente.getNumDoc());
                                                                                                                 prc.jtfNombresApellidos.setText(cliente.getNombresApellidos());
+                                                                                                                
                                                                                                                 //terminar de llenar los campos
                                                                                                                 internalFrameActual = prc;
                                                                                                                 v = 1;

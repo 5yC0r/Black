@@ -4,16 +4,18 @@ package Modelo;
 public class PrecioProducto {
     
     int codPrecio;
-    String unidad;
+    String nombre;
     
-    float costo;
-    float venta;
+    float valorCosto;
+    float valorVenta;
+    int codProducto;
     
     public PrecioProducto(){
         this.codPrecio = 0;
-        unidad = "";
+       this.nombre = "";
         
-        costo = 0;
-        venta = 0;
+        this.valorCosto = 0.1f;
+        this.valorVenta = 0.1f;
+        this.codProducto = 0;
     }
 }

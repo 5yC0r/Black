@@ -4,9 +4,12 @@
  */
 package Modelo.DAO;
 
+import Modelo.Categoria;
 import Modelo.Conexion;
+import Modelo.Empleado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -45,4 +48,41 @@ public void registrarCategoria(
             }
         }
     }
+
+public int obtenerCodigo(String categoria) throws SQLException{
+        Conexion conexion = new Conexion();
+        Categoria cat = new Categoria();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM categoria where nombreNuevaCategoria ='"+categoria+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                cat.setCodCategoria(rs.getInt(1));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = cat.getCodCategoria();
+             
+             System.out.println(codigo);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+
 }

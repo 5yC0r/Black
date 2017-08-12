@@ -25,7 +25,7 @@ public class ControladorBienvenida  implements ActionListener{
         if(ae.getSource()== bienvenida.btnBienvenida){
             
             try {
-                empresaDao.obtenerDatos();
+                empresaDao.obtenerDatos(login);
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorBienvenida.class.getName()).log(Level.SEVERE, null, ex);
             }

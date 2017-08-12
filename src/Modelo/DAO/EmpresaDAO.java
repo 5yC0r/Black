@@ -7,10 +7,14 @@ package Modelo.DAO;
 import Modelo.Conexion;
 import Modelo.Empresa;
 import Vistas.Login;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -71,11 +75,22 @@ public class EmpresaDAO {
         }
     }
     
-    public void obtenerDatos() throws SQLException{
+    public void obtenerDatos(Login login) throws SQLException{
         Conexion conexion = new Conexion();
         Empresa empresa = new Empresa();
         Connection accesoBD = null;
         PreparedStatement ps = null;
+        String ip = "";
+        
+        InetAddress direccion;
+        try {
+            direccion = InetAddress.getLocalHost();
+            ip = direccion.getHostName();
+            System.out.println("HostName: "+ direccion.getHostName());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(EmpresaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         try {
             String consulta = "SELECT * FROM empresa where codEmpresa='1'";
             accesoBD = conexion.getConnection();
@@ -88,6 +103,7 @@ public class EmpresaDAO {
             
             login.NombreEmpresa.setText(empresa.getRazonSocial());
             login.LocalidadEmpresa.setText(empresa.getLocalidad());
+            login.NombreEquipo.setText(ip);
             
         } catch (SQLException e) {
             System.out.println("Error al obtener datos de cliente: "+e.toString());

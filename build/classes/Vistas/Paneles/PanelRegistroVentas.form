@@ -215,7 +215,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jcbOtraVenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbOtroCliente" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jtfNombreCliente" min="-2" pref="407" max="-2" attributes="0"/>
                   </Group>
@@ -231,7 +231,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfCodigoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcbOtraVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbOtroCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -275,10 +275,13 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jcbOtraVenta">
+        <Component class="javax.swing.JCheckBox" name="jcbOtroCliente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Otros"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbOtroClienteActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

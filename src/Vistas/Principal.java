@@ -38,7 +38,6 @@ public class Principal extends javax.swing.JFrame {
         btnCumpleaños = new javax.swing.JButton();
         btnNuevaRecarga = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -50,6 +49,7 @@ public class Principal extends javax.swing.JFrame {
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         panelPrincipal = new javax.swing.JDesktopPane();
         menuBarPrincipal = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -210,8 +210,6 @@ public class Principal extends javax.swing.JFrame {
         jButton10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        btnActualizar.setText("Actualizar");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -233,9 +231,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnNuevaRecarga)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton10)
-                .addGap(18, 18, 18)
-                .addComponent(btnActualizar)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,12 +244,14 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnMiCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addComponent(btnReporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(btnActualizar)
-                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(null);
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(131, 132, 0, 0);
+        jPanel3.add(jLabel18);
+        jLabel18.setBounds(95, 60, 0, 0);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new01.png"))); // NOI18N
         jButton1.setText("Nuevo");
@@ -270,6 +268,8 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton1);
+        jButton1.setBounds(12, 8, 51, 41);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/style_file-5.png"))); // NOI18N
         btnEditar.setText("Editar");
@@ -281,6 +281,8 @@ public class Principal extends javax.swing.JFrame {
         btnEditar.setIconTextGap(1);
         btnEditar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(btnEditar);
+        btnEditar.setBounds(12, 60, 51, 41);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -292,6 +294,8 @@ public class Principal extends javax.swing.JFrame {
         btnGuardar.setIconTextGap(0);
         btnGuardar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(btnGuardar);
+        btnGuardar.setBounds(16, 164, 47, 41);
 
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Icon-trash.png"))); // NOI18N
         jButton12.setText("Eliminar");
@@ -303,6 +307,8 @@ public class Principal extends javax.swing.JFrame {
         jButton12.setIconTextGap(0);
         jButton12.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(jButton12);
+        jButton12.setBounds(12, 216, 51, 41);
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
         jButton13.setText("Buscar");
@@ -314,6 +320,8 @@ public class Principal extends javax.swing.JFrame {
         jButton13.setIconTextGap(0);
         jButton13.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(jButton13);
+        jButton13.setBounds(16, 275, 47, 41);
 
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/printer.png"))); // NOI18N
         jButton14.setText("Imprimir");
@@ -325,6 +333,8 @@ public class Principal extends javax.swing.JFrame {
         jButton14.setIconTextGap(0);
         jButton14.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(jButton14);
+        jButton14.setBounds(12, 327, 51, 48);
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/export_icon.png"))); // NOI18N
         jButton15.setText("Exportar");
@@ -336,6 +346,8 @@ public class Principal extends javax.swing.JFrame {
         jButton15.setIconTextGap(0);
         jButton15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(jButton15);
+        jButton15.setBounds(3, 386, 70, 50);
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.png"))); // NOI18N
         jButton16.setText("Cancelar");
@@ -347,61 +359,21 @@ public class Principal extends javax.swing.JFrame {
         jButton16.setIconTextGap(0);
         jButton16.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(jButton16);
+        jButton16.setBounds(3, 445, 70, 50);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel6))
-                            .addComponent(jLabel18)))
-                    .addComponent(jButton16)
-                    .addComponent(jButton12)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel6)
-                        .addGap(248, 248, 248))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGuardar)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton12)
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton13)
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton14)
-                        .addGap(11, 11, 11)
-                        .addComponent(jButton15)
-                        .addGap(18, 18, 18)))
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setBorder(null);
+        btnActualizar.setBorderPainted(false);
+        btnActualizar.setContentAreaFilled(false);
+        btnActualizar.setFocusCycleRoot(true);
+        btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnActualizar.setIconTextGap(0);
+        btnActualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel3.add(btnActualizar);
+        btnActualizar.setBounds(3, 112, 70, 41);
 
         panelPrincipal.setBackground(new java.awt.Color(240, 240, 240));
 
@@ -558,7 +530,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                     .addComponent(panelPrincipal)))
         );
 

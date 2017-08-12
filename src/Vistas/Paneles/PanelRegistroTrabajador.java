@@ -4,6 +4,9 @@
  */
 package Vistas.Paneles;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author MARIANA
@@ -15,7 +18,15 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
      */
     public PanelRegistroTrabajador() {
         initComponents();
+        Calendar c2 = new GregorianCalendar();
+        jcFechaRegistroTrabajador.setCalendar(c2);
+
+        
+        
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +119,12 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         jLabel11.setText("Hobby:");
 
         jLabel15.setText("Celular:");
+
+        jdcFechNacTrab.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFechNacTrabPropertyChange(evt);
+            }
+        });
 
         jLabel7.setText("Sexo:");
 
@@ -357,7 +374,7 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,6 +383,12 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
     private void jtfDniTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDniTrabActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfDniTrabActionPerformed
+
+    private void jdcFechNacTrabPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFechNacTrabPropertyChange
+        // TODO add your handling code here:
+        
+        //System.out.println(edad);
+    }//GEN-LAST:event_jdcFechNacTrabPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

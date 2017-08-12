@@ -30,8 +30,8 @@ public class ControladorProveedor {
         String telefono = prp.jtfTelefonoProveedor.getText();
         String celular = prp.jtfCelularProveedor.getText();
         String numeroCuenta = prp.jtfNumeroCuenta.getText();
-        String diaPedido1 = "Lunes";
-        String diaPedido2 = "Martes";
+        String diaPedido1 = prp.jtfPedido1.getText();
+        String diaPedido2 = prp.jtfPedido2.getText();
        
         ProveedorDAO proveedorDao = new ProveedorDAO();
         

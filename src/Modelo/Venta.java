@@ -5,20 +5,39 @@ import java.util.ArrayList;
 
 public class Venta {
 
-    public int getCodigoCliente() {
-        return codigoCliente;
+   
+    
+    int codVenta; // se generara automaticamente con el increment
+    String fechaVenta;
+    int codEmpleado;    
+    int codCliente;
+    float subTotalVenta;
+    float descuento;
+    float totalNetoVenta;
+
+    
+    
+    
+       
+    ArrayList <Producto> listaProductosVendidos;
+    
+    public Venta(){
+        codVenta = 0;
+        fechaVenta = "";
+        codEmpleado=0;
+        codCliente = 0;
+        subTotalVenta = 0.1f;
+        descuento = 0.1f;
+        totalNetoVenta = 0.1f;
+        listaProductosVendidos = new ArrayList();
+    }
+    
+    public int getCodVenta() {
+        return codVenta;
     }
 
-    public void setCodigoCliente(int codigoCliente) {
-        this.codigoCliente = codigoCliente;
-    }
-
-    public float getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(float descuento) {
-        this.descuento = descuento;
+    public void setCodVenta(int codVenta) {
+        this.codVenta = codVenta;
     }
 
     public String getFechaVenta() {
@@ -29,20 +48,20 @@ public class Venta {
         this.fechaVenta = fechaVenta;
     }
 
-    public ArrayList<Producto> getListaProductosVendidos() {
-        return listaProductosVendidos;
+    public int getCodEmpleado() {
+        return codEmpleado;
     }
 
-    public void setListaProductosVendidos(ArrayList<Producto> listaProductosVendidos) {
-        this.listaProductosVendidos = listaProductosVendidos;
+    public void setCodEmpleado(int codEmpleado) {
+        this.codEmpleado = codEmpleado;
     }
 
-    public int getResponsableVenta() {
-        return responsableVenta;
+    public int getCodCliente() {
+        return codCliente;
     }
 
-    public void setResponsableVenta(int responsableVenta) {
-        this.responsableVenta = responsableVenta;
+    public void setCodCliente(int codCliente) {
+        this.codCliente = codCliente;
     }
 
     public float getSubTotalVenta() {
@@ -53,6 +72,14 @@ public class Venta {
         this.subTotalVenta = subTotalVenta;
     }
 
+    public float getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
+    }
+
     public float getTotalNetoVenta() {
         return totalNetoVenta;
     }
@@ -61,36 +88,12 @@ public class Venta {
         this.totalNetoVenta = totalNetoVenta;
     }
 
-    public int getCodigoVenta() {
-        return codigoVenta;
+    public ArrayList<Producto> getListaProductosVendidos() {
+        return listaProductosVendidos;
     }
 
-    public void setCodigoVenta(int codigoVenta) {
-        this.codigoVenta = codigoVenta;
+    public void setListaProductosVendidos(ArrayList<Producto> listaProductosVendidos) {
+        this.listaProductosVendidos = listaProductosVendidos;
     }
     
-    int codigoVenta; // se generara automaticamente con el increment
-    String fechaVenta;
-    int responsableVenta;    
-    int codigoCliente;
-    //String nombreCliente;
-    float subTotalVenta;
-    float descuento;
-    float totalNetoVenta;
-    
-    
-       
-    ArrayList <Producto> listaProductosVendidos;
-    
-    public Venta(){
-        codigoVenta = 0;
-        fechaVenta = "";
-        responsableVenta = 0;
-        codigoCliente = 0;
-       // nombreCliente = "";
-        subTotalVenta = 0.1f;
-        descuento = 0.1f;
-        totalNetoVenta = 0.1f;
-        listaProductosVendidos = new ArrayList();
-    }
 }

@@ -6,6 +6,8 @@ package Vistas.Paneles;
 
 import Controlador.ControladorLogin;
 import Modelo.Usuario;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -22,13 +24,10 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
      
     public PanelRegistroVentas() {
         initComponents();
+        Calendar c2 = new GregorianCalendar();
+        jdcFechaVenta.setCalendar(c2);
         
-        //int codventa = 001;
-        //String user = us.getUser();
-        //System.out.println(user);
-        jtfCodigoVenta.setText("001");
-        
-        //jtfResponsableVenta.setText(user);
+               
     }
 
     /**
@@ -55,7 +54,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jtfNombreCliente = new javax.swing.JTextField();
-        jcbOtraVenta = new javax.swing.JCheckBox();
+        jcbOtroCliente = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -146,7 +145,12 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Nombre: ");
 
-        jcbOtraVenta.setText("Otros");
+        jcbOtroCliente.setText("Otros");
+        jcbOtroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbOtroClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,7 +168,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(jcbOtraVenta))
+                        .addComponent(jcbOtroCliente))
                     .addComponent(jtfNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -176,7 +180,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jtfCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
-                    .addComponent(jcbOtraVenta))
+                    .addComponent(jcbOtroCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -339,7 +343,21 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jtfNombreCliente.setText("1212");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jcbOtroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOtroClienteActionPerformed
+        // TODO add your handling code here:
+       // jtfCodigoCliente.setText("11111111");
+        if(jcbOtroCliente.isSelected()== true){
+            jtfCodigoCliente.setText("11111111");
+            jtfNombreCliente.setEditable(false);
+        }
+        else{
+            jtfCodigoCliente.setText("");
+            jtfNombreCliente.setEditable(true);
+        }        
+    }//GEN-LAST:event_jcbOtroClienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEmitirComprobante;
@@ -363,7 +381,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    public javax.swing.JCheckBox jcbOtraVenta;
+    public javax.swing.JCheckBox jcbOtroCliente;
     public javax.swing.JComboBox jcbUnidadPrecio;
     public com.toedter.calendar.JDateChooser jdcFechaVenta;
     public javax.swing.JTextField jtfCodigoCliente;

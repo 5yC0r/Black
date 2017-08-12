@@ -32,6 +32,7 @@ public class BlackBar {
         cl.setPrincipal(principal);
         
         cp.setPrincipal(principal);
+        cp.setLogin(login);
         cp.darEventoBotones();
 
         bienvenida.setLocationRelativeTo(null);

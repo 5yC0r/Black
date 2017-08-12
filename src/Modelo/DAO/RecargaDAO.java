@@ -73,7 +73,6 @@ public class RecargaDAO {
              codigo = operador.getCodOperador();
              
             // System.out.println(codigo);
-             
             
         } catch (SQLException e) {
             System.out.println("Error al obtener el codigo del operador: "+e.toString());

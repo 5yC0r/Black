@@ -4,6 +4,13 @@
  */
 package Vistas.Paneles;
 
+import Modelo.DAO.ComprobanteDAO;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author MARIANA
@@ -13,8 +20,52 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelEmisionComprobante1
      */
+    ComprobanteDAO comprobanteDao = new ComprobanteDAO();
     public PanelEmisionComprobante() {
         initComponents();
+        
+        
+        
+         Calendar c2 = new GregorianCalendar();
+        jdcFechaEmisionComprobante.setCalendar(c2);
+        //jtfCorrelativoComprobante.setEditable(false);
+       // jtfIGV.setEditable(false);
+        jtfSerieComprobante. setEditable(false);
+        
+        
+        
+    }
+    
+    public void tipoComprobante(String cb){
+        
+        if(cb.equals("Boleta")){
+            try {
+                comprobanteDao.obtenerUltimoComprobante("Boleta");
+                //jtfSerieComprobante.setText("B");
+                //jtfSerieComprobante.setEditable(false);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelEmisionComprobante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+           //System.out.println("--"+jtfRazonSocial.getText());
+           jtfIGV.setText("0");
+           jtfIGVfinal.setText("0");
+                //jtfIGV.setEditable(false);
+               //System.out.println("--"+jdcFechaNacimiento.getDate());
+              // jcbSexoCliente.setEnabled(true);
+            //jcbTipoDoc.setText("DNI");
+        }else{
+           if(cb.equals("Factura")){
+              // jtfSerieComprobante.setText("F");
+           //jtfSerieComprobante.setEditable(false);
+               //System.out.println("--"+jdcFechaNacimiento.getDate());
+               jtfIGV.setText("18");
+               jtfIGVfinal.setText("18");
+               
+                //jtfIGV.setEditable(false);
+           }
+        }
+    
     }
 
     /**
@@ -362,6 +413,9 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
 
     private void jtfTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTipoComprobanteActionPerformed
         // TODO add your handling code here:
+        String cb = jtfTipoComprobante.getSelectedItem().toString();
+        tipoComprobante(cb);
+        
     }//GEN-LAST:event_jtfTipoComprobanteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

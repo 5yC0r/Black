@@ -4,6 +4,9 @@
  */
 package Vistas.Paneles;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author MARIANA
@@ -15,7 +18,31 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
      */
     public PanelRegistroCliente() {
         initComponents();
+        
+        Calendar c2 = new GregorianCalendar();
+        jdcFechaRegistro.setCalendar(c2);
+        
+        /*String cb = jcbTipoCliente.getSelectedItem().toString();
+        if(cb.equals("Persona Natural")){
+            jtfRazonSocial.setText("");
+        }else{
+            jtfRazonSocial.setText("hh");
+        }*/
     }
+    
+    /*public void cargarTipoCliente(){
+        
+        String cb = jcbTipoCliente.getSelectedItem().toString();
+        if(cb.equals("Persona Natural")){
+           jtfRazonSocial.setEditable(false);
+        }else{
+           if(cb.equals("Persona Juridica")){
+               jtfNombresApellidos.setEditable(false);
+               jdcFechaNacimiento.setEnabled(false);
+                       jcbSexoCliente.setEditable(false);
+           }
+        }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +63,6 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         jtfRazonSocial = new javax.swing.JTextField();
         jtfCelularCliente = new javax.swing.JTextField();
         jtfCorreoCliente = new javax.swing.JTextField();
-        jcbTipoDoc = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
         jtfDireccionCliente = new javax.swing.JTextField();
         jtfNumDoc = new javax.swing.JTextField();
@@ -48,6 +74,7 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel17 = new javax.swing.JLabel();
         jtfTelefonoCliente = new javax.swing.JTextField();
+        jcbTipoDoc = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,8 +105,6 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Correo Electrónico:");
 
-        jcbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DNI", "Pasaporte", "RUC" }));
-
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Dirección:");
 
@@ -91,9 +116,16 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
 
         jLabel16.setText("Tipo de Cliente:");
 
-        jcbTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Persona Natural", "Persona Juridica" }));
+        jcbTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Persona Natural", "Persona Juridica" }));
+        jcbTipoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoClienteActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Telefono:");
+
+        jcbTipoDoc.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,15 +162,15 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
                             .addComponent(jtfNombresApellidos, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfRazonSocial, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(1, 1, 1)
-                                        .addComponent(jcbTipoCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jcbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jcbTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jcbTipoDoc))
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfNumDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtfDireccionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,9 +183,9 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
                         .addComponent(jcbTipoCliente)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfNumDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jcbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,11 +293,35 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbTipoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoClienteActionPerformed
+        // TODO add your handling code here:
+        String cb = jcbTipoCliente.getSelectedItem().toString();
+        if(cb.equals("Persona Natural")){
+           jtfRazonSocial.setEditable(false);
+           //System.out.println("--"+jtfRazonSocial.getText());
+           jtfNombresApellidos.setEditable(true);
+           jdcFechaNacimiento.setEnabled(true);
+               //System.out.println("--"+jdcFechaNacimiento.getDate());
+               jcbSexoCliente.setEnabled(true);
+            jcbTipoDoc.setText("DNI");
+        }else{
+           if(cb.equals("Persona Juridica")){
+               jtfNombresApellidos.setEditable(false);
+               jdcFechaNacimiento.setEnabled(false);
+               //System.out.println("--"+jdcFechaNacimiento.getDate());
+               jcbSexoCliente.setEnabled(false);               
+               jtfRazonSocial.setEditable(true);
+               jcbTipoDoc.setText("RUC");
+           }
+        }
+    }//GEN-LAST:event_jcbTipoClienteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -285,7 +341,7 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     public javax.swing.JComboBox<String> jcbSexoCliente;
     public javax.swing.JComboBox jcbTipoCliente;
-    public javax.swing.JComboBox<String> jcbTipoDoc;
+    public javax.swing.JTextField jcbTipoDoc;
     public com.toedter.calendar.JDateChooser jdcFechaNacimiento;
     public com.toedter.calendar.JDateChooser jdcFechaRegistro;
     public javax.swing.JTextField jtfCelularCliente;

@@ -218,5 +218,41 @@ public class ClienteDAO {
         }
         return listaClientes;
     }
+    
+    public String obtenerNombre(int codCliente) throws SQLException{
+        Conexion conexion = new Conexion();
+        Cliente cliente = new Cliente();
+        String nombre = "";
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM Cliente where numDoc ='"+codCliente+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                cliente.setNombresApellidos(rs.getString(2));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             nombre = cliente.getNombresApellidos();
+             
+            System.out.println(nombre);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return nombre;
+    }
 }
 

@@ -38,12 +38,10 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jtfCelularProveedor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jrbLunes = new javax.swing.JRadioButton();
-        jrbMartes = new javax.swing.JRadioButton();
-        jrbMiercoles = new javax.swing.JRadioButton();
-        jrbJueves = new javax.swing.JRadioButton();
-        jrbViernes = new javax.swing.JRadioButton();
-        jrbSabado = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jtfPedido2 = new javax.swing.JTextField();
+        jtfPedido1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -88,9 +86,8 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jtfDireccionProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                         .addComponent(jtfNombreProveedor, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtfTelefonoProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jtfCelularProveedor, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(jtfTelefonoProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                        .addComponent(jtfCelularProveedor, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jtfNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -122,53 +119,50 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jrbLunes.setText("Lunes");
-        jrbLunes.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setText("Dia de Pedido 1:");
+
+        jLabel9.setText("Dia de Pedido 2:");
+
+        jtfPedido2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbLunesActionPerformed(evt);
+                jtfPedido2ActionPerformed(evt);
             }
         });
 
-        jrbMartes.setText("Martes");
-
-        jrbMiercoles.setText("Miercoles");
-
-        jrbJueves.setText("Jueves");
-
-        jrbViernes.setText("Viernes");
-
-        jrbSabado.setText("Sabado");
+        jtfPedido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPedido1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jrbLunes)
-                .addGap(10, 10, 10)
-                .addComponent(jrbMartes)
-                .addGap(10, 10, 10)
-                .addComponent(jrbMiercoles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jrbJueves)
-                .addGap(18, 18, 18)
-                .addComponent(jrbViernes)
-                .addGap(18, 18, 18)
-                .addComponent(jrbSabado)
-                .addGap(25, 25, 25))
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(54, 54, 54)
+                        .addComponent(jtfPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtfPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jrbMartes)
-                    .addComponent(jrbMiercoles)
-                    .addComponent(jrbJueves)
-                    .addComponent(jrbViernes)
-                    .addComponent(jrbSabado)
-                    .addComponent(jrbLunes))
+                    .addComponent(jLabel9)
+                    .addComponent(jtfPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -188,9 +182,9 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,13 +203,17 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbLunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbLunesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbLunesActionPerformed
-
     private void jtfNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumeroCuentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNumeroCuentaActionPerformed
+
+    private void jtfPedido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPedido2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPedido2ActionPerformed
+
+    private void jtfPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPedido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPedido1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -225,18 +223,16 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JRadioButton jrbJueves;
-    public javax.swing.JRadioButton jrbLunes;
-    public javax.swing.JRadioButton jrbMartes;
-    public javax.swing.JRadioButton jrbMiercoles;
-    public javax.swing.JRadioButton jrbSabado;
-    public javax.swing.JRadioButton jrbViernes;
     public javax.swing.JTextField jtfCelularProveedor;
     public javax.swing.JTextField jtfDireccionProveedor;
     public javax.swing.JTextField jtfNombreProveedor;
     public javax.swing.JTextField jtfNumeroCuenta;
+    public javax.swing.JTextField jtfPedido1;
+    public javax.swing.JTextField jtfPedido2;
     public javax.swing.JTextField jtfTelefonoProveedor;
     // End of variables declaration//GEN-END:variables
 }

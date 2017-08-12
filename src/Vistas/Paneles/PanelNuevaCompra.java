@@ -4,6 +4,13 @@
  */
 package Vistas.Paneles;
 
+import Controlador.ControladorPrincipal;
+import Modelo.Conexion;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author MARIANA
@@ -13,8 +20,34 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelNuevaCompra1
      */
+    
+    Conexion conexion;
+    
     public PanelNuevaCompra() {
         initComponents();
+        
+        this.jcbProveedor.removeAllItems();
+        
+            
+            conexion = new Conexion();
+            java.sql.Connection accesoBD = null;
+            Statement ps = null;
+            
+        try{
+            //conexion = new Conexion();
+            
+            accesoBD = conexion.getConnection();
+            ps = (Statement) accesoBD.createStatement();
+            //Statement sent = conexion.createStatement(); 
+           ResultSet rs = ps.executeQuery("SELECT * FROM proveedor");
+            
+               
+            while(rs.next()){
+            this.jcbProveedor.addItem(rs.getString("nombreProveedor"));
+            }  
+        }catch(Exception ex){
+        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -36,7 +69,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jtfNumeroComprobante = new javax.swing.JTextField();
         jtfNombreVendedor = new javax.swing.JTextField();
         jcbProveedor = new javax.swing.JComboBox();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cbxOtraCompra = new javax.swing.JCheckBox();
         jdcFechaCompra = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jcbTipoPago = new javax.swing.JComboBox();
@@ -89,7 +122,12 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
 
         jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 1", "Item 2", "Item 3" }));
 
-        jCheckBox1.setText("Otros");
+        cbxOtraCompra.setText("Otros");
+        cbxOtraCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxOtraCompraActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Tipo de Pago:");
 
@@ -119,7 +157,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                                     .addComponent(jtfNumeroComprobante)
                                     .addComponent(jcbProveedor, 0, 125, Short.MAX_VALUE))
                                 .addGap(34, 34, 34)
-                                .addComponent(jCheckBox1))
+                                .addComponent(cbxOtraCompra))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jcbTipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
@@ -142,7 +180,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfNumeroComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(cbxOtraCompra))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,9 +239,8 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -227,14 +264,28 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxOtraCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOtraCompraActionPerformed
+        // TODO add your handling code here:
+        if(cbxOtraCompra.isSelected()== true){
+            jtfNumeroComprobante.setText("000000");
+            jcbProveedor.setEnabled(false);
+            jtfNombreVendedor.setEditable(false);
+        }
+        else{
+            jtfNumeroComprobante.setText("");
+            jcbProveedor.setEnabled(true);
+            jtfNombreVendedor.setEditable(true);
+        }
+    }//GEN-LAST:event_cbxOtraCompraActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox cbxOtraCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -5,12 +5,26 @@ import java.util.ArrayList;
 
 public class Producto {
 
-    public String getCategoria() {
-        return categoria;
+    
+    int codProducto;
+    String codigoProducto;
+    String nombreProducto;
+    String marca;
+    String descripcion;
+    String fechaVencimiento;    
+    int stock;
+    int puntoPedido;
+    String fechaRegistro;
+    int codCategoria;
+    int codProveedor;
+    int codEmpleado;
+
+    public int getCodProducto() {
+        return codProducto;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCodProducto(int codProducto) {
+        this.codProducto = codProducto;
     }
 
     public String getCodigoProducto() {
@@ -21,36 +35,12 @@ public class Producto {
         this.codigoProducto = codigoProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(String fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public String getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(String fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public ArrayList<PrecioProducto> getListaPrecios() {
-        return listaPrecios;
-    }
-
-    public void setListaPrecios(ArrayList<PrecioProducto> listaPrecios) {
-        this.listaPrecios = listaPrecios;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public String getMarca() {
@@ -61,20 +51,28 @@ public class Producto {
         this.marca = marca;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getNumeroBoleta() {
-        return numeroBoleta;
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
-    public void setNumeroBoleta(String numeroBoleta) {
-        this.numeroBoleta = numeroBoleta;
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public int getPuntoPedido() {
@@ -85,38 +83,63 @@ public class Producto {
         this.puntoPedido = puntoPedido;
     }
 
-    public int getStock() {
-        return stock;
+    public String getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
-    String codigoProducto;
-    String nombreProducto;
-    String marca;
-    String descripcion;
-    String categoria;
-    String fechaVencimiento;
-    int stock;
-    int puntoPedido;
-    String numeroBoleta;
-    String fechaRegistro;
+
+    public int getCodCategoria() {
+        return codCategoria;
+    }
+
+    public void setCodCategoria(int codCategoria) {
+        this.codCategoria = codCategoria;
+    }
+
+    public int getCodProveedor() {
+        return codProveedor;
+    }
+
+    public void setCodProveedor(int codProveedor) {
+        this.codProveedor = codProveedor;
+    }
+
+    public int getCodEmpleado() {
+        return codEmpleado;
+    }
+
+    public void setCodEmpleado(int codEmpleado) {
+        this.codEmpleado = codEmpleado;
+    }
+
+    public ArrayList<PrecioProducto> getListaPrecios() {
+        return listaPrecios;
+    }
+
+    public void setListaPrecios(ArrayList<PrecioProducto> listaPrecios) {
+        this.listaPrecios = listaPrecios;
+    }
+    
     
     ArrayList <PrecioProducto> listaPrecios;
     
     public Producto(){
+        codProducto=0;
         codigoProducto = "";
         nombreProducto= "";
-        descripcion = "";
         marca = "";
-        fechaRegistro = "";
+        descripcion = "";
         fechaVencimiento = "";
-        
-        categoria = "";
         stock = 0;
         puntoPedido= 0;
-        numeroBoleta ="";
+        fechaRegistro = "";
+        codCategoria = 0;
+        codProveedor=0;
+        codEmpleado=0;
+        
         
         listaPrecios = new ArrayList();
     }

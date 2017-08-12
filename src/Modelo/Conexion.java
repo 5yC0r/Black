@@ -11,7 +11,7 @@ public class Conexion {
     String driver = "com.mysql.jdbc.Driver";
     String usuario = "root";
     String pass = "";
-    String bd = "basebb1";
+    String bd = "basebb";
     String url = "jdbc:mysql://localhost:3306/"+bd;
     
 //    String usuario = "nuevospa_apadri";
@@ -26,6 +26,7 @@ public class Conexion {
             con = (Connection) DriverManager.getConnection(url,usuario,pass);
             if (con != null) {
                 System.out.println("Conexion establecida...");
+                System.getProperty("user.name");
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error al conectar: "+e);

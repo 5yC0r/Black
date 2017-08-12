@@ -24,7 +24,7 @@ public class UsuarioDAO {
         Usuario usu = new Usuario();
         
         try {
-            String consulta = "SELECT * FROM usuario where usuario='"+usuario+"' && password ='"+contraseña+"'&& tipoUsuario ='Administrador'" ;
+            String consulta = "SELECT * FROM usuario where usuario='"+usuario+"' && password ='"+contraseña+"'" ;
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();

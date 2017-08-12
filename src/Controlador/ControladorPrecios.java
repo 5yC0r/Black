@@ -4,36 +4,30 @@
  */
 package Controlador;
 
-import Modelo.DAO.RecargaDAO;
-import Modelo.DAO.UsuarioDAO;
-import Vistas.Paneles.AgregarOperador;
-import Vistas.Paneles.PanelRecarga;
-import Vistas.Principal;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Vistas.Paneles.PanelRegistroProducto;
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author MARIANA
  */
-public class ControladorRecarga  {
-    PanelRecarga pr;
-    AgregarOperador ao;
+public class ControladorPrecios {
     
-    public void setPanelRecarga(JInternalFrame jif) {
-        this.pr = (PanelRecarga) jif;
+    PanelRegistroProducto prp;
+    
+    
+    public void setPanelRegistroProducto(JInternalFrame jif) {
+        this.prp = (PanelRegistroProducto) jif;
                           
     }
             
     
     public void insertarDatos() {
     
-        int codOperador = 0;
+        
+        
+        
+       /* int codOperador = 0;
         String numeroCelular = pr.jtfNumeroCelular.getText();
         String nombreOperador = pr.jcbOperador.getSelectedItem().toString();
         float cantidadRecargada = Float.parseFloat(pr.jtfCantidadRecargada.getText());
@@ -50,9 +44,11 @@ public class ControladorRecarga  {
             recargaDao.registrarRecarga(numeroCelular,codOperador,cantidadRecargada);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     
     
     
     }
+    
+    
 }
