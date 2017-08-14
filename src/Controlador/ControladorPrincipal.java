@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.DAO.*;
+import Modelo.Empleado;
 import Vistas.Login;
 import Vistas.Paneles.*;
 import Vistas.Principal;
@@ -184,6 +185,7 @@ public class ControladorPrincipal implements ActionListener {
                     } else {
                         if (ae.getSource() == principal.miListadoClientes) {
                             PanelListadoClientes plc = new PanelListadoClientes();
+                            internalFrameActual = plc;
                             v = 14;
                             ControladorListaClientes clc = new ControladorListaClientes();
                             clc.setPlc(plc);
@@ -244,6 +246,8 @@ public class ControladorPrincipal implements ActionListener {
                             } else {
                                 if (ae.getSource() == principal.miListadoTrabajadores) {
                                     PanelListadoTrabajadores plt = new PanelListadoTrabajadores();
+                                    v = 15;
+                                    internalFrameActual = plt;
                                     //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                     principal.panelPrincipal.removeAll();
                                     //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -934,6 +938,39 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                 prc.show();
                                                                                                                 principal.panelPrincipal.revalidate();
                                                                                                                 principal.panelPrincipal.repaint();
+                                                                                                            }else{
+                                                                                                                if(v == 15){ // la ventana que se muestra es la de listado de trabajadores
+                                                                                                                    PanelListadoTrabajadores plt;
+                                                                                                                    plt = (PanelListadoTrabajadores) internalFrameActual;
+                                                                                                                    ControladorListaTrabajador clt = new ControladorListaTrabajador();
+                                                                                                                    int filaSeleccionada = plt.tableTrabajadores.getSelectedRow();
+                                                                                                                    String numDocCliente = (String) plt.tableTrabajadores.getValueAt(filaSeleccionada, 1);
+                                                                                                                    System.out.println(numDocCliente);
+                                                                                                                    clt.setNumDniCliente(numDocCliente);
+                                                                                                                    Empleado empleado = null; 
+                                                                                                                    try {
+                                                                                                                        empleado= clt.retornarDatosTrabajador();
+                                                                                                                    } catch (SQLException ex) {
+                                                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                    }
+
+                                                                                                                    PanelRegistroTrabajador prt = new PanelRegistroTrabajador();
+                                                                                                                    prt.setTitle("Editar Trabajador");
+                                                                                                                    System.out.println("->"+ empleado.getDni() + empleado.getNombresApellidos());
+                                                                                                                    numDocActualizar = empleado.getDni();
+                                                                                                                    prt.jtfDniTrab.setText(empleado.getDni());
+                                                                                                                    prt.jtfApellidosNombres.setText(empleado.getNombresApellidos());
+
+                                                                                                                    //terminar de llenar los campos
+                                                                                                                    internalFrameActual = prt;
+                                                                                                                    v = 2;
+                                                                                                                    principal.panelPrincipal.removeAll();
+                                                                                                                    prt.setLocation(5, 5);
+                                                                                                                    principal.panelPrincipal.add(prt);
+                                                                                                                    prt.show();
+                                                                                                                    principal.panelPrincipal.revalidate();
+                                                                                                                    principal.panelPrincipal.repaint();
+                                                                                                                }
                                                                                                             }
                                                                                                         } else {
                                                                                                             if (ae.getSource() == principal.btnActualizar) {
@@ -945,6 +982,17 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                         clienteDao.actualizarCliente("", "", prc.jtfNumDoc.getText(), "", prc.jtfNombresApellidos.getText(), "", "", "", "", "", "", 2, "", numDocActualizar);
                                                                                                                     } catch (SQLException ex) {
                                                                                                                         Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                    }
+                                                                                                                }else{
+                                                                                                                    if(v == 2){
+                                                                                                                        PanelRegistroTrabajador prt = (PanelRegistroTrabajador) internalFrameActual;
+                                                                                                                        System.out.println(prt.jtfDniTrab.getText() + prt.jtfApellidosNombres.getText());
+                                                                                                                        EmpleadoDAO empleadoDao = new EmpleadoDAO();
+                                                                                                                        try {
+                                                                                                                            empleadoDao.actualizarEmpleado(prt.jtfApellidosNombres.getText(), "", "", "", "", "", "", "", 1, "", "",numDocActualizar, 0);
+                                                                                                                        } catch (SQLException ex) {
+                                                                                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                        }
                                                                                                                     }
                                                                                                                 }
                                                                                                             }

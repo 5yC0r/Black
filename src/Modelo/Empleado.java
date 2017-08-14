@@ -15,7 +15,7 @@ public class Empleado {
     int fechaPago;
     String hobby;
     String sexo;
-    int dni;
+    String dni;
     float sueldo;
     int codUsuario;
     int estado;     //Activo o no - para hacer la eliminacion logica
@@ -35,7 +35,7 @@ public class Empleado {
         
         this.sexo = "";
         
-        this.dni = 1231;
+        this.dni = "";
        
         this.sueldo = 0.0f;
         this.codUsuario = 0;
@@ -138,11 +138,11 @@ public class Empleado {
         this.sexo = sexo;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 

@@ -66,13 +66,13 @@ public class EmpleadoDAO {
         }
     }
     
-    public Empleado obtenerDatosEmpleado(int codEmpleado) throws SQLException{
+    public Empleado obtenerDatosEmpleado(String codEmpleado) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         Empleado empleado = new Empleado();
         try {
-            String consulta = "SELECT * FROM empleado where codEmpleado='"+codEmpleado+"'";
+            String consulta = "SELECT * FROM empleado where dni='"+codEmpleado+"'";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
@@ -88,7 +88,7 @@ public class EmpleadoDAO {
                 empleado.setFechaPago(rs.getInt(10));
                 empleado.setHobby(rs.getString(11));
                 empleado.setSexo(rs.getString(12));
-                empleado.setDni(rs.getInt(13));
+                empleado.setDni(rs.getString(13));
                 empleado.setSueldo(rs.getFloat(14));
             }
         } catch (SQLException e) {
@@ -107,7 +107,6 @@ public class EmpleadoDAO {
     }
     
     public void actualizarEmpleado(
-        int codEmpleado,
         String nombresApellidos, 
         String telefonoContacto,
         String celular,
@@ -120,15 +119,15 @@ public class EmpleadoDAO {
         String hobby,
         String sexo,
 
-        int dni,
+        String dni,
         float sueldo    
     ) throws SQLException{
         Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "UPDATE empleado SET nombresApellidos = ?, telefonoContacto = ?,celular = ? ,telefonoReferencia = ?, direccion = ?,fechaNacimiento = ?,correo = ?,numeroCuenta = ?, fechaPago = ?, hobby = ?, sexo = ?,dni = ?,sueldo = ?"
-                    + "WHERE codEmpleado = ? ";
+            String consulta = "UPDATE empleado SET nombresApellidos = ?, telefonoContacto = ?,celular = ? ,telefonoReferencia = ?, direccion = ?,fechaNacimiento = ?,correo = ?,numeroCuenta = ?, fechaPago = ?, hobby = ?, sexo = ?,sueldo = ?"
+                    + "WHERE dni = ? ";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombresApellidos);
@@ -142,9 +141,9 @@ public class EmpleadoDAO {
             ps.setInt(9, fechaPago);
             ps.setString(10, hobby);
             ps.setString(11, sexo);
-            ps.setInt(12, dni);
-            ps.setFloat(13, sueldo);
-            ps.setInt(14, codEmpleado);
+            
+            ps.setFloat(12, sueldo);
+            ps.setString(13, dni);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al actualizar empleado: "+e.toString());
@@ -198,7 +197,7 @@ public class EmpleadoDAO {
             while(rs.next()){
                 empleado = new Empleado();
                 empleado.setNombresApellidos(rs.getString(1));
-                empleado.setDni(rs.getInt(2));
+                empleado.setDni(rs.getString(2));
                 empleado.setFechaNacimiento(rs.getString(3));
                 empleado.setFechaPago(rs.getInt(4));
                 listaTrabajadores.add(empleado);
