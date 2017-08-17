@@ -3,9 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <group>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Vistas/Principal.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Vistas/Paneles/PanelListadoTrabajadores.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Vistas/Paneles/PanelRegistroTrabajador.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Controlador/ControladorListaTrabajador.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Modelo/DAO/EmpleadoDAO.java</file>
+            <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Controlador/ControladorListaClientes.java</file>
+        </group>
+=======
+<<<<<<< HEAD
+>>>>>>> 3640d791ae7e2a41e565c63191be22a1288f5d20
         <group>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Controlador/ControladorPrincipal.java</file>
             <file>file:/D:/SyArCorp/Black%20Bar/Sistema/Black/src/Vistas/Principal.java</file>
         </group>
+<<<<<<< HEAD
+=======
+=======
+        <group/>
+>>>>>>> c2cd127ebea9d93fdb61d21846846b3b2b314a45
+>>>>>>> aca43835db2fb98ebda5331c1f1c8b51287b7982
+>>>>>>> 3640d791ae7e2a41e565c63191be22a1288f5d20
     </open-files>
 </project-private>

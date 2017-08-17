@@ -51,7 +51,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jtfCodigoCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarCliente = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jtfNombreCliente = new javax.swing.JTextField();
         jcbOtroCliente = new javax.swing.JCheckBox();
@@ -136,12 +136,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Codigo:");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        btnBuscarCliente.setText("jButton1");
 
         jLabel7.setText("Nombre: ");
 
@@ -166,7 +161,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtfCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(jcbOtroCliente))
                     .addComponent(jtfNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,7 +174,7 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jtfCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscarCliente)
                     .addComponent(jcbOtroCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -341,11 +336,6 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfSubtotalVentaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jtfNombreCliente.setText("1212");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jcbOtroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOtroClienteActionPerformed
         // TODO add your handling code here:
        // jtfCodigoCliente.setText("11111111");
@@ -360,8 +350,8 @@ public class PanelRegistroVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbOtroClienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnBuscarCliente;
     public javax.swing.JButton btnEmitirComprobante;
-    public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

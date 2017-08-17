@@ -173,6 +173,10 @@ public class ControladorPrincipal implements ActionListener {
                         
                         UsuarioDAO usuarioDao = new UsuarioDAO();
                         VentaDAO ventaDao = new VentaDAO();
+                        
+                        ControladorRegistroVenta crv = new ControladorRegistroVenta();
+                        crv.setPrv(prv);
+                        crv.darEventoBoton();
                         try {
                             int id = ventaDao.obtenerUltimo()+1;
                             prv.jtfCodigoVenta.setText(Integer.toString(id));
