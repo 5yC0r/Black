@@ -194,7 +194,7 @@ public class ClienteDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT tipoDoc, numDoc, nombresApellidos, fechaRegistroCliente FROM cliente";
+            String consulta = "SELECT tipoDoc, numDoc, nombresApellidos, fechaRegistroCliente,fechaNacimiento,correoCliente FROM cliente";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);        
             ResultSet rs = ps.executeQuery();
@@ -203,7 +203,9 @@ public class ClienteDAO {
                 cliente.setTipoDoc(rs.getString(1));
                 cliente.setNumDoc(rs.getString(2));
                 cliente.setNombresApellidos(rs.getString(3));
-                cliente.setFechaRegistroCliente(rs.getString(4));
+                cliente.setFechaRegistroCliente(rs.getString(4));                
+                cliente.setFechaNacimiento(rs.getString(5));
+                cliente.setCorreoCliente(rs.getString(6));
                 listaClientes.add(cliente);
             }     
         } catch (SQLException e) {
@@ -226,14 +228,13 @@ public class ClienteDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT * FROM Cliente where numDoc ='"+codCliente+"'";
+            String consulta = "SELECT * FROM cliente where numDoc ='"+codCliente+"' || codCliente = '"+codCliente+"'";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                cliente.setNombresApellidos(rs.getString(2));
-                //operador.setNombreOperador(rs.getString(2));
+                cliente.setNombresApellidos(rs.getString(6));
              }
              nombre = cliente.getNombresApellidos();
              

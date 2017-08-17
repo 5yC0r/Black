@@ -7,7 +7,7 @@ public class Producto {
 
     
     int codProducto;
-    String codigoProducto;
+    int codigoProducto;
     String nombreProducto;
     String marca;
     String descripcion;
@@ -27,11 +27,11 @@ public class Producto {
         this.codProducto = codProducto;
     }
 
-    public String getCodigoProducto() {
+    public int getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(String codigoProducto) {
+    public void setCodigoProducto(int codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
@@ -128,7 +128,7 @@ public class Producto {
     
     public Producto(){
         codProducto=0;
-        codigoProducto = "";
+        codigoProducto = 1;
         nombreProducto= "";
         marca = "";
         descripcion = "";

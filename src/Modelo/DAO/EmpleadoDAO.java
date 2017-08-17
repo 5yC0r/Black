@@ -1,7 +1,6 @@
 
 package Modelo.DAO;
 
-import Modelo.Cliente;
 import Modelo.Conexion;
 import Modelo.Empleado;
 import java.sql.Connection;
@@ -27,7 +26,7 @@ public class EmpleadoDAO {
         int fechaPago,
         String hobby,
         String sexo,
-        int dni,
+        String dni,
         float sueldo,
         int codUsuario
     ) throws SQLException{
@@ -50,7 +49,7 @@ public class EmpleadoDAO {
             ps.setInt(9, fechaPago);
             ps.setString(10, hobby);
             ps.setString(11, sexo);
-            ps.setInt(12, dni);
+            ps.setString(12, dni);
             ps.setFloat(13, sueldo);
             ps.setFloat(14, codUsuario);
             ps.execute();            
@@ -229,7 +228,6 @@ public class EmpleadoDAO {
             
             while (rs.next()) {
                 empleado.setCodEmpleado(rs.getInt(1));
-                //operador.setNombreOperador(rs.getString(2));
              }
              codigo = empleado.getCodEmpleado();
              
@@ -246,44 +244,6 @@ public class EmpleadoDAO {
                 accesoBD.close();
             }
         }
-        //System.out.println(operador.getCodigoOperador());
-        //System.out.println(cliente.getFechaRegistroCliente());
        return codigo;
     }
-    
-    /*public String obtenerNombre(int codUsuario) throws SQLException{
-        Conexion conexion = new Conexion();
-        Empleado empleado = new Empleado();
-        String nombre = "";
-        Connection accesoBD = null;
-        PreparedStatement ps = null;
-        try {
-            String consulta = "SELECT * FROM empleado where codUsuario ='"+codUsuario+"'";
-            accesoBD = conexion.getConnection();
-            ps = accesoBD.prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                empleado.setNombresApellidos(rs.getString(2));
-                //operador.setNombreOperador(rs.getString(2));
-             }
-             nombre = empleado.getNombresApellidos();
-             
-             System.out.println(nombre);
-             
-            
-        } catch (SQLException e) {
-            System.out.println("Error al obtener el codigo del operador: "+e.toString());
-        }finally{
-            if (ps != null) {
-                ps.close();
-            }
-            if (accesoBD != null) {
-                accesoBD.close();
-            }
-        }
-        //System.out.println(operador.getCodigoOperador());
-        //System.out.println(cliente.getFechaRegistroCliente());
-       return nombre;
-    }*/
 }

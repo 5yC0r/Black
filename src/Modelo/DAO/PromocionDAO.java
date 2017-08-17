@@ -4,10 +4,14 @@
  */
 package Modelo.DAO;
 
+import Modelo.Cliente;
 import Modelo.Conexion;
+import Modelo.Promocion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,10 +19,10 @@ import java.sql.SQLException;
  */
 public class PromocionDAO {
     
-    private final Conexion conexion;
+
     
     public PromocionDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarPromocion(
@@ -29,7 +33,7 @@ public class PromocionDAO {
         int unidades,
         float importe
     ) throws SQLException{
-        
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
@@ -55,5 +59,38 @@ public class PromocionDAO {
                 accesoBD.close();
             }
         }
+    }
+    
+    public ArrayList<Promocion> listarPromociones() throws SQLException{
+        ArrayList<Promocion> listaPromociones = new ArrayList();
+        Promocion promocion;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT nombrePromocion,codProducto,unidades,importe FROM promocion";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                promocion = new Promocion();
+                promocion.setNombrePromocion(rs.getString(1));
+                promocion.setCodProducto(rs.getInt(2));
+                promocion.setUnidades(rs.getInt(3));
+                promocion.setImporte(rs.getFloat(4));
+                listaPromociones.add(promocion);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaPromociones;
     }
 }

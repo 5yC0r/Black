@@ -15,6 +15,8 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         
         initComponents();
+        
+        setIconImage(new ImageIcon(getClass().getResource("../imagenes/icono.png")).getImage());
         ImageIcon playBtn1 = new ImageIcon(getClass().getResource("/imagenes/save1.png"));
         ImageIcon playBtn2 = new ImageIcon(getClass().getResource("/imagenes/products1.png"));
         btnGuardar.setRolloverIcon(playBtn1);
@@ -81,7 +83,6 @@ public class Principal extends javax.swing.JFrame {
         misPromociones = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         miNuevaCategoria = new javax.swing.JMenuItem();
-        miModificarCategoria = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
         miNuevaCompra = new javax.swing.JMenuItem();
         miListadoCompras = new javax.swing.JMenuItem();
@@ -472,9 +473,6 @@ public class Principal extends javax.swing.JFrame {
         miNuevaCategoria.setText("Nueva Categoria");
         jMenu10.add(miNuevaCategoria);
 
-        miModificarCategoria.setText("Modificar Categoria");
-        jMenu10.add(miModificarCategoria);
-
         jMenu6.add(jMenu10);
 
         menuBarPrincipal.add(jMenu6);
@@ -603,7 +601,6 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem miListadoProveedores;
     public javax.swing.JMenuItem miListadoTrabajadores;
     public javax.swing.JMenuItem miListadoVentas;
-    public javax.swing.JMenuItem miModificarCategoria;
     public javax.swing.JMenuItem miNuevaCategoria;
     public javax.swing.JMenuItem miNuevaCompra;
     public javax.swing.JMenuItem miNuevaRecarga;

@@ -4,6 +4,8 @@
  */
 package Vistas.Paneles;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author MARIANA
@@ -42,6 +44,12 @@ public class PanelNuevaCategoria extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setText("Nombre:");
+
+        jtfNombreNuevaCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreNuevaCategoriaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,18 +116,39 @@ public class PanelNuevaCategoria extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(95, 95, 95)
                     .addComponent(jLabel9)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(35, Short.MAX_VALUE)))
+                    .addContainerGap(39, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfNombreNuevaCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreNuevaCategoriaKeyTyped
+        
+       char c = evt.getKeyChar();
+        String modCat = jtfNombreNuevaCategoria.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(modCat.length() == 20){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreNuevaCategoriaKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

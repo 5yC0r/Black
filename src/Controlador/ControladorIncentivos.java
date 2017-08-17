@@ -4,10 +4,8 @@
  */
 package Controlador;
 
-import Modelo.DAO.ClienteDAO;
 import Modelo.DAO.IncentivosDAO;
 import Vistas.Paneles.PanelBonosyComisiones;
-import Vistas.Paneles.PanelRegistroCliente;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.logging.Level;
@@ -37,13 +35,14 @@ public class ControladorIncentivos {
             String nombreIncentivo = pbc.jtfNombreIncentivo.getText();
             String cantidadIncentivo = pbc.jtfCantidadIncentivo.getText();
             String sueldoVenta = pbc.jcbSueldoVentas.getSelectedItem().toString();
-            String estadoIncentivo = pbc.jcbEstadoIncentivo.getSelectedItem().toString();
+            String estadoIncentivo = pbc.estadoIncentivo.getText();
 
             String descripcionIncentivo = pbc.jtfDescripcionIncentivo.getText();
-            String fechaIncentivo = df.format(pbc.jdcFechaIncentivo.getDate());
+            String fechaInicio = df.format(pbc.jdcFechaInicio.getDate());
+            String fechaFin = df.format(pbc.jdcFechaFin.getDate());
         
         try {
-            incentivosDao.registrarIncentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo,fechaIncentivo);
+            incentivosDao.registrarIncentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo,fechaInicio,fechaFin);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

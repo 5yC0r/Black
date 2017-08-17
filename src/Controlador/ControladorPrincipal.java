@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Cliente;
+import Modelo.Conexion;
 import Modelo.DAO.*;
 import Modelo.Empleado;
 import Vistas.Login;
@@ -8,6 +9,8 @@ import Vistas.Paneles.*;
 import Vistas.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +22,7 @@ public class ControladorPrincipal implements ActionListener {
 
     Principal principal;
     int banderaGuardar = 0;
+    int a=0;
     int v = 0;// las ventanas tienen un numero cada una
     int msj;
     JInternalFrame internalFrameActual;
@@ -61,7 +65,7 @@ public class ControladorPrincipal implements ActionListener {
         principal.miRegistroProducto.addActionListener(this);
         principal.miListadoProducto.addActionListener(this);
         principal.miNuevaCategoria.addActionListener(this);
-        principal.miModificarCategoria.addActionListener(this);
+        //principal.miModificarCategoria.addActionListener(this);el a es para esta ventana que ya no se usara
         principal.miRegistroProveedor.addActionListener(this);
         principal.miListadoProveedores.addActionListener(this);
         principal.miReporteVentas.addActionListener(this);
@@ -111,9 +115,11 @@ public class ControladorPrincipal implements ActionListener {
         } else {
             if (ae.getSource() == principal.miRegistrarTrabajador) {
                 PanelRegistroTrabajador prt = new PanelRegistroTrabajador();
+                //ControladorTrabajador ct = new ControladorTrabajador();
                 banderaGuardar = 1;
                 v = 2;
                 setPanelActual(prt);
+                //prt.jtfEdadTrab.setText(ct.calcularEdad(prt.jdcFechNacTrab.getCalendar()));
                 //prt.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                 principal.panelPrincipal.removeAll();
                 //principal.panelPrincipal.add(prt, BorderLayout.CENTER);
@@ -129,7 +135,7 @@ public class ControladorPrincipal implements ActionListener {
                     principal.panelPrincipal.removeAll();
                     //principal.panelPrincipal.add(pus, BorderLayout.CENTER);
                     this.principal.panelPrincipal.add(pus);
-                    /*UsuarioDAO usuarioDao = new UsuarioDAO();
+                    UsuarioDAO usuarioDao = new UsuarioDAO();
                             DefaultTableModel modeloTabla = new DefaultTableModel();
                             modeloTabla.addColumn("Usuario");
                             modeloTabla.addColumn("Tipo de Usuario");
@@ -153,7 +159,7 @@ public class ControladorPrincipal implements ActionListener {
                                 } catch (SQLException ex) {
                                     Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            }*/
+                            }
                     pus.show();
                     pus.setLocation(5, 5);
                     principal.panelPrincipal.revalidate();
@@ -164,6 +170,7 @@ public class ControladorPrincipal implements ActionListener {
                         banderaGuardar = 1;
                         v = 12;
                         setPanelActual(prv);
+                        
                         UsuarioDAO usuarioDao = new UsuarioDAO();
                         VentaDAO ventaDao = new VentaDAO();
                         try {
@@ -233,8 +240,26 @@ public class ControladorPrincipal implements ActionListener {
                                 ce.setPanelDatosEmpresa(pde);
                                 ce.darEventoABotones();
                                 banderaGuardar = 1;
+                                int codEmpresa =1;
                                 v = 4;
                                 setPanelActual(pde);
+                                EmpresaDAO empresaDao = new EmpresaDAO();
+                                try {
+                                    pde.jtfNombreEmpresa.setText(empresaDao.obtenerDatosBB(codEmpresa).getNombre());
+                                    pde.jtaDescripcion.setText(empresaDao.obtenerDatosBB(codEmpresa).getDescripcion());
+                                    pde.jtfCelular.setText(empresaDao.obtenerDatosBB(codEmpresa).getCelular());
+                                    pde.jtfCorreoElectronico.setText(empresaDao.obtenerDatosBB(codEmpresa).getCorreoElectronico());
+                                    pde.jtfDireccion.setText(empresaDao.obtenerDatosBB(codEmpresa).getDireccion());
+                                    pde.jtfPaginaWeb.setText(empresaDao.obtenerDatosBB(codEmpresa).getPaginaWeb());
+                                    pde.jtfRazonSocial.setText(empresaDao.obtenerDatosBB(codEmpresa).getRazonSocial());
+                                    pde.jtfRepresentanteLegal.setText(empresaDao.obtenerDatosBB(codEmpresa).getRepresentanteLegal());
+                                    pde.jtfRuc.setText(String.valueOf(empresaDao.obtenerDatosBB(codEmpresa).getRuc()));
+                                    pde.jtfTelefono.setText(empresaDao.obtenerDatosBB(codEmpresa).getTelefono());                                   
+                                    
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -292,6 +317,7 @@ public class ControladorPrincipal implements ActionListener {
                                         plv.setLocation(5, 5);
                                         this.principal.panelPrincipal.add(plv);
                                         VentaDAO ventaDao = new VentaDAO();
+                                        ClienteDAO clienteDao = new ClienteDAO();
                                         DefaultTableModel modeloTabla = new DefaultTableModel();
                                         modeloTabla.addColumn("Num. de Venta");
                                         modeloTabla.addColumn("Cliente");
@@ -309,7 +335,7 @@ public class ControladorPrincipal implements ActionListener {
                                         for (int i = 0; i < numRegistros; i++) {
                                             try {
                                                 columna[0] = ventaDao.listarVentas().get(i).getCodVenta();
-                                                columna[1] = ventaDao.listarVentas().get(i).getCodCliente();
+                                                columna[1] = clienteDao.obtenerNombre(ventaDao.listarVentas().get(i).getCodCliente());
                                                 columna[2] = ventaDao.listarVentas().get(i).getTotalNetoVenta();
                                                 columna[3] = ventaDao.listarVentas().get(i).getFechaVenta();
 
@@ -337,21 +363,42 @@ public class ControladorPrincipal implements ActionListener {
                                             principal.panelPrincipal.repaint();
                                         } else {
                                             if (ae.getSource() == principal.miNuevaRecarga || ae.getSource() == principal.btnNuevaRecarga) {
-                                                PanelRecarga pnr = new PanelRecarga();
-                                                AgregarOperador pao = new AgregarOperador();
+                                                PanelRecarga pnr = new PanelRecarga();                                                
                                                 banderaGuardar = 1;
-                                                v = 6;
-                                                pnr.btnAgregarOperador.addActionListener(this);
-                                                if(ae.getSource() == pnr.btnAgregarOperador){
-                                                    pnr.dispose();                                                    
-                                                    pao.setVisible(true);
-                                                }
-                                                setPanelActual(pnr);                                       
+                                                v = 6;        
+                                                setPanelActual(pnr);
+                                                
                                                 //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                 principal.panelPrincipal.removeAll();
                                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                 pnr.setLocation(5, 5);
                                                 this.principal.panelPrincipal.add(pnr);
+                                                RecargaDAO recargaDao = new RecargaDAO();
+                                                OperadorDAO operadorDao = new OperadorDAO();
+                                                DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                modeloTabla.addColumn("Num. de Celular");
+                                                modeloTabla.addColumn("Importe");
+                                                modeloTabla.addColumn("Operador");
+                                                pnr.tableRecargas.setModel(modeloTabla);
+                                                Object[] columna = new Object[3];
+
+                                                int numRegistros = 0;
+                                                try {
+                                                    numRegistros = recargaDao.listarRecargas().size();
+                                                } catch (SQLException ex) {
+                                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
+                                                for (int i = 0; i < numRegistros; i++) {
+                                                    try {
+                                                        columna[0] = recargaDao.listarRecargas().get(i).getNumeroCelular();
+                                                        columna[1] = recargaDao.listarRecargas().get(i).getCantidadRecargada();
+                                                        columna[2] = operadorDao.obtenerNombre(recargaDao.listarRecargas().get(i).getCodOperador());
+
+                                                        modeloTabla.addRow(columna);
+                                                    } catch (SQLException ex) {
+                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }
+                                                }
                                                 pnr.show();
                                                 principal.panelPrincipal.revalidate();
                                                 principal.panelPrincipal.repaint();
@@ -366,6 +413,28 @@ public class ControladorPrincipal implements ActionListener {
                                                     //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                     pao.setLocation(5, 5);
                                                     this.principal.panelPrincipal.add(pao);
+                                                    OperadorDAO operadorDao = new OperadorDAO();
+                                                    DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                    modeloTabla.addColumn("Cod. Operador");
+                                                    modeloTabla.addColumn("Nombre");
+                                                    pao.tableOperadores.setModel(modeloTabla);
+                                                    Object[] columna = new Object[2];
+
+                                                    int numRegistros = 0;
+                                                    try {
+                                                        numRegistros = operadorDao.listarOperadores().size();
+                                                    } catch (SQLException ex) {
+                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }
+                                                    for (int i = 0; i < numRegistros; i++) {
+                                                        try {
+                                                            columna[0] = operadorDao.listarOperadores().get(i).getCodOperador();
+                                                            columna[1] = operadorDao.listarOperadores().get(i).getNombreOperador();
+                                                            modeloTabla.addRow(columna);
+                                                        } catch (SQLException ex) {
+                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                        }
+                                                    }
                                                     pao.show();
                                                     principal.panelPrincipal.revalidate();
                                                     principal.panelPrincipal.repaint();
@@ -380,6 +449,34 @@ public class ControladorPrincipal implements ActionListener {
                                                         //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                         pp.setLocation(5, 5);
                                                         this.principal.panelPrincipal.add(pp);
+                                                        PromocionDAO promocionDao = new PromocionDAO();
+                                                        ProductoDAO productoDao = new ProductoDAO();
+                                                                DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                modeloTabla.addColumn("Nombre");
+                                                                modeloTabla.addColumn("Producto");
+                                                                modeloTabla.addColumn("Unidades");
+                                                                modeloTabla.addColumn("Importe");
+                                                                pp.tablePromociones.setModel(modeloTabla);
+                                                                Object[] columna = new Object[4];
+                                                                
+                                                                int numRegistros = 0;
+                                                                try {
+                                                                    numRegistros = promocionDao.listarPromociones().size();
+                                                                } catch (SQLException ex) {
+                                                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                }
+                                                                for (int i = 0; i < numRegistros; i++) {
+                                                                    try {
+                                                                        columna[0] = promocionDao.listarPromociones().get(i).getNombrePromocion();
+                                                                        columna[1] = productoDao.obtenerNombre(promocionDao.listarPromociones().get(i).getCodProducto());
+                                                                        columna[2] = promocionDao.listarPromociones().get(i).getUnidades();
+                                                                        columna[3] = promocionDao.listarPromociones().get(i).getImporte();
+
+                                                                        modeloTabla.addRow(columna);
+                                                                    } catch (SQLException ex) {
+                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                    }
+                                                                }
                                                         pp.show();
                                                         principal.panelPrincipal.revalidate();
                                                         principal.panelPrincipal.repaint();
@@ -420,7 +517,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                 modeloTabla.addColumn("Stock");
                                                                 pma.tableProductos.setModel(modeloTabla);
                                                                 Object[] columna = new Object[4];
-
+                                                                
                                                                 int numRegistros = 0;
                                                                 try {
                                                                     numRegistros = productoDao.listarProductos().size();
@@ -453,18 +550,66 @@ public class ControladorPrincipal implements ActionListener {
                                                                     //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                                     pnc.setLocation(5, 5);
                                                                     this.principal.panelPrincipal.add(pnc);
+                                                                    CategoriaDAO categoriaDao = new CategoriaDAO();
+                                                                    DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                    modeloTabla.addColumn("Código");
+                                                                    modeloTabla.addColumn("Nombre");
+                                                                    pnc.tableCategorias.setModel(modeloTabla);
+                                                                    Object[] columna = new Object[2];
+
+                                                                    int numRegistros = 0;
+                                                                    try {
+                                                                        numRegistros = categoriaDao.listarCategorias().size();
+                                                                    } catch (SQLException ex) {
+                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                    }
+                                                                    for (int i = 0; i < numRegistros; i++) {
+                                                                        try {
+                                                                            columna[0] = categoriaDao.listarCategorias().get(i).getCodCategoria();
+                                                                            columna[1] = categoriaDao.listarCategorias().get(i).getNombreNuevaCategoria();
+
+                                                                            modeloTabla.addRow(columna);
+                                                                        } catch (SQLException ex) {
+                                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                        }
+                                                                    }
                                                                     pnc.show();
                                                                     principal.panelPrincipal.revalidate();
                                                                     principal.panelPrincipal.repaint();
                                                                 } else {
-                                                                    if (ae.getSource() == principal.miModificarCategoria) {
-                                                                        PanelModificarCategoria pmc = new PanelModificarCategoria();
+                                                                    if (ae.getSource() == principal.btnCumpleaños) {
+                                                                        PanelCumpleanios pc = new PanelCumpleanios();
                                                                         //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                                         principal.panelPrincipal.removeAll();
                                                                         //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
-                                                                        pmc.setLocation(5, 5);
-                                                                        this.principal.panelPrincipal.add(pmc);
-                                                                        pmc.show();
+                                                                        pc.setLocation(5, 5);
+                                                                        this.principal.panelPrincipal.add(pc);
+                                                                        ClienteDAO clienteDao = new ClienteDAO();
+                                                                        DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                        modeloTabla.addColumn("Nombre de Cliente");
+                                                                        modeloTabla.addColumn("Fecha de Cumpleaños");
+                                                                        modeloTabla.addColumn("Correo Electrónico");
+                                                                        pc.tableCumpleaños.setModel(modeloTabla);
+                                                                        Object[] columna = new Object[3];
+
+                                                                        int numRegistros = 0;
+                                                                        try {
+                                                                            numRegistros = clienteDao.listarClientes().size();
+                                                                        } catch (SQLException ex) {
+                                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                        }
+                                                                        for (int i = 0; i < numRegistros; i++) {
+                                                                            try {
+                                                                                columna[0] = clienteDao.listarClientes().get(i).getNombresApellidos();
+                                                                                columna[1] = clienteDao.listarClientes().get(i).getFechaNacimiento();
+                                                                                columna[2] = clienteDao.listarClientes().get(i).getCorreoCliente();
+
+                                                                                modeloTabla.addRow(columna);
+                                                                            } catch (SQLException ex) {
+                                                                                Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                            }
+                                                                        }
+                                                                        pc.show();
                                                                         principal.panelPrincipal.revalidate();
                                                                         principal.panelPrincipal.repaint();
                                                                     } else {
@@ -489,6 +634,36 @@ public class ControladorPrincipal implements ActionListener {
                                                                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                                                 plp.setLocation(5, 5);
                                                                                 this.principal.panelPrincipal.add(plp);
+                                                                                ProveedorDAO proveedorDao = new ProveedorDAO();
+                                                                                DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                                modeloTabla.addColumn("Nombre");
+                                                                                modeloTabla.addColumn("Num. Cuenta");
+                                                                                modeloTabla.addColumn("Teléfono");
+                                                                                modeloTabla.addColumn("Celular");
+                                                                                modeloTabla.addColumn("1°Dia de Pedido");                                                                                
+                                                                                modeloTabla.addColumn("2°Dia de Pedido");
+                                                                                plp.tableProveedores.setModel(modeloTabla);
+                                                                                Object[] columna = new Object[6];
+
+                                                                                int numRegistros = 0;
+                                                                                try {
+                                                                                    numRegistros = proveedorDao.listarProveedores().size();
+                                                                                } catch (SQLException ex) {
+                                                                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                }
+                                                                                for (int i = 0; i < numRegistros; i++) {
+                                                                                    try {
+                                                                                        columna[0] = proveedorDao.listarProveedores().get(i).getNombreProveedor();
+                                                                                        columna[1] = proveedorDao.listarProveedores().get(i).getNumeroCuenta();
+                                                                                        columna[2] = proveedorDao.listarProveedores().get(i).getTelefono();
+                                                                                        columna[3] = proveedorDao.listarProveedores().get(i).getCelular();
+                                                                                        columna[4] = proveedorDao.listarProveedores().get(i).getDiaPedido1();
+                                                                                        columna[5] = proveedorDao.listarProveedores().get(i).getDiaPedido2();
+                                                                                        modeloTabla.addRow(columna);
+                                                                                    } catch (SQLException ex) {
+                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                    }
+                                                                                }
                                                                                 plp.show();
                                                                                 principal.panelPrincipal.revalidate();
                                                                                 principal.panelPrincipal.repaint();
@@ -563,6 +738,34 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                 //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                                                                                 plc.setLocation(5, 5);
                                                                                                 this.principal.panelPrincipal.add(plc);
+                                                                                                CompraDAO compraDao = new CompraDAO();
+                                                                                                ProveedorDAO proveedorDao = new ProveedorDAO();
+                                                                                                DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                                                modeloTabla.addColumn("Num. de Comprobante");
+                                                                                                modeloTabla.addColumn("Proveedor");
+                                                                                                modeloTabla.addColumn("Importe");
+                                                                                                modeloTabla.addColumn("Fecha");
+                                                                                                plc.tableCompras.setModel(modeloTabla);
+                                                                                                Object[] columna = new Object[4];
+
+                                                                                                int numRegistros = 0;
+                                                                                                try {
+                                                                                                    numRegistros = compraDao.listarCompras().size();
+                                                                                                } catch (SQLException ex) {
+                                                                                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                }
+                                                                                                for (int i = 0; i < numRegistros; i++) {
+                                                                                                    try {
+                                                                                                        columna[0] = compraDao.listarCompras().get(i).getNumeroComprobante();
+                                                                                                        columna[1] = proveedorDao.obtenerNombre(compraDao.listarCompras().get(i).getCodProveedor());
+                                                                                                        columna[2] = compraDao.listarCompras().get(i).getTotalPago();
+                                                                                                        columna[3] = compraDao.listarCompras().get(i).getFechaCompra();
+
+                                                                                                        modeloTabla.addRow(columna);
+                                                                                                    } catch (SQLException ex) {
+                                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                    }
+                                                                                                }
                                                                                                 plc.show();
 
                                                                                                 principal.panelPrincipal.revalidate();
@@ -575,57 +778,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                     setPanelActual(pec);
                                                                                                     //UsuarioDAO usuarioDao = new UsuarioDAO();
                                                                                                     ComprobanteDAO comprobanteDao = new ComprobanteDAO();
-                                                                                                    /*try {
-                                                                                                        int id = Integer.parseInt(comprobanteDao.obtenerUltimo())+1;
-                                                                                                        String serie = String.valueOf(id);
-                                                                                                         int tam =serie.length();
-                                                                                                        if(tam == 1){
-                                                                                                        serie = "00"+serie;
-                                                                                                        pec.jtfSerieComprobante.setText(serie);
-                                                                                                        }else{
-                                                                                                            if(tam == 2){
-                                                                                                            serie = "0"+serie;
-                                                                                                            pec.jtfSerieComprobante.setText(serie);
-                                                                                                            }else{
-                                                                                                                pec.jtfSerieComprobante.setText(serie);
-                                                                                                            }
-                                                                                                        }
-                                                                                                        int id = Integer.parseInt(comprobanteDao.obtenerUltimoCorrelativo())+1;
-                                                                                                        String coo = String.valueOf(id);
-                                                                                                        pec.jtfCorrelativoComprobante.setText(coo);
-                                                                                                        int tamc =coo.length();
-                                                                                                        if(tamc == 1){
-                                                                                                            coo = "0000000"+coo;
-                                                                                                        }
-                                                                                                        else{
-                                                                                                            if(tamc == 2){
-                                                                                                                coo = "000000"+coo;
-                                                                                                            }
-                                                                                                            else{
-                                                                                                                if(tamc == 3)
-                                                                                                                {coo = "00000"+coo;}
-                                                                                                                else{
-                                                                                                                    if(tamc == 4){coo = "0000"+coo;}
-                                                                                                                    else{
-                                                                                                                        if(tamc == 5)
-                                                                                                                        {coo = "000"+coo;}
-                                                                                                                        else{
-                                                                                                                            if(tamc == 6)
-                                                                                                                            {coo = "00"+coo;}
-                                                                                                                            else{
-                                                                                                                                if(tamc == 7){coo = "0"+coo;}
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
-                                                                                                        }
-                                                                                                        
-                                                                                                        //prv.jtfResponsableVenta.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
-
-                                                                                                    } catch (SQLException ex) {
-                                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                                                                                                    }*/
+                                                                                                    
                                                                                                     //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                                                                                     principal.panelPrincipal.removeAll();
                                                                                                     //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
@@ -644,8 +797,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                         JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                     } else {
                                                                                                                     
-                                                                                                                cc.setPanelRegistroCliente(prc);
-                                                                                                                                                                                                                             cc.insertarDatos();
+                                                                                                                cc.setPanelRegistroCliente(prc);                                                                                                                                                                                                                             cc.insertarDatos();
                                                                                                                 msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                 if (msj == 0) {
                                                                                                                     prc.jcbSexoCliente.setSelectedItem("Seleccione");
@@ -673,16 +825,15 @@ public class ControladorPrincipal implements ActionListener {
 
                                                                                                                         ct.setPanelRegistroTrabajador(prt);
                                                                                                                         ct.insertarDatos();
+                                                                                                                        
                                                                                                                         msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                         if (msj == 0) {
-                                                                                                                            prt.jtfApellidosNombres.setText("");
-                                                                                                         
+                                                                                                                            prt.jtfApellidosNombres.setText("");                                                                                                         
                                                                                                                             prt.jtfCelularTrab.setText("");
                                                                                                                             prt.jtfClaveUsuario.setText("");
                                                                                                                             prt.jtfCorreoTrab.setText("");
                                                                                                                             prt.jtfDireccionTrab.setText("");
-                                                                                                                            prt.jtfDniTrab.setText("");
-                                                                                                                            
+                                                                                                                            prt.jtfDniTrab.setText("");                                                                                                                            
                                                                                                                             prt.jtfEdadTrab.setText("");
                                                                                                                             prt.jtfFechaPago.setText("");
                                                                                                                             prt.jtfHobbyTrab.setText("");
@@ -707,42 +858,31 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                         if ("".equals(pbc.jtfNombreIncentivo.getText())) {
                                                                                                                         JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                         } else {
-
                                                                                                                             ci.setPanelBonosyComisiones(pbc);
                                                                                                                             ci.insertarDatos();
                                                                                                                             msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                             if (msj == 0) {
-                                                                                                                                /*pbc..jtfApellidosNombres.setText("");
-
-                                                                                                                                prt.jtfCelularTrab.setText("");
-                                                                                                                                prt.jtfClaveUsuario.setText("");
-                                                                                                                                prt.jtfCorreoTrab.setText("");
-                                                                                                                                prt.jtfDireccionTrab.setText("");
-                                                                                                                                prt.jtfDniTrab.setText("");
-
-                                                                                                                                prt.jtfEdadTrab.setText("");
-                                                                                                                                prt.jtfFechaPago.setText("");
-                                                                                                                                prt.jtfHobbyTrab.setText("");
-                                                                                                                                prt.jtfNumCuentaTrab.setText("");
-                                                                                                                                prt.jtfSueldoTrab.setText("");
-                                                                                                                                prt.jtfTelRefTrab.setText("");
-                                                                                                                                prt.jtfTelefonoTrab.setText("");
-                                                                                                                                prt.jtfUsuario.setText("");
-                                                                                                                                prt.jcbCargoTrabajador.setSelectedItem("Seleccione");
-                                                                                                                                prt.jcbSexoTrab.setSelectedItem("Seleccione");
-                                                                                                                                prt.jdcFechNacTrab.setCalendar(null);*/
-
-                                                                                                                            } else {
-                                                                                                                                pbc.dispose();
+                                                                                                                                pbc.jcbTipoIncentivo.setSelectedItem("Seleccione");
+                                                                                                                                pbc.jtfNombreIncentivo.setText("");
+                                                                                                                                pbc.jtfCantidadIncentivo.setText("");
+                                                                                                                                pbc.jcbSueldoVentas.setSelectedItem("Seleccione");
+                                                                                                                                pbc.jtfDescripcionIncentivo.setText("");
+                                                                                                                                pbc.jdcFechaInicio.setCalendar(null);
+                                                                                                                                pbc.jdcFechaFin.setCalendar(null);
+                                                                                                                                pbc.estadoIncentivo.setText("");
+                                                                                                                            } else {                                                                                                                                                                                                                                                           
+                                                                                                                                    pbc.dispose();
                                                                                                                             }
                                                                                                                         }
                                                                                                                         
                                                                                                                     } else {
                                                                                                                         if (v == 4) {
+                                                                                                                            JOptionPane.showMessageDialog(null, "Usted no puede realizar esta accion!", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                             //PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
                                                                                                                             //ControladorEmpresa ce = new ControladorEmpresa();
                                                                                                                             //ce.setPanelDatosEmpresa(pde);
-                                                                                                                            ce.insertarDatos();
+                                                                                                                            //ce.insertarDatos();
+                                                                                                                            
                                                                                                                         } else {
                                                                                                                             if (v == 5) {
                                                                                                                                 AgregarOperador pao = (AgregarOperador) internalFrameActual;
@@ -764,11 +904,6 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                 if (v == 6) {
                                                                                                                                     PanelRecarga pnr = (PanelRecarga) internalFrameActual;
                                                                                                                                     ControladorRecarga cr = new ControladorRecarga();
-                                                                                                                                    /*if(ae.getSource() == pnr.btnAgregarOperador){
-                                                                                                                                        //abrir ventana principal
-                                                                                                                                        AgregarOperador ao = new AgregarOperador();
-                                                                                                                                        ao.setVisible(true);
-                                                                                                                                        }*/
                                                                                                                                     if ("".equals(pnr.jtfNumeroCelular.getText())) {
                                                                                                                                         JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                                     } else {
@@ -787,8 +922,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                 } else {
                                                                                                                                     if (v == 7) {
                                                                                                                                         PanelNuevaCategoria pnc = (PanelNuevaCategoria) internalFrameActual;
-                                                                                                                                        ControladorCategoria cc = new ControladorCategoria();
-                                                                                                                                        
+                                                                                                                                        ControladorCategoria cc = new ControladorCategoria();                                                                                                                                        
                                                                                                                                         if ("".equals(pnc.jtfNombreNuevaCategoria.getText())) {
                                                                                                                                             JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
                                                                                                                                         } else {
@@ -813,13 +947,13 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                 cp.insertarDatos();
                                                                                                                                                 msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                                                 if (msj == 0) {
-                                                                                                                                                    prp.jtfCelularProveedor.setText("");
-                                                                                                                                                    prp.jtfDireccionProveedor.setText("");
                                                                                                                                                     prp.jtfNombreProveedor.setText("");
+                                                                                                                                                    prp.jtfDireccionProveedor.setText("");
+                                                                                                                                                    prp.jtfTelefonoProveedor.setText("");
+                                                                                                                                                    prp.jtfCelularProveedor.setText("");
                                                                                                                                                     prp.jtfNumeroCuenta.setText("");
                                                                                                                                                     prp.jtfPedido1.setText("");
                                                                                                                                                     prp.jtfPedido2.setText("");
-                                                                                                                                                    prp.jtfTelefonoProveedor.setText("");
 
                                                                                                                                                 } else {
                                                                                                                                                     prp.dispose();
@@ -831,52 +965,135 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                 ControladorPromocion cp = new ControladorPromocion();
                                                                                                                                                 if ("".equals(pp.jtfNombrePromocion.getText())) {
                                                                                                                                                 JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                                                                                                                                            } else {
+                                                                                                                                                } else {
                                                                                                                                                 cp.setPanelPromociones(pp);
                                                                                                                                                 cp.insertarDatos();
                                                                                                                                                 msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                                                 if (msj == 0) {
-                                                                                                                                                    /*prp.jtfCelularProveedor.setText("");
-                                                                                                                                                    prp.jtfDireccionProveedor.setText("");
-                                                                                                                                                    prp.jtfNombreProveedor.setText("");
-                                                                                                                                                    prp.jtfNumeroCuenta.setText("");
-                                                                                                                                                    prp.jtfPedido1.setText("");
-                                                                                                                                                    prp.jtfPedido2.setText("");
-                                                                                                                                                    prp.jtfTelefonoProveedor.setText("");*/
-
+                                                                                                                                                    pp.jtfNombrePromocion.setText("");
+                                                                                                                                                    pp.jtpDescripcion.setText("");
+                                                                                                                                                    pp.jtfUnidades.setText("");
+                                                                                                                                                    pp.jtfImporte.setText("");
                                                                                                                                                 } else {
                                                                                                                                                     pp.dispose();
                                                                                                                                                 }
                                                                                                                                             }
-                                                                                                                                                
                                                                                                                                             } else {
-                                                                                                                                                if (v == 10) {
-                                                                                                                                                    int i;
+                                                                                                                                                if (v == 10) {                                                                                                                                                    
                                                                                                                                                     PanelRegistroProducto prp = (PanelRegistroProducto) internalFrameActual;
                                                                                                                                                     ControladorProducto cp = new ControladorProducto();
                                                                                                                                                     PrecioProductoDAO precioDao = new PrecioProductoDAO();
-                                                                                                                                                    //ControladorPrecios cpr = new ControladorPrecios();
+                                                                                                                                                    ProductoDAO productoDao = new ProductoDAO();
+                                                                                                                                                    int codProducto = 1;// codigo del registro del producto  
+                                                                                                                                                    if ("".equals(prp.jtfCodigoProducto.getText())) {
+                                                                                                                                                    JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                                    } else {                                                                                                                                                       
                                                                                                                                                     cp.setPanelRegistroProducto(prp);
                                                                                                                                                     cp.insertarDatos();
-                                                                                                                                                    /*for(i =0 ; i< prp.tablePrecios.getRowCount() ; i++){
-                                                                                                                                                        System.out.println(prp.tablePrecios.getValueAt(i,0));
-                                                                                                                                                        try {
-                                                                                                                                                            precioDao.registrarPreciosProducto((prp.tablePrecios.getValueAt(i,0).toString()), (Float)(prp.tablePrecios.getValueAt(i,1)),(Float)(prp.tablePrecios.getValueAt(i,2)),1);
-                                                                                                                                                        } catch (SQLException ex) {
-                                                                                                                                                            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                    try {                                                                                                                                                        
+                                                                                                                                                        codProducto = productoDao.obtenerCodigo(Integer.parseInt(prp.jtfCodigoProducto.getText()));
+                                                                                                                                                    } catch (SQLException ex) {
+                                                                                                                                                        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                    }                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                    if(prp.tablePrecios.getRowCount() == 0){
+                                                                                                                                                        JOptionPane.showMessageDialog(null, "Complete los datos por favor, la tabla se encuentra vacía!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                                                                                                                                                        }else{
+                                                                                                                                                            DefaultTableModel modelo = (DefaultTableModel)prp.tablePrecios.getModel();
+                                                                                                                                                            int Filas = modelo.getRowCount();
+                                                                                                                                                            //System.out.println(Filas);
+                                                                                                                                                            for(int i = 0; i<Filas; i++){
+                                                                                                                                                                
+                                                                                                                                                               if(prp.tablePrecios.getValueAt(i, 0) != null){
+                                                                                                                                                               try {                                                                                                                                                                   
+                                                                                                                                                                    String unidad = prp.tablePrecios.getValueAt(i, 0).toString();
+                                                                                                                                                                    float precioCosto = Float.parseFloat(prp.tablePrecios.getValueAt(i, 1).toString());
+                                                                                                                                                                    float precioVenta = Float.parseFloat(prp.tablePrecios.getValueAt(i, 2).toString());
+                                                                                                                                                                    
+                                                                                                                                                                    precioDao.registrarPreciosProducto(unidad,precioCosto,precioVenta,codProducto);                                                                                                                                                               
+
+                                                                                                                                                                } catch (SQLException ex) {
+                                                                                                                                                                Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                                }
+                                                                                                                                                               }
+                                                                                                                                                            }
                                                                                                                                                         }
-                                                                                                                                                        } */
-                                                                                                                                                    /*if(prp.tablePrecios.getRowCount()>0){
-                                                                                                                                                        System.out.println(""+prp.tablePrecios.getValueAt(0, 0));
-                                                                                                                                                    }else{
-                                                                                                                                                         JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                                                                                                                                                    }*/
+                                                                                                                                                        msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                                                if (msj == 0) {
+                                                                                                                                                                prp.jtfCodigoProducto.setText("");
+                                                                                                                                                                prp.jtfNombreProducto.setText("");
+                                                                                                                                                                prp.jtfDescripcionProducto.setText("");
+                                                                                                                                                                prp.jtfMarcaProducto.setText("");
+                                                                                                                                                                prp.jtfFechaVencimiento.setCalendar(null);
+                                                                                                                                                                prp.jtfStock.setText("");
+                                                                                                                                                                prp.jtfPuntoPedido.setText("");
+                                                                                                                                                                DefaultTableModel tb = (DefaultTableModel) prp.tablePrecios.getModel();
+                                                                                                                                                                            int a = tb.getRowCount()-1;                                                                                                                                                                   
+                                                                                                                                                                            for (int i = a; i >= 0; i--) {           
+                                                                                                                                                                            tb.removeRow(tb.getRowCount()-1);
+                                                                                                                                                                            }
+                                                                                                                                                                } else {
+                                                                                                                                                                    prp.dispose();                                                                                                                                                                }
+                                                                                                                                                    }
                                                                                                                                                 } else {
                                                                                                                                                     if (v == 11) {
                                                                                                                                                         PanelNuevaCompra pnc = (PanelNuevaCompra) internalFrameActual;
                                                                                                                                                         ControladorCompra cc = new ControladorCompra();
-                                                                                                                                                        cc.setPanelNuevaCompra(pnc);
-                                                                                                                                                        cc.insertarDatos();
+                                                                                                                                                        productosAdquiridosDAO productosAdquiridosDao = new productosAdquiridosDAO();
+                                                                                                                                                        CompraDAO compraDao = new CompraDAO();
+                                                                                                                                                        int codCompra = 1;// codigo del registro del producto 
+                                                                                                                                                        if ("".equals(pnc.jtfNumeroComprobante.getText())) {
+                                                                                                                                                            JOptionPane.showMessageDialog(null, "Complete los datos por favor !", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                                                                                                                                            } else {                                                                                                                                                       
+                                                                                                                                                                cc.setPanelNuevaCompra(pnc);
+                                                                                                                                                                cc.insertarDatos();
+                                                                                                                                                                try {                                                                                                                                                        
+                                                                                                                                                                    codCompra = compraDao.obtenerCodigo(pnc.jtfNumeroComprobante.getText());
+                                                                                                                                                                } catch (SQLException ex) {
+                                                                                                                                                                    Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                                }                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                            if(pnc.tableCompras.getRowCount() == 0){
+                                                                                                                                                                JOptionPane.showMessageDialog(null, "Complete los datos por favor, la tabla se encuentra vacía!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+                                                                                                                                                                }else{
+                                                                                                                                                                    DefaultTableModel modelo = (DefaultTableModel)pnc.tableCompras.getModel();
+                                                                                                                                                                    int Filas = modelo.getRowCount();
+                                                                                                                                                                    //System.out.println(Filas);
+                                                                                                                                                                    for(int i = 0; i<Filas; i++){
+
+                                                                                                                                                                    if(pnc.tableCompras.getValueAt(i, 0) != null){
+                                                                                                                                                                    try {                                                                                                                                                                   
+                                                                                                                                                                            String codigo = pnc.tableCompras.getValueAt(i, 0).toString();
+                                                                                                                                                                            String nombre = pnc.tableCompras.getValueAt(i, 1).toString();
+                                                                                                                                                                            int cantidad = Integer.parseInt(pnc.tableCompras.getValueAt(i,2).toString());
+                                                                                                                                                                            float importe = Float.parseFloat(pnc.tableCompras.getValueAt(i, 3).toString());
+
+                                                                                                                                                                            productosAdquiridosDao.registrarProductosAdquiridos(codigo,nombre,cantidad,importe,codCompra);                                                                                                                                                               
+
+                                                                                                                                                                        } catch (SQLException ex) {
+                                                                                                                                                                        Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                                msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
+                                                                                                                                                                        if (msj == 0) {
+                                                                                                                                                                        pnc.jtfNumeroComprobante.setText("");
+                                                                                                                                                                        pnc.jtfNombreVendedor.setText("");
+                                                                                                                                                                        pnc.jdcFechaCompra.setCalendar(null);
+                                                                                                                                                                        pnc.jcbTipoPago.setSelectedItem("Seleccione");
+                                                                                                                                                                        pnc.jtfDiasPago.setText("");
+                                                                                                                                                                        pnc.cbxOtraCompra.setSelected(false);
+                                                                                                                                                                        
+                                                                                                                                                                        DefaultTableModel tb = (DefaultTableModel) pnc.tableCompras.getModel();
+                                                                                                                                                                            int a = tb.getRowCount()-1;                                                                                                                                                                   
+                                                                                                                                                                            for (int i = a; i >= 0; i--) {           
+                                                                                                                                                                            tb.removeRow(tb.getRowCount()-1);
+                                                                                                                                                                            }
+                                                                                                                                                                        } else {
+                                                                                                                                                                            pnc.dispose();                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        
                                                                                                                                                     } else {
                                                                                                                                                         if (v == 12) {
                                                                                                                                                             PanelRegistroVentas prv = (PanelRegistroVentas) internalFrameActual;
@@ -908,7 +1125,7 @@ public class ControladorPrincipal implements ActionListener {
 
                                                                                                         }
                                                                                                     } else {
-                                                                                                        if (ae.getSource() == principal.btnEditar) {
+               /*AQUI EMPIEZA PARA EDITAR LOS REGISTROS*/                                              if (ae.getSource() == principal.btnEditar) {
                                                                                                             if(v == 14){    //estamos en la ventana listado de clientes
                                                                                                                 PanelListadoClientes plc;
                                                                                                                 plc = (PanelListadoClientes) internalFrameActual;
@@ -993,6 +1210,23 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                         } catch (SQLException ex) {
                                                                                                                             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                                                                                                                         }
+                                                                                                                    }else{
+                                                                                                                        if(v == 4){
+                                                                                                                        PanelDatosEmpresa pde = (PanelDatosEmpresa) internalFrameActual;
+                                                                                                                        System.out.println(pde.jtfNombreEmpresa.getText());
+                                                                                                                        EmpresaDAO empresaDao = new EmpresaDAO();
+                                                                                                                        
+                                                                                                                        try {
+                                                                                                                            empresaDao.actualizarEmpresa(pde.jtfNombreEmpresa.getText(),pde.jtfRazonSocial.getText(),pde.jtfRepresentanteLegal.getText(),Integer.parseInt(pde.jtfRuc.getText()),pde.jtfDireccion.getText(),pde.jtfTelefono.getText(),
+                                                                                                                                    pde.jtfCelular.getText(),pde.jtfCorreoElectronico.getText(),pde.jtfPaginaWeb.getText(),pde.jtaDescripcion.getText(),1);
+                                                                                                                        } catch (SQLException ex) {
+                                                                                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                        }
+                                                                                                                        JOptionPane.showMessageDialog(null, "Registro actualizado con éxito");
+                                                                                                                        pde.dispose();
+                                                                                                                   }else{
+                                                                                                                        
+                                                                                                                    }
                                                                                                                     }
                                                                                                                 }
                                                                                                             }

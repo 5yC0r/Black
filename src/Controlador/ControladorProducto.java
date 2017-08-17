@@ -42,7 +42,7 @@ public class ControladorProducto {
             //int codProducto =1;
             int i;
             
-            String codigoProducto = prp.jtfCodigoProducto.getText();
+            int codigoProducto = Integer.parseInt(prp.jtfCodigoProducto.getText());
             String nombreProducto = prp.jtfNombreProducto.getText();
             String marca = prp.jtfMarcaProducto.getText();
             String descripcion = prp.jtfDescripcionProducto.getText();

@@ -7,9 +7,11 @@ package Vistas.Paneles;
 import Controlador.ControladorPrincipal;
 import Modelo.Conexion;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,9 +24,13 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
      */
     
     Conexion conexion;
+    DefaultTableModel model;
+         int filas = 0;
     
     public PanelNuevaCompra() {
         initComponents();
+        jtfDiasPago.setEditable(false);
+        
         
         this.jcbProveedor.removeAllItems();
         
@@ -49,7 +55,20 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
+    public void tipoPago(String cb){
+        
+        if(cb.equals("Contado")){
+           jtfDiasPago.setText("0");
+           jtfDiasPago.setEditable(false);
+        }else{
+           if(cb.equals("Credito")){
+               jtfDiasPago.setText("");
+               jtfDiasPago.setEditable(true);
+           }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,10 +97,11 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jtfDiasPago = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCompras = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jtfTotalPagar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,6 +141,11 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jLabel5.setText("Fecha:");
 
         jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 1", "Item 2", "Item 3" }));
+        jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProveedorActionPerformed(evt);
+            }
+        });
 
         cbxOtraCompra.setText("Otros");
         cbxOtraCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +157,11 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jLabel6.setText("Tipo de Pago:");
 
         jcbTipoPago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Contado", "Credito" }));
+        jcbTipoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoPagoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Plazo:");
 
@@ -210,23 +240,27 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jLabel11.setText("Productos Comprados");
         jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Cantidad", "Importe"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableCompras);
 
         jLabel13.setText("Datos de la Compra");
         jLabel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel12.setText("Total a Pagar");
+
+        jButton1.setText("+");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,8 +273,11 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)))
                         .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -256,15 +293,17 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -274,6 +313,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(cbxOtraCompra.isSelected()== true){
             jtfNumeroComprobante.setText("000000");
+            jcbProveedor.setSelectedIndex(0);
             jcbProveedor.setEnabled(false);
             jtfNombreVendedor.setEditable(false);
         }
@@ -284,8 +324,25 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbxOtraCompraActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        model = (DefaultTableModel) this.tableCompras.getModel();
+        model.addRow(new Object[filas]);
+        filas++;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jcbTipoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoPagoActionPerformed
+        
+        String tp = jcbTipoPago.getSelectedItem().toString();
+        tipoPago(tp);
+    }//GEN-LAST:event_jcbTipoPagoActionPerformed
+
+    private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProveedorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox cbxOtraCompra;
+    public javax.swing.JCheckBox cbxOtraCompra;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -300,7 +357,6 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     public javax.swing.JComboBox jcbProveedor;
     public javax.swing.JComboBox jcbTipoPago;
     public com.toedter.calendar.JDateChooser jdcFechaCompra;
@@ -308,5 +364,6 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfNombreVendedor;
     public javax.swing.JTextField jtfNumeroComprobante;
     public javax.swing.JTextField jtfTotalPagar;
+    public javax.swing.JTable tableCompras;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,10 +1,13 @@
 
 package Vistas;
 
+import javax.swing.ImageIcon;
+
 public class Bienvenida extends javax.swing.JFrame {
 
     public Bienvenida() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../imagenes/icono.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")

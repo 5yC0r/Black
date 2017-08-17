@@ -43,7 +43,7 @@ public class ControladorEmpresa implements ActionListener{
         String nombre = pde.jtfNombreEmpresa.getText();
         String razonSocial = pde.jtfRazonSocial.getText();
         String representanteLegal = pde.jtfRepresentanteLegal.getText();
-        String ruc = pde.jtfRuc.getText();
+        int ruc = Integer.parseInt(pde.jtfRuc.getText());
         String direccion = pde.jtfDireccion.getText();
         String telefono = pde.jtfTelefono.getText();
         String celular = pde.jtfCelular.getText();

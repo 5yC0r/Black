@@ -4,6 +4,8 @@
  */
 package Vistas.Paneles;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author MARIANA
@@ -55,6 +57,12 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nombre de Proveedor:");
 
+        jtfNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreProveedorKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Numero de Cuenta:");
 
         jtfNumeroCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -62,12 +70,35 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                 jtfNumeroCuentaActionPerformed(evt);
             }
         });
+        jtfNumeroCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNumeroCuentaKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Direccion:");
 
         jLabel4.setText("Telefono:");
 
+        jtfDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDireccionProveedorKeyTyped(evt);
+            }
+        });
+
+        jtfTelefonoProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfTelefonoProveedorKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Celular:");
+
+        jtfCelularProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCelularProveedorKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,10 +116,11 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jtfDireccionProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                        .addComponent(jtfNombreProveedor, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jtfTelefonoProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                        .addComponent(jtfCelularProveedor, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jtfNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfNombreProveedor, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jtfTelefonoProveedor, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfCelularProveedor, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfNumeroCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -128,10 +160,20 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                 jtfPedido2ActionPerformed(evt);
             }
         });
+        jtfPedido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPedido2KeyTyped(evt);
+            }
+        });
 
         jtfPedido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPedido1ActionPerformed(evt);
+            }
+        });
+        jtfPedido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPedido1KeyTyped(evt);
             }
         });
 
@@ -197,7 +239,7 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,6 +256,118 @@ public class PanelRegistroProveedor extends javax.swing.JInternalFrame {
     private void jtfPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPedido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPedido1ActionPerformed
+
+    private void jtfCelularProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCelularProveedorKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        
+        String cel  = jtfCelularProveedor.getText();
+        
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(cel.length() == 9){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfCelularProveedorKeyTyped
+
+    private void jtfNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreProveedorKeyTyped
+        char c = evt.getKeyChar();
+        String nomProo = jtfNombreProveedor.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomProo.length() == 40){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreProveedorKeyTyped
+
+    private void jtfDireccionProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDireccionProveedorKeyTyped
+       char c = evt.getKeyChar();
+        String nomDirecc = jtfDireccionProveedor.getText();
+       
+             if(nomDirecc.length() == 60){
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtfDireccionProveedorKeyTyped
+
+    private void jtfTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoProveedorKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        
+        String tel  = jtfTelefonoProveedor.getText();
+        
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(tel.length() == 9){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfTelefonoProveedorKeyTyped
+
+    private void jtfNumeroCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNumeroCuentaKeyTyped
+        char c = evt.getKeyChar();//      
+        String numCuen  = jtfNumeroCuenta.getText();
+        if (Character.isDigit(c)  || c == '-' ) {
+            //Permite ingreso
+            if(numCuen.length() == 20){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNumeroCuentaKeyTyped
+
+    private void jtfPedido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPedido1KeyTyped
+        char c = evt.getKeyChar();
+        String numPedi1 = jtfPedido1.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(numPedi1.length() == 25){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfPedido1KeyTyped
+
+    private void jtfPedido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPedido2KeyTyped
+        char c = evt.getKeyChar();
+        String numPedi2 = jtfPedido2.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(numPedi2.length() == 25){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfPedido2KeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

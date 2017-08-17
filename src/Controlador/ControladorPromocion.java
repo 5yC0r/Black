@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Modelo.DAO.ProductoDAO;
 import Modelo.DAO.PromocionDAO;
 import Vistas.Paneles.PanelPromociones;
 import java.sql.SQLException;
@@ -26,15 +27,17 @@ public class ControladorPromocion {
     public void insertarDatos(){
       
         PromocionDAO promocionDao = new PromocionDAO();
+        ProductoDAO productoDao = new ProductoDAO();
             
             String nombrePromocion = pp.jtfNombrePromocion.getText();
             String descripcion = pp.jtpDescripcion.getText();
-//            String categoria = pp.jcbCategoriaProducto.getSelectedItem().toString();
-            int codProducto = pp.jcbProducto.getSelectedIndex();
+//          String categoria = pp.jcbCategoriaProducto.getSelectedItem().toString();
+            String producto = pp.jcbProducto.getSelectedItem().toString();
             int unidades = Integer.parseInt(pp.jtfUnidades.getText());
             float importe = Float.parseFloat(pp.jtfImporte.getText());       
         
         try {
+            int codProducto = productoDao.obtenerCodigoNombre(producto);
             promocionDao.registrarPromocion(nombrePromocion,descripcion,codProducto,unidades,importe);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);

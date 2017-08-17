@@ -6,6 +6,8 @@ package Vistas.Paneles;
 
 import Controlador.ControladorPrincipal;
 import Modelo.Conexion;
+import com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +15,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,8 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
      * Creates new form PanelRegistroProducto1
      */
     Conexion conexion;
+    DefaultTableModel model;
+    int filas = 0;
     
     public PanelRegistroProducto() {
         initComponents();
@@ -110,6 +115,7 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePrecios = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -138,7 +144,47 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Punto de Pedido:");
 
+        jtfCodigoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigoProductoActionPerformed(evt);
+            }
+        });
+        jtfCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCodigoProductoKeyTyped(evt);
+            }
+        });
+
+        jtfNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNombreProductoActionPerformed(evt);
+            }
+        });
+        jtfNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreProductoKeyTyped(evt);
+            }
+        });
+
         jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Snack", "Bebidas", "Galletas" }));
+
+        jtfStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfStockKeyTyped(evt);
+            }
+        });
+
+        jtfPuntoPedido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPuntoPedidoKeyTyped(evt);
+            }
+        });
+
+        jtfMarcaProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfMarcaProductoKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("Feha de Vencimiento:");
 
@@ -260,16 +306,20 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
 
         tablePrecios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Unidad", "Costo", "Venta"
             }
         ));
         jScrollPane1.setViewportView(tablePrecios);
+
+        jButton1.setText("+");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,11 +328,14 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,16 +345,97 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigoProductoActionPerformed
+
+    private void jtfCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProductoKeyTyped
+        
+        char c = evt.getKeyChar();
+        int limite = 13;
+        int longitudCadena = jtfCodigoProducto.getText().length();
+        if (!Character.isDigit(c)|| longitudCadena == limite) {
+            evt.consume();//no permite digitar
+        }
+    }//GEN-LAST:event_jtfCodigoProductoKeyTyped
+
+    private void jtfNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreProductoKeyTyped
+        char c = evt.getKeyChar();
+        String nomProd = jtfNombreProducto.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomProd.length() == 40){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreProductoKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        model = (DefaultTableModel) this.tablePrecios.getModel();
+        model.addRow(new Object[filas]);
+        filas++;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtfMarcaProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfMarcaProductoKeyTyped
+       char c = evt.getKeyChar();
+        String nomProd = jtfMarcaProducto.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomProd.length() == 40){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfMarcaProductoKeyTyped
+
+    private void jtfStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfStockKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();//no permite digitar
+        }
+    }//GEN-LAST:event_jtfStockKeyTyped
+
+    private void jtfPuntoPedidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPuntoPedidoKeyTyped
+       char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();//no permite digitar
+        }
+    }//GEN-LAST:event_jtfPuntoPedidoKeyTyped
+
+    private void jtfNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNombreProductoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox cbxProveedor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

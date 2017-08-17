@@ -5,12 +5,14 @@
 package Modelo.DAO;
 
 import Modelo.Categoria;
+import Modelo.Cliente;
 import Modelo.Conexion;
 import Modelo.Proveedor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -97,5 +99,75 @@ public class ProveedorDAO {
         //System.out.println(operador.getCodigoOperador());
         //System.out.println(cliente.getFechaRegistroCliente());
        return codigo;
+    }
+    
+    public ArrayList<Proveedor> listarProveedores() throws SQLException{
+        ArrayList<Proveedor> listaProveedores = new ArrayList();
+        Proveedor proveedor;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT nombreProveedor,telefono,celular,numeroCuenta,diaPedido1,diaPedido2 FROM proveedor";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                proveedor = new Proveedor();
+                proveedor.setNombreProveedor(rs.getString(1));
+                proveedor.setTelefono(rs.getString(2));
+                proveedor.setCelular(rs.getString(3));
+                proveedor.setNumeroCuenta(rs.getString(4));                
+                proveedor.setDiaPedido1(rs.getString(5));                
+                proveedor.setDiaPedido2(rs.getString(6));
+                listaProveedores.add(proveedor);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaProveedores;
+    }
+    
+    public String obtenerNombre(int codProveedor) throws SQLException{
+        Conexion conexion = new Conexion();
+        Proveedor proveedor = new Proveedor();
+        String nombre = "";
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM proveedor where codProveedor = '"+codProveedor+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                proveedor.setNombreProveedor(rs.getString(2));
+             }
+             nombre = proveedor.getNombreProveedor();
+             
+            System.out.println(nombre);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return nombre;
     }
 }

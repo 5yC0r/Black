@@ -7,7 +7,7 @@ public class Empresa {
     String nombre;
     String razonSocial;
     String representanteLegal;
-    String ruc;
+    int ruc;
     String direccion;
     String Localidad;
     String telefono;
@@ -22,7 +22,7 @@ public class Empresa {
         this.nombre = "";
         this.razonSocial = "";
         this.representanteLegal = "";
-        this.ruc = "";
+        this.ruc = 0;
         this.direccion = "";
         this.Localidad = "";
         this.telefono = "";
@@ -114,11 +114,11 @@ public class Empresa {
         this.representanteLegal = representanteLegal;
     }
 
-    public String getRuc() {
+    public int getRuc() {
         return ruc;
     }
 
-    public void setRuc(String ruc) {
+    public void setRuc(int ruc) {
         this.ruc = ruc;
     }
 

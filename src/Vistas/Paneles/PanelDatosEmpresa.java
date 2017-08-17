@@ -5,6 +5,7 @@
 package Vistas.Paneles;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -98,7 +99,49 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Pagina Web:");
 
+        jtfNombreEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreEmpresaKeyTyped(evt);
+            }
+        });
+
+        jtfRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfRazonSocialKeyTyped(evt);
+            }
+        });
+
+        jtfRepresentanteLegal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfRepresentanteLegalKeyTyped(evt);
+            }
+        });
+
+        jtfRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfRucKeyTyped(evt);
+            }
+        });
+
+        jtfDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDireccionKeyTyped(evt);
+            }
+        });
+
+        jtfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfTelefonoKeyTyped(evt);
+            }
+        });
+
         jLabel13.setText("Celular:");
+
+        jtfCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCelularKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -178,6 +221,11 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
 
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         jLabel11.setText("Datos Generales");
@@ -251,7 +299,7 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,6 +317,123 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfNombreEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreEmpresaKeyTyped
+        char c = evt.getKeyChar();
+        String tam = jtfNombreEmpresa.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(tam.length() == 20){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreEmpresaKeyTyped
+
+    private void jtfRazonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfRazonSocialKeyTyped
+        char c = evt.getKeyChar();
+        String tam = jtfRazonSocial.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(tam.length() == 20){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfRazonSocialKeyTyped
+
+    private void jtfRepresentanteLegalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfRepresentanteLegalKeyTyped
+        char c = evt.getKeyChar();
+        String tam = jtfRepresentanteLegal.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(tam.length() == 40){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfRepresentanteLegalKeyTyped
+
+    private void jtfRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfRucKeyTyped
+        char c = evt.getKeyChar();
+        int limite = 13;
+        int longitudCadena = jtfRuc.getText().length();
+        if (!Character.isDigit(c)|| longitudCadena == limite) {
+            evt.consume();//no permite digitar
+        }
+    }//GEN-LAST:event_jtfRucKeyTyped
+
+    private void jtfDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDireccionKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String nomDirecc = jtfDireccion.getText();
+       
+             if(nomDirecc.length() == 50){
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtfDireccionKeyTyped
+
+    private void jtfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        
+        String tel  = jtfTelefono.getText();
+        
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(tel.length() == 20){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfTelefonoKeyTyped
+
+    private void jtfCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCelularKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        
+        String tel  = jtfCelular.getText();
+        
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(tel.length() == 20){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfCelularKeyTyped
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaDescripcionKeyTyped
+        char c = evt.getKeyChar();
+        String nomDirecc = jtaDescripcion.getText();
+       
+             if(nomDirecc.length() == 200){
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;

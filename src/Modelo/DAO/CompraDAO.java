@@ -4,20 +4,24 @@
  */
 package Modelo.DAO;
 
+import Modelo.Compra;
 import Modelo.Conexion;
+import Modelo.Empleado;
+import com.mysql.jdbc.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author MARIANA
  */
 public class CompraDAO {
-    private final Conexion conexion;
+    
     
     public CompraDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarCompra(
@@ -29,7 +33,7 @@ public class CompraDAO {
         int diasPago,
         float totalPago
         ) throws SQLException{
-        
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
@@ -56,5 +60,72 @@ public class CompraDAO {
                 accesoBD.close();
             }
         }
+    }
+    
+    public int obtenerCodigo(String codigoBoleta) throws SQLException{
+        Conexion conexion = new Conexion();
+        Compra compra = new Compra();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM compra where numeroComprobante ='"+codigoBoleta+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = (ResultSet) ps.executeQuery();
+            
+            while (rs.next()) {
+                compra.setCodCompra(rs.getInt(1));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = compra.getCodCompra();             
+             System.out.println(codigo);         
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    public ArrayList<Compra> listarCompras() throws SQLException{
+        ArrayList<Compra> listaCompras = new ArrayList();
+        Compra compra;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT numeroComprobante,codProveedor,fechaCompra,totalPago FROM compra";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            java.sql.ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                compra = new Compra();
+                compra.setNumeroComprobante(rs.getString(1));
+                compra.setCodProveedor(rs.getInt(2));
+                compra.setFechaCompra(rs.getString(3));
+                compra.setTotalPago(rs.getInt(4));
+                listaCompras.add(compra);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaCompras;
     }
 }

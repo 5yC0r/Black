@@ -28,13 +28,14 @@ public class IncentivosDAO {
         String estadoIncentivo,
 
         String descripcionIncentivo,
-        String fechaIncentivo
+        String fechaInicio,
+        String fechaFin
     ) throws SQLException{
         
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO incentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo,fechaIncentivo)"
+            String consulta = "INSERT INTO incentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo,fechaInicio,fechaFin)"
                     + "VALUES(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
@@ -44,7 +45,8 @@ public class IncentivosDAO {
             ps.setString(4, sueldoVenta);
             ps.setString(5, estadoIncentivo);
             ps.setString(6, descripcionIncentivo);
-            ps.setString(7, fechaIncentivo);
+            ps.setString(7, fechaInicio);
+            ps.setString(8, fechaFin);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar datos del incentivo: "+e.toString());

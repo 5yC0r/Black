@@ -240,4 +240,36 @@ public class UsuarioDAO {
         //System.out.println(cliente.getFechaRegistroCliente());
        return nombre;
     }
+    
+    public ArrayList<Usuario> listarUsuarios() throws SQLException{
+        ArrayList<Usuario> listaUsuarios = new ArrayList();
+        Usuario usuario;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT usuario, tipoUsuario, fechaRegistro FROM usuario";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                usuario = new Usuario();
+                usuario.setUsuario(rs.getString(1));
+                usuario.setTipoUsuario(rs.getString(2));
+                usuario.setFechaRegistro(rs.getString(3));
+                listaUsuarios.add(usuario);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaUsuarios;
+    }
 }

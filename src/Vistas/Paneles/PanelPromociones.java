@@ -4,6 +4,14 @@
  */
 package Vistas.Paneles;
 
+import Controlador.ControladorPrincipal;
+import Modelo.Conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author MARIANA
@@ -13,8 +21,60 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
     /**
      * Creates new form PanelPromociones1
      */
+    Conexion conexion;
     public PanelPromociones() {
         initComponents();
+        
+        this.jcbCategoriaProducto.removeAllItems();
+        this.jcbProducto.removeAllItems();
+        
+        
+            conexion = new Conexion();
+            java.sql.Connection accesoBD = null;
+            Statement ps = null;
+            
+        try{
+            //conexion = new Conexion();
+            
+            accesoBD = conexion.getConnection();
+            ps = (Statement) accesoBD.createStatement();
+            //Statement sent = conexion.createStatement(); 
+           ResultSet rs = ps.executeQuery("SELECT * FROM categoria");
+            
+               
+            while(rs.next()){
+            this.jcbCategoriaProducto.addItem(rs.getString("nombreNuevaCategoria"));
+            }  
+        }catch(Exception ex){
+        Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }
+    
+    
+    
+    public void indexarProductos(int codCategoria)
+    {
+        
+        conexion = new Conexion();
+            java.sql.Connection accesoBD = null;
+            Statement ps = null;
+            
+        try {
+            accesoBD = conexion.getConnection();
+            ps = (Statement) accesoBD.createStatement();
+            //Statement sent = conexion.createStatement(); 
+           ResultSet rs = ps.executeQuery("SELECT * FROM producto where codCategoria = '"+codCategoria+"'");
+            
+            while(rs.next()){
+            this.jcbProducto.addItem(rs.getString("nombreProducto"));
+            } 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelRegistroProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -29,7 +89,7 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePromociones = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtfNombrePromocion = new javax.swing.JTextField();
@@ -56,7 +116,7 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
         jLabel7.setText("Listado de Promociones");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePromociones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,7 +127,7 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
                 "Nombre", "Producto", "Cantidad", "Importe"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablePromociones);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -177,7 +237,7 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,6 +245,10 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
 
     private void jcbCategoriaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaProductoActionPerformed
         // TODO add your handling code here:
+        this.jcbProducto.removeAllItems();
+        int cb = jcbCategoriaProducto.getSelectedIndex()+1;        
+        indexarProductos(cb);
+        
     }//GEN-LAST:event_jcbCategoriaProductoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,12 +263,12 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     public javax.swing.JComboBox jcbCategoriaProducto;
     public javax.swing.JComboBox jcbProducto;
     public javax.swing.JTextField jtfImporte;
     public javax.swing.JTextField jtfNombrePromocion;
     public javax.swing.JTextField jtfUnidades;
     public javax.swing.JTextPane jtpDescripcion;
+    public javax.swing.JTable tablePromociones;
     // End of variables declaration//GEN-END:variables
 }

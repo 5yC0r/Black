@@ -73,7 +73,7 @@ public class VentaDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT codigoVenta,codigoCliente,totalNetoVenta,fechaVenta FROM venta";
+            String consulta = "SELECT codVenta,codCliente,totalNetoVenta,fechaVenta FROM venta";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);        
             ResultSet rs = ps.executeQuery();

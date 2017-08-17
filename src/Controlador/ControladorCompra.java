@@ -28,7 +28,7 @@ public class ControladorCompra {
     public void insertarDatos() {
     
         String numeroComprobante = pnc.jtfNumeroComprobante.getText();
-        int codProveedor = pnc.jcbProveedor.getSelectedIndex();
+        int codProveedor = pnc.jcbProveedor.getSelectedIndex()+1;
 //        String vendedor = pnc.jtfNombreVendedor.getText();
         int codEmpleado =1; //revisar ojo
         String fechaCompra = df.format(pnc.jdcFechaCompra.getDate());

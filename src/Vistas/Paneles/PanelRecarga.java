@@ -71,7 +71,7 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableRecargas = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -166,18 +166,23 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(10, 166, 330, 18);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableRecargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableRecargas);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 190, 330, 240);
@@ -204,9 +209,9 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     public javax.swing.JComboBox jcbOperador;
     public javax.swing.JTextField jtfCantidadRecargada;
     public javax.swing.JTextField jtfNumeroCelular;
+    public javax.swing.JTable tableRecargas;
     // End of variables declaration//GEN-END:variables
 }

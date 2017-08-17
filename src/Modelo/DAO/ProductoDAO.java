@@ -19,15 +19,15 @@ import java.util.ArrayList;
  */
 public class ProductoDAO {
     
-    Conexion conexion;
+    
     
     public ProductoDAO(){
-        conexion = new Conexion();
+        
     }
     
     public void registrarProducto(
         
-        String codigoProducto,
+        int codigoProducto,
         String nombreProducto,
         String marca,
         String descripcion,
@@ -40,7 +40,7 @@ public class ProductoDAO {
         int codEmpleado
         
     ) throws SQLException{
-        
+        Conexion conexion = new Conexion();
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
@@ -48,7 +48,7 @@ public class ProductoDAO {
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
-            ps.setString(1, codigoProducto);
+            ps.setInt(1, codigoProducto);
             ps.setString(2,nombreProducto);
             ps.setString(3, marca);
             ps.setString(4, descripcion);
@@ -87,7 +87,7 @@ public class ProductoDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 producto = new Producto();
-                producto.setCodigoProducto(rs.getString(1));
+                producto.setCodigoProducto(rs.getInt(1));
                 producto.setNombreProducto(rs.getString(2));
                 producto.setMarca(rs.getString(3));
                 producto.setStock(rs.getInt(4));
@@ -104,5 +104,110 @@ public class ProductoDAO {
             }
         }
         return listaProductos;
+    }
+    
+    public int obtenerCodigo(int codigoProducto) throws SQLException{
+        Conexion conexion = new Conexion();
+        Producto producto = new Producto();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM producto where codigoProducto ='"+codigoProducto+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                producto.setCodProducto(rs.getInt(1));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = producto.getCodProducto();             
+             System.out.println(codigo);             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    
+    public int obtenerCodigoNombre(String nomProducto) throws SQLException{
+        Conexion conexion = new Conexion();
+        Producto producto = new Producto();
+        int codigo = 0;
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM producto where nombreProducto ='"+nomProducto+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                producto.setCodProducto(rs.getInt(1));
+                producto.setNombreProducto(rs.getString(3));
+                //operador.setNombreOperador(rs.getString(2));
+             }
+             codigo = producto.getCodProducto();             
+             System.out.println(codigo);             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return codigo;
+    }
+    
+    public String obtenerNombre(int codProducto) throws SQLException{
+        Conexion conexion = new Conexion();
+        Producto producto = new Producto();
+        String nombre = "";
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT nombreProducto FROM producto where codProducto = '"+codProducto+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                producto.setNombreProducto(rs.getString(1));
+             }
+             nombre = producto.getNombreProducto();
+             
+            System.out.println(nombre);
+             
+            
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el codigo del operador: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        //System.out.println(operador.getCodigoOperador());
+        //System.out.println(cliente.getFechaRegistroCliente());
+       return nombre;
     }
 }
