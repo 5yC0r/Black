@@ -6,8 +6,6 @@ package Modelo.DAO;
 
 import Modelo.Conexion;
 import Modelo.Operador;
-import Modelo.Recarga;
-import com.mysql.jdbc.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

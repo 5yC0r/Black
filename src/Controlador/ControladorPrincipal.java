@@ -1,7 +1,6 @@
 package Controlador;
 
 import Modelo.Cliente;
-import Modelo.Conexion;
 import Modelo.DAO.*;
 import Modelo.Empleado;
 import Vistas.Login;
@@ -9,8 +8,6 @@ import Vistas.Paneles.*;
 import Vistas.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -871,9 +868,8 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                 pbc.jtfCantidadIncentivo.setText("");
                                                                                                                                 pbc.jcbSueldoVentas.setSelectedItem("Seleccione");
                                                                                                                                 pbc.jtfDescripcionIncentivo.setText("");
-                                                                                                                                pbc.jdcFechaInicio.setCalendar(null);
-                                                                                                                                pbc.jdcFechaFin.setCalendar(null);
-                                                                                                                                pbc.estadoIncentivo.setText("");
+                                                                                                                                
+                                                                                                                                //pbc.estadoIncentivo.setText("");
                                                                                                                             } else {                                                                                                                                                                                                                                                           
                                                                                                                                     pbc.dispose();
                                                                                                                             }
@@ -1011,10 +1007,9 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                                if(prp.tablePrecios.getValueAt(i, 0) != null){
                                                                                                                                                                try {                                                                                                                                                                   
                                                                                                                                                                     String unidad = prp.tablePrecios.getValueAt(i, 0).toString();
-                                                                                                                                                                    float precioCosto = Float.parseFloat(prp.tablePrecios.getValueAt(i, 1).toString());
-                                                                                                                                                                    float precioVenta = Float.parseFloat(prp.tablePrecios.getValueAt(i, 2).toString());
+                                                                                                                                                                    float precioVenta = Float.parseFloat(prp.tablePrecios.getValueAt(i, 1).toString());
                                                                                                                                                                     
-                                                                                                                                                                    precioDao.registrarPreciosProducto(unidad,precioCosto,precioVenta,codProducto);                                                                                                                                                               
+                                                                                                                                                                    precioDao.registrarPreciosProducto(unidad,precioVenta,codProducto);                                                                                                                                                               
 
                                                                                                                                                                 } catch (SQLException ex) {
                                                                                                                                                                 Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -1025,10 +1020,8 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                         msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                                                                 if (msj == 0) {
                                                                                                                                                                 prp.jtfCodigoProducto.setText("");
-                                                                                                                                                                prp.jtfNombreProducto.setText("");
                                                                                                                                                                 prp.jtfDescripcionProducto.setText("");
-                                                                                                                                                                prp.jtfMarcaProducto.setText("");
-                                                                                                                                                                prp.jtfFechaVencimiento.setCalendar(null);
+                                                                                                                                                                prp.jtfMarcaProducto.setText("");                                                                                                                                                                
                                                                                                                                                                 prp.jtfStock.setText("");
                                                                                                                                                                 prp.jtfPuntoPedido.setText("");
                                                                                                                                                                 DefaultTableModel tb = (DefaultTableModel) prp.tablePrecios.getModel();

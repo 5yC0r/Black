@@ -22,8 +22,7 @@ public class PrecioProductoDAO {
     }
     
     public void registrarPreciosProducto(
-        String nombre,    
-        float valorCosto,
+        String nombre,
         float valorVenta,
         int codProducto
     ) throws SQLException{
@@ -31,14 +30,13 @@ public class PrecioProductoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO precios(nombre,valorCosto,valorVenta,codProducto)"
-                    + "VALUES(?,?,?,?)";
+            String consulta = "INSERT INTO precios(nombre,valorVenta,codProducto)"
+                    + "VALUES(?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, nombre);
-            ps.setFloat(2,valorCosto );
-            ps.setFloat(3,valorVenta);
-            ps.setInt(4, codProducto);            
+            ps.setFloat(2,valorVenta);
+            ps.setInt(3, codProducto);            
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar los precios de los productos: "+e.toString());

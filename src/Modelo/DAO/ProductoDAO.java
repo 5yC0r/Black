@@ -4,7 +4,6 @@
  */
 package Modelo.DAO;
 
-import Modelo.Cliente;
 import Modelo.Conexion;
 import Modelo.Producto;
 import java.sql.Connection;
@@ -28,11 +27,9 @@ public class ProductoDAO {
     public void registrarProducto(
         
         int codigoProducto,
-        String nombreProducto,
         String marca,
         String descripcion,
         int codCategoria,
-        String fechaVencimiento,
         int stock,
         int puntoPedido,
         String fechaRegistro,
@@ -44,21 +41,19 @@ public class ProductoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO producto(codigoProducto,nombreProducto,marca,descripcion,codCategoria,fechaVencimiento,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO producto(codigoProducto,marca,descripcion,codCategoria,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setInt(1, codigoProducto);
-            ps.setString(2,nombreProducto);
-            ps.setString(3, marca);
-            ps.setString(4, descripcion);
-            ps.setInt(5, codCategoria);
-            ps.setString(6, fechaVencimiento);
-            ps.setInt(7, stock);
-            ps.setInt(8, puntoPedido);
-            ps.setString(9, fechaRegistro);
-            ps.setInt(10,codProveedor);
-            ps.setInt(11,codEmpleado);
+            ps.setString(2, marca);
+            ps.setString(3, descripcion);
+            ps.setInt(4, codCategoria);
+            ps.setInt(5, stock);
+            ps.setInt(6, puntoPedido);
+            ps.setString(7, fechaRegistro);
+            ps.setInt(8,codProveedor);
+            ps.setInt(9,codEmpleado);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar los datos del producto: "+e.toString());
@@ -81,7 +76,7 @@ public class ProductoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT codigoProducto, nombreProducto, marca, stock FROM producto";
+            String consulta = "SELECT codigoProducto, descripcionProducto, marca, stock FROM producto";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);        
             ResultSet rs = ps.executeQuery();
@@ -94,7 +89,7 @@ public class ProductoDAO {
                 listaProductos.add(producto);
             }     
         } catch (SQLException e) {
-            System.out.println("Error al eliminar cliente: "+e.toString());
+            System.out.println("Error al listar producto: "+e.toString());
         }finally{
             if (ps != null) {
                 ps.close();

@@ -19,8 +19,6 @@ public class Incentivos {
     String estadoIncentivo;
     
     String descripcionIncentivo;
-    String fechaInicio;
-    String fechaFin;
     
     public Incentivos(){
         this.codIncentivo = 0;
@@ -29,9 +27,9 @@ public class Incentivos {
         this.cantidadIncentivo = "";
         this.sueldoVenta = "";
         this.estadoIncentivo = "";
-        this.fechaInicio = "";
+        
         this.descripcionIncentivo = "";
-        this.fechaFin = "";
+        
 
     }
     
@@ -65,22 +63,6 @@ public class Incentivos {
 
     public void setEstadoIncentivo(String estadoIncentivo) {
         this.estadoIncentivo = estadoIncentivo;
-    }
-
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
     }
 
     public String getNombreIncentivo() {

@@ -7,7 +7,7 @@ package Modelo.DAO;
 import Modelo.Compra;
 import Modelo.Conexion;
 import Modelo.Empleado;
-import com.mysql.jdbc.ResultSet;
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -72,7 +72,7 @@ public class CompraDAO {
             String consulta = "SELECT * FROM compra where numeroComprobante ='"+codigoBoleta+"'";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
-            ResultSet rs = (ResultSet) ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 compra.setCodCompra(rs.getInt(1));

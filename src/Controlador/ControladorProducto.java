@@ -11,8 +11,6 @@ import java.text.DateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
-import javax.swing.JTabbedPane;
-import sun.misc.FloatingDecimal;
 
 /**
  *
@@ -43,11 +41,11 @@ public class ControladorProducto {
             int i;
             
             int codigoProducto = Integer.parseInt(prp.jtfCodigoProducto.getText());
-            String nombreProducto = prp.jtfNombreProducto.getText();
+            //String nombreProducto = prp.jtfNombreProducto.getText();
             String marca = prp.jtfMarcaProducto.getText();
             String descripcion = prp.jtfDescripcionProducto.getText();
             String categoria = prp.jcbCategoriaProducto.getSelectedItem().toString();
-            String fechaVencimiento = df.format(prp.jtfFechaVencimiento.getDate());
+           // String fechaVencimiento = df.format(prp.jtfFechaVencimiento.getDate());
             int stock = Integer.parseInt(prp.jtfStock.getText());
             int puntoPedido = Integer.parseInt(prp.jtfPuntoPedido.getText());
             //String numeroBoleta = "";// ya no se ingresa por c/producto pertenece a diferentes boletas
@@ -70,7 +68,7 @@ public class ControladorProducto {
             codCategoria = categoriaDao.obtenerCodigo(categoria);
             codEmpleado = empleadoDao.obtenerCodigo(nomTrabajador);
             
-            productoDao.registrarProducto(codigoProducto,nombreProducto,marca,descripcion,codCategoria,fechaVencimiento,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado);
+            productoDao.registrarProducto(codigoProducto,marca,descripcion,codCategoria,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado);
         } catch (SQLException ex) {
            
              Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);

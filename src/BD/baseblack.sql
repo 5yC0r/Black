@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2017 a las 22:28:49
+-- Tiempo de generación: 18-08-2017 a las 02:47:08
 -- Versión del servidor: 5.5.34
 -- Versión de PHP: 5.4.22
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `categoria` (
   `CodCategoria` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreNuevaCategoria` varchar(15) NOT NULL,
+  `nombreNuevaCategoria` varchar(30) NOT NULL,
   PRIMARY KEY (`CodCategoria`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -50,16 +50,16 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `tipoCliente` varchar(17) NOT NULL,
   `tipoDoc` varchar(15) NOT NULL,
   `numDoc` varchar(20) NOT NULL,
-  `razonSocial` varchar(50) DEFAULT NULL,
-  `nombresApellidos` varchar(50) DEFAULT NULL,
-  `fechaNacimiento` varchar(15) DEFAULT NULL,
+  `razonSocial` varchar(60) DEFAULT NULL,
+  `nombresApellidos` varchar(60) DEFAULT NULL,
+  `fechaNacimiento` varchar(12) DEFAULT NULL,
   `sexoCliente` varchar(12) DEFAULT NULL,
-  `telefonoCliente` varchar(20) DEFAULT NULL,
-  `celularCliente` varchar(20) DEFAULT NULL,
-  `correoCliente` varchar(40) DEFAULT NULL,
+  `telefonoCliente` varchar(30) DEFAULT NULL,
+  `celularCliente` varchar(30) DEFAULT NULL,
+  `correoCliente` varchar(50) DEFAULT NULL,
   `direccion` varchar(60) DEFAULT NULL,
   `codEmpleado` int(11) NOT NULL,
-  `fechaRegistroCliente` varchar(15) NOT NULL,
+  `fechaRegistroCliente` varchar(12) NOT NULL,
   `estadoCliente` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codCliente`),
   KEY `codEmpleado` (`codEmpleado`),
@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `tipoPago` varchar(10) NOT NULL,
   `diasPago` int(2) NOT NULL,
   `totalPago` float NOT NULL,
+  `estadoCompra` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codCompra`),
   KEY `codProveedor` (`codProveedor`),
   KEY `fk_compra_proveedor1_idx` (`codProveedor`),
@@ -118,13 +119,13 @@ CREATE TABLE IF NOT EXISTS `comprobante` (
 
 CREATE TABLE IF NOT EXISTS `empleado` (
   `codEmpleado` int(11) NOT NULL AUTO_INCREMENT,
-  `nombresApellidos` varchar(50) NOT NULL,
-  `telefonoContacto` varchar(20) DEFAULT NULL,
-  `celular` varchar(20) DEFAULT NULL,
-  `telefonoReferencia` varchar(20) DEFAULT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
+  `nombresApellidos` varchar(70) NOT NULL,
+  `telefonoContacto` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `telefonoReferencia` varchar(30) DEFAULT NULL,
+  `direccion` varchar(80) DEFAULT NULL,
   `fechaNacimiento` varchar(12) NOT NULL,
-  `correo` varchar(50) DEFAULT NULL,
+  `correo` varchar(80) DEFAULT NULL,
   `numeroCuenta` varchar(20) DEFAULT NULL,
   `fechaPago` int(4) NOT NULL,
   `hobby` varchar(30) DEFAULT NULL,
@@ -155,14 +156,14 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `codEmpresa` int(8) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `razonSocial` varchar(60) NOT NULL,
-  `representanteLegal` varchar(50) NOT NULL,
+  `representanteLegal` varchar(60) NOT NULL,
   `ruc` int(14) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
+  `direccion` varchar(60) NOT NULL,
   `Localidad` varchar(20) NOT NULL DEFAULT 'Trujillo',
-  `telefono` varchar(20) DEFAULT NULL,
-  `celular` varchar(20) DEFAULT NULL,
-  `correoElectronico` varchar(30) NOT NULL,
-  `paginaWeb` varchar(30) DEFAULT NULL,
+  `telefono` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `correoElectronico` varchar(60) NOT NULL,
+  `paginaWeb` varchar(50) DEFAULT NULL,
   `foto` varchar(100) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`codEmpresa`)
@@ -183,14 +184,12 @@ INSERT INTO `empresa` (`codEmpresa`, `nombre`, `razonSocial`, `representanteLega
 
 CREATE TABLE IF NOT EXISTS `incentivo` (
   `codIncentivo` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoIncentivo` varchar(15) NOT NULL,
-  `nombreIncentivo` varchar(30) NOT NULL,
+  `tipoIncentivo` varchar(12) NOT NULL,
+  `nombreIncentivo` varchar(50) NOT NULL,
   `cantidadIncentivo` varchar(8) NOT NULL,
   `sueldoVenta` varchar(15) NOT NULL,
   `estadoIncentivo` varchar(12) NOT NULL,
   `descripcionIncentivo` varchar(150) DEFAULT NULL,
-  `fechaInicio` varchar(12) NOT NULL,
-  `fechaFin` varchar(12) NOT NULL,
   PRIMARY KEY (`codIncentivo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -225,9 +224,8 @@ INSERT INTO `operador` (`codOperador`, `nombreOperador`) VALUES
 CREATE TABLE IF NOT EXISTS `precios` (
   `codPrecio` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
-  `valorCosto` float NOT NULL,
   `valorVenta` float NOT NULL,
-  `codProducto` int(11) NOT NULL,
+  `codProducto` int(20) NOT NULL,
   PRIMARY KEY (`codPrecio`),
   KEY `codProducto` (`codProducto`),
   KEY `fk_precios_producto1_idx` (`codProducto`)
@@ -240,14 +238,12 @@ CREATE TABLE IF NOT EXISTS `precios` (
 --
 
 CREATE TABLE IF NOT EXISTS `producto` (
-  `codProducto` int(11) NOT NULL AUTO_INCREMENT,
+  `codProducto` int(20) NOT NULL AUTO_INCREMENT,
   `codigoProducto` int(20) NOT NULL,
-  `nombreProducto` varchar(25) NOT NULL,
+  `descripcionProducto` varchar(70) NOT NULL,
   `marca` varchar(20) DEFAULT NULL,
-  `descripcion` varchar(40) DEFAULT NULL,
-  `fechaVencimiento` varchar(12) NOT NULL,
   `stock` int(11) NOT NULL,
-  `puntoPedido` int(11) NOT NULL,
+  `puntoPedido` int(3) NOT NULL,
   `fechaRegistro` varchar(12) NOT NULL,
   `codCategoria` int(11) NOT NULL,
   `codProveedor` int(11) NOT NULL,
@@ -269,8 +265,8 @@ CREATE TABLE IF NOT EXISTS `producto` (
 
 CREATE TABLE IF NOT EXISTS `productosadquiridos` (
   `codProdAdqui` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(15) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `importe` float NOT NULL,
   `codCompra` int(11) NOT NULL,
@@ -287,10 +283,10 @@ CREATE TABLE IF NOT EXISTS `productosadquiridos` (
 
 CREATE TABLE IF NOT EXISTS `promocion` (
   `codPromocion` int(11) NOT NULL AUTO_INCREMENT,
-  `nombrePromocion` varchar(20) NOT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
-  `codProducto` int(11) NOT NULL,
-  `unidades` int(11) NOT NULL,
+  `nombrePromocion` varchar(40) NOT NULL,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `codProducto` int(20) NOT NULL,
+  `unidades` int(8) NOT NULL,
   `importe` float NOT NULL,
   PRIMARY KEY (`codPromocion`),
   KEY `codProducto` (`codProducto`),
@@ -306,22 +302,36 @@ CREATE TABLE IF NOT EXISTS `promocion` (
 CREATE TABLE IF NOT EXISTS `proveedor` (
   `codProveedor` int(11) NOT NULL AUTO_INCREMENT,
   `nombreProveedor` varchar(30) NOT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
+  `direccion` varchar(70) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `celular` varchar(15) DEFAULT NULL,
+  `celular` varchar(20) DEFAULT NULL,
   `numeroCuenta` varchar(20) DEFAULT NULL,
   `diaPedido1` varchar(10) NOT NULL,
   `diaPedido2` varchar(10) DEFAULT NULL,
   `estadoProveedor` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codProveedor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Volcado de datos para la tabla `proveedor`
 --
 
 INSERT INTO `proveedor` (`codProveedor`, `nombreProveedor`, `direccion`, `telefono`, `celular`, `numeroCuenta`, `diaPedido1`, `diaPedido2`, `estadoProveedor`) VALUES
-(1, 'EXTERNO', 'S/N', '', '', '', 'LUNES', '', 1);
+(1, 'EXTERNO', 'S/N', '', '', '', 'LUNES', '', 1),
+(2, 'BACKUS', '', '', '', '', 'MIERCOLES', 'SABADO', 1),
+(3, 'COCA COLA', '', '', '', '5701437914057', 'MARTES', 'SABADO', 1),
+(4, 'PEPSI', '', '', '', '', 'LUNES', '', 1),
+(5, 'DONOFRIO', '', '', '', '5700048126095', 'VIERNES', '', 1),
+(6, 'AYDISA', '', '', '', '5701879407082', 'LUNES', 'JUEVES', 1),
+(7, 'BRITISH', '', '', '', '', 'MIERCOLES', '', 1),
+(8, 'LA TABERNA', '', '', '', '', 'SABADO', '', 1),
+(9, 'PAYEST', '', '', '', '5700029640068', 'SABADO', '', 1),
+(10, 'FRITO LAYS', '', '', '', '', '', '', 1),
+(11, 'LIBER', '', '', '', '', 'SABADO', '', 1),
+(12, 'GLORIA', '', '', '', '', 'SABADO', '', 1),
+(13, 'CIELO', '', '', '', '', 'LUNES', '', 1),
+(14, 'GUZMAN', '', '', '', '5701068407063', 'SABADO', '', 1),
+(15, 'WINTER', '', '', '', '', 'MARTES', '', 1);
 
 -- --------------------------------------------------------
 
@@ -353,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `tipoUsuario` varchar(15) NOT NULL,
   `estadoUsuario` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `usuario`

@@ -11,7 +11,7 @@ public class Conexion {
     String driver = "com.mysql.jdbc.Driver";
     String usuario = "root";
     String pass = "";
-    String bd = "basebb2";
+    String bd = "baseblack";
     String url = "jdbc:mysql://localhost:3306/"+bd;
     
 //    String usuario = "nuevospa_apadri";

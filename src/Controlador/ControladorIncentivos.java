@@ -35,14 +35,13 @@ public class ControladorIncentivos {
             String nombreIncentivo = pbc.jtfNombreIncentivo.getText();
             String cantidadIncentivo = pbc.jtfCantidadIncentivo.getText();
             String sueldoVenta = pbc.jcbSueldoVentas.getSelectedItem().toString();
-            String estadoIncentivo = pbc.estadoIncentivo.getText();
+            String estadoIncentivo = pbc.cbxEstado.getSelectedItem().toString();
 
             String descripcionIncentivo = pbc.jtfDescripcionIncentivo.getText();
-            String fechaInicio = df.format(pbc.jdcFechaInicio.getDate());
-            String fechaFin = df.format(pbc.jdcFechaFin.getDate());
+            
         
         try {
-            incentivosDao.registrarIncentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo,fechaInicio,fechaFin);
+            incentivosDao.registrarIncentivo(tipoIncentivo,nombreIncentivo,cantidadIncentivo,sueldoVenta,estadoIncentivo,descripcionIncentivo);
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
