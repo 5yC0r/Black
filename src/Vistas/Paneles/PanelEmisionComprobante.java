@@ -6,7 +6,9 @@ package Vistas.Paneles;
 
 import Modelo.DAO.ComprobanteDAO;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,22 +23,32 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
      * Creates new form PanelEmisionComprobante1
      */
     ComprobanteDAO comprobanteDao = new ComprobanteDAO();
+    
+    public String fechaActual()
+    {
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat();
+        
+        return formatoFecha.format(fecha);
+    }
     public PanelEmisionComprobante() {
         initComponents();
         
+        fechaEmision.setText(fechaActual());
         
         
-         Calendar c2 = new GregorianCalendar();
-        jdcFechaEmisionComprobante.setCalendar(c2);
+        
+         //Calendar c2 = new GregorianCalendar();
+        //jdcFechaEmisionComprobante.setCalendar(c2);
         //jtfCorrelativoComprobante.setEditable(false);
        // jtfIGV.setEditable(false);
-        jtfSerieComprobante. setEditable(false);
+       // jtfSerieComprobante. setEditable(false);
         
         
         
     }
     
-    public void tipoComprobante(String cb){
+    /*public void tipoComprobante(String cb){
         
         if(cb.equals("Boleta")){
             try {
@@ -66,7 +78,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
            }
         }
     
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,15 +92,14 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jtfTipoComprobante = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jtfSerieComprobante = new javax.swing.JTextField();
         jtfCorrelativoComprobante = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jtfIGV = new javax.swing.JTextField();
-        jdcFechaEmisionComprobante = new com.toedter.calendar.JDateChooser();
+        tipoComprobante = new javax.swing.JTextField();
+        fechaEmision = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -117,7 +128,6 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Emision de Comprobante");
 
@@ -129,18 +139,16 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Tipo de Comprobante:");
 
-        jtfTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Boleta", "Factura" }));
-        jtfTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfTipoComprobanteActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Num. de Cpte.:");
+        jLabel2.setText("# Ticket: ");
 
         jLabel3.setText("Fecha de Emisión:");
 
         jLabel7.setText("IGV:");
+
+        tipoComprobante.setEditable(false);
+        tipoComprobante.setText("TICKET");
+
+        fechaEmision.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -156,18 +164,16 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfTipoComprobante, 0, 119, Short.MAX_VALUE)
-                            .addComponent(jdcFechaEmisionComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(67, 67, 67)
+                            .addComponent(fechaEmision)
+                            .addComponent(tipoComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfSerieComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jtfIGV))
-                .addGap(4, 4, 4)
-                .addComponent(jtfCorrelativoComprobante)
+                    .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -175,25 +181,28 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addComponent(jtfSerieComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jdcFechaEmisionComprobante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(tipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7))
+                                    .addComponent(fechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -397,7 +406,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -411,15 +420,9 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIGVfinalActionPerformed
 
-    private void jtfTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTipoComprobanteActionPerformed
-        // TODO add your handling code here:
-        String cb = jtfTipoComprobante.getSelectedItem().toString();
-        tipoComprobante(cb);
-        
-    }//GEN-LAST:event_jtfTipoComprobanteActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnTraerDatosVenta;
+    public javax.swing.JTextField fechaEmision;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -443,7 +446,6 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    public com.toedter.calendar.JDateChooser jdcFechaEmisionComprobante;
     public com.toedter.calendar.JDateChooser jdcFechaVenta;
     public javax.swing.JTextField jtfCodigoVenta;
     public javax.swing.JTextField jtfCorrelativoComprobante;
@@ -452,9 +454,8 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfIGV;
     public javax.swing.JTextField jtfIGVfinal;
     public javax.swing.JTextField jtfNombreCliente;
-    public javax.swing.JTextField jtfSerieComprobante;
     public javax.swing.JTextField jtfSubtotalComprobante;
-    public javax.swing.JComboBox jtfTipoComprobante;
     public javax.swing.JTextField jtfTotalComprobante;
+    public javax.swing.JTextField tipoComprobante;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,7 +69,6 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
         setMaximizable(true);
         setTitle("Datos de Mi Empresa");
 
@@ -299,7 +298,7 @@ public class PanelDatosEmpresa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

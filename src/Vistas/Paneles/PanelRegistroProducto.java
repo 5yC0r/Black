@@ -11,7 +11,9 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +31,17 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
     Conexion conexion;
     DefaultTableModel model;
     int filas = 0;
-    
-    public PanelRegistroProducto() {
-        initComponents();
+    public String fechaActual()
+    {
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         
-         Calendar c2 = new GregorianCalendar();
-        jdcFechaRegistroProducto.setCalendar(c2);
-        jdcFechaRegistroProducto.setEnabled(false);
+        return formatoFecha.format(fecha);
+    }
+    public PanelRegistroProducto() {
+        
+        initComponents();
+         fechaRegistro.setText(fechaActual());
         
         
         
@@ -78,7 +84,14 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
         }
              
     }
-
+    
+    /*public void llenarFechas()
+    {
+        SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/YYYY");
+       String date = dFormat.format(fechaVencimiento.getDate());
+       DefaultTableModel modelf = (DefaultTableModel) tableFecha.getModel();
+       modelf.addRow(new Object[] {date});
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +101,8 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -103,63 +118,78 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
         jtfStock = new javax.swing.JTextField();
         jtfPuntoPedido = new javax.swing.JTextField();
         jtfMarcaProducto = new javax.swing.JTextField();
-        jdcFechaRegistroProducto = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         cbxProveedor = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jtfResponsable = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        fechaRegistro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePrecios = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableFechas = new javax.swing.JTable();
+        fechaVencimiento = new com.toedter.calendar.JDateChooser();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Registro de Producto");
         setToolTipText("");
+        setMaximumSize(new java.awt.Dimension(579, 587));
+        setMinimumSize(new java.awt.Dimension(579, 587));
+        setPreferredSize(new java.awt.Dimension(579, 587));
         getContentPane().setLayout(null);
 
         jLabel9.setText("DESCRIPCION DE PRODUCTO");
         jLabel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 11, 524, 18);
+        jLabel9.setBounds(10, 11, 540, 18);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(null);
 
         jLabel1.setText("Código:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(12, 16, 37, 14);
+        jLabel1.setBounds(20, 30, 37, 14);
 
         jLabel3.setText("Descripción:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(12, 76, 58, 14);
+        jLabel3.setBounds(20, 64, 58, 20);
 
         jLabel4.setText("Marca:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(12, 115, 33, 14);
+        jLabel4.setBounds(20, 110, 33, 14);
 
         jLabel5.setText("Fecha de Registro:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(289, 16, 91, 14);
+        jLabel5.setBounds(280, 30, 91, 14);
 
         jLabel6.setText("Categoria:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(12, 166, 51, 14);
+        jLabel6.setBounds(20, 150, 51, 14);
 
         jLabel7.setText("Stock Actual:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(297, 116, 63, 14);
+        jLabel7.setBounds(20, 190, 63, 14);
 
         jLabel8.setText("Punto de Pedido:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(12, 229, 82, 14);
+        jLabel8.setBounds(280, 190, 82, 14);
 
         jtfCodigoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +202,13 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtfCodigoProducto);
-        jtfCodigoProducto.setBounds(132, 13, 126, 20);
+        jtfCodigoProducto.setBounds(110, 30, 126, 20);
         jPanel1.add(jtfDescripcionProducto);
-        jtfDescripcionProducto.setBounds(132, 75, 380, 20);
+        jtfDescripcionProducto.setBounds(110, 70, 410, 20);
 
         jcbCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Snack", "Bebidas", "Galletas" }));
         jPanel1.add(jcbCategoriaProducto);
-        jcbCategoriaProducto.setBounds(132, 151, 126, 20);
+        jcbCategoriaProducto.setBounds(110, 150, 126, 20);
 
         jtfStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +221,7 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtfStock);
-        jtfStock.setBounds(408, 105, 104, 20);
+        jtfStock.setBounds(110, 190, 130, 20);
 
         jtfPuntoPedido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -199,7 +229,7 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtfPuntoPedido);
-        jtfPuntoPedido.setBounds(370, 200, 105, 20);
+        jtfPuntoPedido.setBounds(400, 190, 120, 20);
 
         jtfMarcaProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -207,54 +237,53 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtfMarcaProducto);
-        jtfMarcaProducto.setBounds(132, 113, 126, 20);
-        jPanel1.add(jdcFechaRegistroProducto);
-        jdcFechaRegistroProducto.setBounds(390, 13, 122, 20);
+        jtfMarcaProducto.setBounds(110, 110, 126, 20);
 
         jLabel12.setText("Proveedor:");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(297, 151, 54, 14);
+        jLabel12.setBounds(280, 150, 54, 14);
 
         cbxProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 1", "Item 2", "Item 3" }));
         jPanel1.add(cbxProveedor);
-        cbxProveedor.setBounds(390, 151, 122, 20);
+        cbxProveedor.setBounds(400, 150, 120, 20);
 
         jLabel13.setText("Responsable:");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(12, 246, 65, 20);
+        jLabel13.setBounds(20, 230, 65, 20);
 
         jtfResponsable.setEditable(false);
         jPanel1.add(jtfResponsable);
-        jtfResponsable.setBounds(132, 246, 380, 20);
+        jtfResponsable.setBounds(110, 230, 410, 20);
+
+        fechaRegistro.setEditable(false);
+        jPanel1.add(fechaRegistro);
+        fechaRegistro.setBounds(400, 30, 120, 20);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 35, 540, 310);
-
-        jLabel10.setText("PRECIOS");
-        jLabel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(18, 366, 205, 26);
+        jPanel1.setBounds(10, 35, 540, 270);
 
         tablePrecios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Unidad", "Venta"
+                "Nombre", "Precio"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tablePrecios);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(18, 398, 256, 144);
+        jScrollPane1.setBounds(10, 350, 250, 150);
+
+        jLabel2.setText("PRECIOS");
+        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 320, 200, 20);
+
+        jLabel10.setText("FECHAS DE VENCIMIENTO");
+        jLabel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(300, 320, 250, 18);
 
         jButton1.setText("+");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -263,36 +292,31 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(233, 366, 41, 26);
+        jButton1.setBounds(450, 350, 41, 23);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jButton3.setText("+");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(220, 320, 41, 23);
+
+        tableFechas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fecha", "Lote"
+                "Fecha"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tableFechas);
 
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(292, 398, 257, 144);
-
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(508, 369, 41, 23);
-
-        jLabel14.setText("VENCIMIENTOS");
-        jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(292, 366, 104, 26);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(406, 369, 87, 20);
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(300, 380, 250, 120);
+        getContentPane().add(fechaVencimiento);
+        fechaVencimiento.setBounds(300, 350, 140, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -304,19 +328,10 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
     private void jtfCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProductoKeyTyped
         
         char c = evt.getKeyChar();
-        int limite = 13;
-        int longitudCadena = jtfCodigoProducto.getText().length();
-        if (!Character.isDigit(c)|| longitudCadena == limite) {
+        if (!Character.isDigit(c)) {
             evt.consume();//no permite digitar
         }
     }//GEN-LAST:event_jtfCodigoProductoKeyTyped
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        model = (DefaultTableModel) this.tablePrecios.getModel();
-        model.addRow(new Object[filas]);
-        filas++;
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtfMarcaProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfMarcaProductoKeyTyped
        char c = evt.getKeyChar();
@@ -351,24 +366,37 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtfPuntoPedidoKeyTyped
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jtfStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfStockActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        model = (DefaultTableModel) this.tableFechas.getModel();
+        SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/YYYY");
+       String date = dFormat.format(fechaVencimiento.getDate());
+       model.addRow(new Object[] {date});
+        //model.addRow(new Object[filas]);
+       // filas++;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        model = (DefaultTableModel) this.tablePrecios.getModel();
+        
+        model.addRow(new Object[filas]);
+        filas++;
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox cbxProveedor;
+    public javax.swing.JTextField fechaRegistro;
+    public com.toedter.calendar.JDateChooser fechaVencimiento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -378,16 +406,17 @@ public class PanelRegistroProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     public javax.swing.JComboBox jcbCategoriaProducto;
-    public com.toedter.calendar.JDateChooser jdcFechaRegistroProducto;
     public javax.swing.JTextField jtfCodigoProducto;
     public javax.swing.JTextField jtfDescripcionProducto;
     public javax.swing.JTextField jtfMarcaProducto;
     public javax.swing.JTextField jtfPuntoPedido;
     public javax.swing.JTextField jtfResponsable;
     public javax.swing.JTextField jtfStock;
+    public javax.swing.JTable tableFechas;
     public javax.swing.JTable tablePrecios;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,8 +26,8 @@ public class ComprobanteDAO {
     
     public void registrarDatosComprobante(
             String tipoComprobante,    //Solo un numero para diferenciar cada tipo
-            String serie,
-            String coorrelativo,
+            //String serie,
+            String numero, //coorrelativo,
             int igv,
             String fechaEmision,
             int codVenta,
@@ -38,18 +38,18 @@ public class ComprobanteDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO comprobante(tipoComprobante,serie,coorrelativo,igv,fechaEmision,codVenta,subtotalComprobante,totalComprobante)"
-                    + "VALUES(?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO comprobante(tipoComprobante,numero,igv,fechaEmision,codVenta,subtotalComprobante,totalComprobante)"
+                    + "VALUES(?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
             ps.setString(1, tipoComprobante);
-            ps.setString(2,serie);
-            ps.setString(3, coorrelativo);
-            ps.setInt(4, igv);
-            ps.setString(5, fechaEmision);
-            ps.setInt(6, codVenta);
-            ps.setFloat(7, subtotalComprobante);
-            ps.setFloat(8, totalComprobante);
+            //ps.setString(2,serie);
+            ps.setString(2, numero);
+            ps.setInt(3, igv);
+            ps.setString(4, fechaEmision);
+            ps.setInt(5, codVenta);
+            ps.setFloat(6, subtotalComprobante);
+            ps.setFloat(7, totalComprobante);
             ps.execute();            
         } catch (SQLException e) {
             System.out.println("Error al registrar datos del comprobante: "+e.toString());
@@ -64,7 +64,7 @@ public class ComprobanteDAO {
         }
     }
     
-    public String obtenerUltimaSerie() throws SQLException{
+    /*public String obtenerUltimaSerie() throws SQLException{
         Conexion conexion = new Conexion();
         Comprobante comprobante = new Comprobante();
         String codigo = "";
@@ -99,9 +99,9 @@ public class ComprobanteDAO {
         //System.out.println(operador.getCodigoOperador());
         //System.out.println(cliente.getFechaRegistroCliente());
        return codigo;
-    }
+    }*/
     
-    public void obtenerUltimoComprobante(String tipo) throws SQLException{
+    /*public void obtenerUltimoComprobante(String tipo) throws SQLException{
         Conexion conexion = new Conexion();
         Comprobante comprobante = new Comprobante();
         String corelativo = "";
@@ -144,9 +144,9 @@ public class ComprobanteDAO {
         //System.out.println(operador.getCodigoOperador());
         //System.out.println(cliente.getFechaRegistroCliente());
        //return codigo;
-    }
+    }*/
     
-    public void generarCoorelativo(int serie, int corelativo) throws SQLException{
+    /*public void generarCoorelativo(int serie, int corelativo) throws SQLException{
         
         // validar cuando se terminenn las series
         // ---------------------------------------------
@@ -205,8 +205,8 @@ public class ComprobanteDAO {
           } } }  } }}        
         System.out.println(cadserie+cco);
         //System.out.println(cliente.getFechaRegistroCliente());
-       //return /*codigo*/"";
-    }
+       //return /*codigo//"";
+    }*/
     
     
 }

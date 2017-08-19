@@ -41,7 +41,7 @@ public class ControladorPrincipal implements ActionListener {
         principal.btnVenta.addActionListener(this);
         principal.btnReporte.addActionListener(this);
         principal.btnMiCompra.addActionListener(this);
-        principal.btnCumpleaños.addActionListener(this);//falta usarla
+        principal.btnCumpleaños.addActionListener(this);
         principal.btnNuevaRecarga.addActionListener(this);
         principal.btnGuardar.addActionListener(this);
         principal.btnEditar.addActionListener(this);
@@ -70,7 +70,7 @@ public class ControladorPrincipal implements ActionListener {
         principal.miNuevaCompra.addActionListener(this);
         principal.miListadoCompras.addActionListener(this);
         principal.miEmisionComprobante.addActionListener(this);
-        
+        //principal.miFacturacion.addActionListener(this);
         
     }
 
@@ -172,8 +172,12 @@ public class ControladorPrincipal implements ActionListener {
                         VentaDAO ventaDao = new VentaDAO();
                         
                         ControladorRegistroVenta crv = new ControladorRegistroVenta();
+                        ControladorCargarProducto ccp = new ControladorCargarProducto();
                         crv.setPrv(prv);
+                        ccp.setPrv(prv);
                         crv.darEventoBoton();
+                        ccp.darEventoBoton();
+                        //ccp.CargarSpinner();
                         try {
                             int id = ventaDao.obtenerUltimo()+1;
                             prv.jtfCodigoVenta.setText(Integer.toString(id));
@@ -359,6 +363,32 @@ public class ControladorPrincipal implements ActionListener {
                                             //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                             pbc.setLocation(5, 5);
                                             this.principal.panelPrincipal.add(pbc);
+                                            IncentivosDAO incentivosDao = new IncentivosDAO();
+                                            DefaultTableModel modeloTabla = new DefaultTableModel();
+                                            modeloTabla.addColumn("Tipo");
+                                            modeloTabla.addColumn("Nombre");
+                                            modeloTabla.addColumn("Cantidad");
+                                            modeloTabla.addColumn("Estado");
+                                            pbc.tableIncentivos.setModel(modeloTabla);
+                                            Object[] columna = new Object[4];
+
+                                            int numRegistros = 0;
+                                            try {
+                                               numRegistros = incentivosDao.listarIncentivos().size();
+                                            } catch (SQLException ex) {
+                                                  Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                            for (int i = 0; i < numRegistros; i++) {
+                                            try {
+                                                 columna[0] = incentivosDao.listarIncentivos().get(i).getTipoIncentivo();
+                                                 columna[1] = incentivosDao.listarIncentivos().get(i).getNombreIncentivo();
+                                                 columna[2] = incentivosDao.listarIncentivos().get(i).getCantidadIncentivo();
+                                                 columna[3] = incentivosDao.listarIncentivos().get(i).getEstadoIncentivo();
+                                                 modeloTabla.addRow(columna);
+                                             } catch (SQLException ex) {
+                                                   Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                              }
+                                            }
                                             pbc.show();
                                             principal.panelPrincipal.revalidate();
                                             principal.panelPrincipal.repaint();
@@ -528,7 +558,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                 for (int i = 0; i < numRegistros; i++) {
                                                                     try {
                                                                         columna[0] = productoDao.listarProductos().get(i).getCodigoProducto();
-                                                                        columna[1] = productoDao.listarProductos().get(i).getNombreProducto();
+                                                                        columna[1] = productoDao.listarProductos().get(i).getDescripcion();
                                                                         columna[2] = productoDao.listarProductos().get(i).getMarca();
                                                                         columna[3] = productoDao.listarProductos().get(i).getStock();
 
@@ -768,7 +798,6 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                     }
                                                                                                 }
                                                                                                 plc.show();
-
                                                                                                 principal.panelPrincipal.revalidate();
                                                                                                 principal.panelPrincipal.repaint();
                                                                                             } else {
@@ -788,9 +817,9 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                     pec.show();
                                                                                                     principal.panelPrincipal.revalidate();
                                                                                                     principal.panelPrincipal.repaint();
-                                                                                                } else {
+                                                                                                } else {                                                                                                    
                                                                                                     if (ae.getSource() == principal.btnGuardar) {
-                                                                                                        if (banderaGuardar == 1) {
+                    /* de aqui empieza la funcionalidad de guardar*/                                                if (banderaGuardar == 1) {
                                                                                                             if (v == 1) {
                                                                                                                 PanelRegistroCliente prc = (PanelRegistroCliente) internalFrameActual;
                                                                                                                 ControladorCliente cc = new ControladorCliente();
@@ -835,7 +864,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                             prt.jtfCorreoTrab.setText("");
                                                                                                                             prt.jtfDireccionTrab.setText("");
                                                                                                                             prt.jtfDniTrab.setText("");                                                                                                                            
-                                                                                                                            prt.jtfEdadTrab.setText("");
+                                                                                                                            //prt.jtfEdadTrab.setText("");
                                                                                                                             prt.jtfFechaPago.setText("");
                                                                                                                             prt.jtfHobbyTrab.setText("");
                                                                                                                             prt.jtfNumCuentaTrab.setText("");
@@ -913,6 +942,32 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                     if (msj == 0) {
                                                                                                                                         pnr.jtfCantidadRecargada.setText("");                                                                                                                                        
                                                                                                                                         pnr.jtfNumeroCelular.setText("");
+                                                                                                                                        RecargaDAO recargaDao = new RecargaDAO();
+                                                                                                                                        OperadorDAO operadorDao = new OperadorDAO();
+                                                                                                                                        DefaultTableModel modeloTabla = new DefaultTableModel();
+                                                                                                                                        modeloTabla.addColumn("Num. de Celular");
+                                                                                                                                        modeloTabla.addColumn("Importe");
+                                                                                                                                        modeloTabla.addColumn("Operador");
+                                                                                                                                        pnr.tableRecargas.setModel(modeloTabla);
+                                                                                                                                        Object[] columna = new Object[3];
+
+                                                                                                                                        int numRegistros = 0;
+                                                                                                                                        try {
+                                                                                                                                            numRegistros = recargaDao.listarRecargas().size();
+                                                                                                                                        } catch (SQLException ex) {
+                                                                                                                                            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                        }
+                                                                                                                                        for (int i = 0; i < numRegistros; i++) {
+                                                                                                                                            try {
+                                                                                                                                                columna[0] = recargaDao.listarRecargas().get(i).getNumeroCelular();
+                                                                                                                                                columna[1] = recargaDao.listarRecargas().get(i).getCantidadRecargada();
+                                                                                                                                                columna[2] = operadorDao.obtenerNombre(recargaDao.listarRecargas().get(i).getCodOperador());
+
+                                                                                                                                                modeloTabla.addRow(columna);
+                                                                                                                                            } catch (SQLException ex) {
+                                                                                                                                                Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                            }
+                                                                                                                                        }
                                                                                                                                     } else {
                                                                                                                                         pnr.dispose();
                                                                                                                                     }
@@ -983,6 +1038,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                     PanelRegistroProducto prp = (PanelRegistroProducto) internalFrameActual;
                                                                                                                                                     ControladorProducto cp = new ControladorProducto();
                                                                                                                                                     PrecioProductoDAO precioDao = new PrecioProductoDAO();
+                                                                                                                                                    FechaDAO fechaDao = new FechaDAO();
                                                                                                                                                     ProductoDAO productoDao = new ProductoDAO();
                                                                                                                                                     int codProducto = 1;// codigo del registro del producto  
                                                                                                                                                     if ("".equals(prp.jtfCodigoProducto.getText())) {
@@ -1017,6 +1073,21 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                                }
                                                                                                                                                             }
                                                                                                                                                         }
+                                                                                                                                                        if(prp.tablePrecios.getRowCount() > 0){
+                                                                                                                                                        DefaultTableModel modeloFecha = (DefaultTableModel)prp.tableFechas.getModel();// registrar las fechas de vencimiento
+                                                                                                                                                            int FilasFecha = modeloFecha.getRowCount();
+                                                                                                                                                            for(int i = 0; i<FilasFecha; i++){
+                                                                                                                                                                
+                                                                                                                                                               if(prp.tableFechas.getValueAt(i, 0) != null){
+                                                                                                                                                               try {                                                                                                                                                                   
+                                                                                                                                                                    String fecha = prp.tableFechas.getValueAt(i, 0).toString();                                                                                                                                                                    
+                                                                                                                                                                    fechaDao.registrarFechasProducto(fecha,codProducto);
+                                                                                                                                                                } catch (SQLException ex) {
+                                                                                                                                                                Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                                                                                                                                                }
+                                                                                                                                                               }
+                                                                                                                                                            }
+                                                                                                                                                        }
                                                                                                                                                         msj = JOptionPane.showConfirmDialog(null, "Registro exitoso!, ¿Agregar uno nuevo?", "Rgistro Exitoso", JOptionPane.YES_NO_OPTION);
                                                                                                                                                                 if (msj == 0) {
                                                                                                                                                                 prp.jtfCodigoProducto.setText("");
@@ -1024,13 +1095,18 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                                 prp.jtfMarcaProducto.setText("");                                                                                                                                                                
                                                                                                                                                                 prp.jtfStock.setText("");
                                                                                                                                                                 prp.jtfPuntoPedido.setText("");
-                                                                                                                                                                DefaultTableModel tb = (DefaultTableModel) prp.tablePrecios.getModel();
-                                                                                                                                                                            int a = tb.getRowCount()-1;                                                                                                                                                                   
+                                                                                                                                                                DefaultTableModel tp = (DefaultTableModel) prp.tablePrecios.getModel();
+                                                                                                                                                                            int a = tp.getRowCount()-1;                                                                                                                                                                   
                                                                                                                                                                             for (int i = a; i >= 0; i--) {           
-                                                                                                                                                                            tb.removeRow(tb.getRowCount()-1);
+                                                                                                                                                                            tp.removeRow(tp.getRowCount()-1);
+                                                                                                                                                                            }
+                                                                                                                                                                DefaultTableModel tf = (DefaultTableModel) prp.tableFechas.getModel();
+                                                                                                                                                                            int b = tf.getRowCount()-1;                                                                                                                                                                   
+                                                                                                                                                                            for (int i = b; i >= 0; i--) {           
+                                                                                                                                                                            tf.removeRow(tf.getRowCount()-1);
                                                                                                                                                                             }
                                                                                                                                                                 } else {
-                                                                                                                                                                    prp.dispose();                                                                                                                                                                }
+                                                                                                                                                                    prp.dispose();                                                                                                                                                              }
                                                                                                                                                     }
                                                                                                                                                 } else {
                                                                                                                                                     if (v == 11) {
@@ -1110,7 +1186,7 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                                                                     }
                                                                                                                                                 }
                                                                                                                                             }
-                                                                                                                                        }
+                                                                                                                                         }
                                                                                                                                     }
                                                                                                                                 }
                                                                                                                             }
@@ -1229,7 +1305,8 @@ public class ControladorPrincipal implements ActionListener {
                                                                                                             }
                                                                                                         }
                                                                                                     }
-                                                                                                }
+                                                                                                
+                                                                                              }
                                                                                             }
                                                                                         }
                                                                                     }

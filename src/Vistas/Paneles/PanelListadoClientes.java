@@ -43,7 +43,6 @@ public class PanelListadoClientes extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Listado de Clientes");
 
         panelDatosListaClientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -152,7 +151,7 @@ public class PanelListadoClientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(panelDatosListaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnImprimir)
                 .addContainerGap())

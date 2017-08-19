@@ -26,7 +26,7 @@ public class ProductoDAO {
     
     public void registrarProducto(
         
-        int codigoProducto,
+        String codigoProducto,
         String marca,
         String descripcion,
         int codCategoria,
@@ -41,11 +41,11 @@ public class ProductoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "INSERT INTO producto(codigoProducto,marca,descripcion,codCategoria,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado)"
+            String consulta = "INSERT INTO producto(codigoProducto,marca,descripcionProducto,codCategoria,stock,puntoPedido,fechaRegistro,codProveedor,codEmpleado)"
                     + "VALUES(?,?,?,?,?,?,?,?,?)";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);
-            ps.setInt(1, codigoProducto);
+            ps.setString(1, codigoProducto);
             ps.setString(2, marca);
             ps.setString(3, descripcion);
             ps.setInt(4, codCategoria);
@@ -82,8 +82,8 @@ public class ProductoDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 producto = new Producto();
-                producto.setCodigoProducto(rs.getInt(1));
-                producto.setNombreProducto(rs.getString(2));
+                producto.setCodigoProducto(rs.getString(1));
+                producto.setDescripcion(rs.getString(2));
                 producto.setMarca(rs.getString(3));
                 producto.setStock(rs.getInt(4));
                 listaProductos.add(producto);
@@ -150,7 +150,7 @@ public class ProductoDAO {
             
             while (rs.next()) {
                 producto.setCodProducto(rs.getInt(1));
-                producto.setNombreProducto(rs.getString(3));
+                producto.setDescripcion(rs.getString(3));
                 //operador.setNombreOperador(rs.getString(2));
              }
              codigo = producto.getCodProducto();             
@@ -184,9 +184,9 @@ public class ProductoDAO {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                producto.setNombreProducto(rs.getString(1));
+                producto.setDescripcion(rs.getString(1));
              }
-             nombre = producto.getNombreProducto();
+             nombre = producto.getDescripcion();
              
             System.out.println(nombre);
              
@@ -204,5 +204,37 @@ public class ProductoDAO {
         //System.out.println(operador.getCodigoOperador());
         //System.out.println(cliente.getFechaRegistroCliente());
        return nombre;
+    }
+    
+    public Producto obtenerProducto(String codigoProducto) throws SQLException{
+        Conexion conexion = new Conexion();
+        Producto producto = new Producto();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM producto where codigoProducto='"+codigoProducto+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                producto.setCodProducto(rs.getInt(1));
+                producto.setCodigoProducto(rs.getString(2));
+                producto.setDescripcion(rs.getString(3));
+                producto.setMarca(rs.getString(4));
+                producto.setStock(rs.getInt(5));
+                producto.setPuntoPedido(rs.getInt(6));
+                producto.setFechaRegistro(rs.getString(7));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos de cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return producto;
     }
 }

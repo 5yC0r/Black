@@ -51,6 +51,7 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         //return anos;
   }*/
     
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,8 +63,6 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtfDniTrab = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jtfEdadTrab = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtfDireccionTrab = new javax.swing.JTextField();
         jtfTelefonoTrab = new javax.swing.JTextField();
@@ -79,6 +78,8 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         jdcFechNacTrab = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jcbSexoTrab = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        edad = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -104,7 +105,6 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Registro de Trabajador");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -131,11 +131,6 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setText("Fecha Nacimiento:");
-
-        jLabel9.setText("Edad:");
-
-        jtfEdadTrab.setEditable(false);
-        jtfEdadTrab.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel3.setText("Dirección:");
 
@@ -176,6 +171,10 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
         jLabel7.setText("Sexo:");
 
         jcbSexoTrab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Femenino", "Masculino" }));
+
+        jLabel9.setText("Edad:");
+
+        edad.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,12 +225,12 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel9)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jtfEdadTrab))))))
+                                                .addComponent(edad))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtfTelRefTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,12 +247,11 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
                     .addComponent(jcbSexoTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jdcFechNacTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfEdadTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jdcFechNacTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel9)
+                        .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfDireccionTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,15 +277,15 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jdcFechNacTrab.getDateEditor().addPropertyChangeListener(new java.beans.PropertyChangeListener(){
+        /*jdcFechNacTrab.getDateEditor().addPropertyChangeListener(new java.beans.PropertyChangeListener(){
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 //String fechaNacimiento = df.format(jdcFechNacTrab.getDate());
                 //edad();
                 System.out.println("salio clic");
-                jtfEdadTrab.setText("");
+                //jtfEdadTrab.setText("");
                 //System.out.println(edad);
             }
-        });
+        });*/
 
         jLabel14.setText("Datos Personales");
         jLabel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -449,7 +447,7 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -593,6 +591,7 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfSueldoTrabKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField edad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -629,7 +628,6 @@ public class PanelRegistroTrabajador extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfCorreoTrab;
     public javax.swing.JTextField jtfDireccionTrab;
     public javax.swing.JTextField jtfDniTrab;
-    public javax.swing.JTextField jtfEdadTrab;
     public javax.swing.JTextField jtfFechaPago;
     public javax.swing.JTextField jtfHobbyTrab;
     public javax.swing.JTextField jtfNumCuentaTrab;

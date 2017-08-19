@@ -95,5 +95,4 @@ public class Venta {
     public void setListaProductosVendidos(ArrayList<Producto> listaProductosVendidos) {
         this.listaProductosVendidos = listaProductosVendidos;
     }
-    
 }

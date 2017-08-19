@@ -67,7 +67,6 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
         jcbOperador = new javax.swing.JComboBox();
         jtfCantidadRecargada = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnAgregarOperador = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,7 +74,6 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Nueva Recarga");
         setMaximumSize(new java.awt.Dimension(368, 481));
         setMinimumSize(new java.awt.Dimension(368, 481));
@@ -100,13 +98,6 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
 
         jLabel4.setText("S/.");
 
-        btnAgregarOperador.setText("+");
-        btnAgregarOperador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarOperadorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -127,25 +118,22 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
                             .addComponent(jtfCantidadRecargada)
                             .addComponent(jcbOperador, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(btnAgregarOperador)))
+                        .addComponent(jLabel4))
                     .addComponent(jtfNumeroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfNumeroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jcbOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarOperador))
-                .addGap(19, 19, 19)
+                    .addComponent(jcbOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfCantidadRecargada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,17 +178,11 @@ public class PanelRecarga extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarOperadorActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnAgregarOperadorActionPerformed
-
     private void jcbOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOperadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbOperadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAgregarOperador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

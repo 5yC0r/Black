@@ -5,9 +5,13 @@
 package Modelo.DAO;
 
 import Modelo.Conexion;
+import Modelo.Empleado;
+import Modelo.PrecioProducto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -49,6 +53,67 @@ public class PrecioProductoDAO {
                 accesoBD.close();
             }
         }
+    }
+    
+    
+    public ArrayList<PrecioProducto> listarPrecios(int codigo) throws SQLException{
+        ArrayList<PrecioProducto> listaPrecios = new ArrayList();
+        PrecioProducto precioproducto;
+        
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT nombre,valorVenta FROM precios WHERE ='"+codigo+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                precioproducto = new PrecioProducto();
+                precioproducto.setNombre(rs.getString(1));
+                precioproducto.setValorVenta(rs.getFloat(2));
+                listaPrecios.add(precioproducto);
+            }     
+        } catch (SQLException e) {
+            System.out.println("Error al listar precios: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return listaPrecios;
+    }
+    
+    public PrecioProducto obtenerPrecios(String nombre, int codigo) throws SQLException{
+        Conexion conexion = new Conexion();
+        PrecioProducto precio = new PrecioProducto();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        try {
+            String consulta = "SELECT * FROM precios where codProducto='"+codigo+"' && nombre='"+nombre+"'";
+            accesoBD = conexion.getConnection();
+            ps = accesoBD.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                precio.setCodPrecio(rs.getInt(1));
+                precio.setNombre(rs.getString(2));
+                precio.setValorVenta(rs.getFloat(3));
+                precio.setCodProducto(rs.getInt(4));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos de cliente: "+e.toString());
+        }finally{
+            if (ps != null) {
+                ps.close();
+            }
+            if (accesoBD != null) {
+                accesoBD.close();
+            }
+        }
+        return precio;
     }
     
 }
