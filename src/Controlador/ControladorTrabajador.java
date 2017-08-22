@@ -6,7 +6,6 @@ import Modelo.DAO.UsuarioDAO;
 import Vistas.Paneles.PanelRegistroTrabajador;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -14,31 +13,17 @@ import javax.swing.JInternalFrame;
 
 public class ControladorTrabajador {
     PanelRegistroTrabajador prt;
-    //DateFormat df = DateFormat.getDateInstance();
+    DateFormat df = DateFormat.getDateInstance();
 
     public void setPanelRegistroTrabajador(JInternalFrame jif) {
         this.prt = (PanelRegistroTrabajador) jif;
-    }
-    
-    public int calculaEdad(int dia, int mes, int año) {
-        Calendar today = Calendar.getInstance();
-
-        int diff_year = today.get(Calendar.YEAR) -  año;
-        int diff_month = today.get(Calendar.MONTH) - mes;
-        int diff_day = today.get(Calendar.DAY_OF_MONTH) - dia;
-
-        //Si está en ese año pero todavía no los ha cumplido
-        if (diff_month < 0 || (diff_month == 0 && diff_day < 0)) {
-            diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
-        }
-        return diff_year;
     }
     
     public void insertarDatos(){
         //datos usuario
         String usuario = prt.jtfUsuario.getText();
         String clave = prt.jtfClaveUsuario.getText();
-        String fechaRegistro = prt.jcFechaRegistroTrabajador.getCalendar().toString();
+        String fechaRegistro = df.format(prt.jcFechaRegistroTrabajador.getDate());
         String tipoUsuario = prt.jcbCargoTrabajador.getSelectedItem().toString();
         
         //datos personales
@@ -47,10 +32,7 @@ public class ControladorTrabajador {
         String celular = prt.jtfCelularTrab.getText();
         String telefonoReferencia = prt.jtfTelRefTrab.getText();
         String direccion = prt.jtfDireccionTrab.getText();
-        int dia = prt.jdcFechNacTrab.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mes = prt.jdcFechNacTrab.getCalendar().get(Calendar.MONTH)+1;
-        int año = prt.jdcFechNacTrab.getCalendar().get(Calendar.YEAR);
-        String fechaNacimiento = prt.jdcFechNacTrab.getCalendar().toString();
+        String fechaNacimiento = df.format(prt.jdcFechNacTrab.getDate());
         
        // calcularEdad(prt.jdcFechNacTrab.getCalendar());
         

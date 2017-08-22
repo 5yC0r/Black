@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-08-2017 a las 17:36:53
+-- Tiempo de generación: 18-08-2017 a las 02:47:08
 -- Versión del servidor: 5.5.34
 -- Versión de PHP: 5.4.22
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `baseblack`
+-- Base de datos: `basebb2`
 --
 
 -- --------------------------------------------------------
@@ -30,15 +30,14 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `CodCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombreNuevaCategoria` varchar(30) NOT NULL,
   PRIMARY KEY (`CodCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`CodCategoria`, `nombreNuevaCategoria`) VALUES
-(1, 'OTRAS'),
-(2, 'GASEOSAS');
+(1, 'OTRAS');
 
 -- --------------------------------------------------------
 
@@ -65,14 +64,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`codCliente`),
   KEY `codEmpleado` (`codEmpleado`),
   KEY `fk_cliente_empleado1_idx` (`codEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `cliente`
---
-
-INSERT INTO `cliente` (`codCliente`, `tipoCliente`, `tipoDoc`, `numDoc`, `razonSocial`, `nombresApellidos`, `fechaNacimiento`, `sexoCliente`, `telefonoCliente`, `celularCliente`, `correoCliente`, `direccion`, `codEmpleado`, `fechaRegistroCliente`, `estadoCliente`) VALUES
-(1, 'Persona Natural', 'DNI', '47328084', '', 'Mariana Meliza Segura Mendoza', '24/09/1992', 'Femenino', '', '987821639', '', '', 1, '18/08/2017', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -106,9 +98,10 @@ CREATE TABLE IF NOT EXISTS `compra` (
 CREATE TABLE IF NOT EXISTS `comprobante` (
   `codComprobante` int(11) NOT NULL AUTO_INCREMENT,
   `tipoComprobante` varchar(12) NOT NULL,
+  `serie` int(4) NOT NULL,
   `coorrelativo` int(12) NOT NULL,
   `igv` int(2) NOT NULL,
-  `fechaEmision` varchar(30) NOT NULL,
+  `fechaEmision` varchar(12) NOT NULL,
   `codVenta` int(11) NOT NULL,
   `subtotalComprobante` float NOT NULL,
   `totalComprobante` float NOT NULL,
@@ -144,15 +137,14 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   PRIMARY KEY (`codEmpleado`),
   KEY `codUsuario` (`codUsuario`),
   KEY `fk_empleado_usuario1_idx` (`codUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
 INSERT INTO `empleado` (`codEmpleado`, `nombresApellidos`, `telefonoContacto`, `celular`, `telefonoReferencia`, `direccion`, `fechaNacimiento`, `correo`, `numeroCuenta`, `fechaPago`, `hobby`, `sexo`, `dni`, `sueldo`, `codUsuario`, `estadoEmpleado`) VALUES
-(1, 'SYARCORP', '', '967468524', '987821639', 'S/N', '', 'SyarcorpPeru@gmail.com', '', 1, '', '', '', 0, 1, 1),
-(2, 'JONATHAN ALEXANDER', '044-12456', '984856322', '', 'URB. COVICORTI MZ K1', '06/07/1988', 'alex@gmail.com', '170-482525-256632', 1, 'JUGAR VASQUET', 'Masculino', '25261458', 1500, 2, 1);
+(1, 'SYARCORP', '', '967468524', '987821639', 'S/N', '', 'SyarcorpPeru@gmail.com', '', 1, '', '', '', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -187,29 +179,6 @@ INSERT INTO `empresa` (`codEmpresa`, `nombre`, `razonSocial`, `representanteLega
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `fechavencimiento`
---
-
-CREATE TABLE IF NOT EXISTS `fechavencimiento` (
-  `codVencimiento` int(20) NOT NULL AUTO_INCREMENT,
-  `fechaVencimiento` varchar(12) NOT NULL,
-  `codProducto` int(20) NOT NULL,
-  PRIMARY KEY (`codVencimiento`),
-  KEY `fk_fechavencimiento_producto` (`codProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `fechavencimiento`
---
-
-INSERT INTO `fechavencimiento` (`codVencimiento`, `fechaVencimiento`, `codProducto`) VALUES
-(1, '03/08/2017', 4),
-(2, '09/08/2017', 5),
-(3, '23/08/2017', 5);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `incentivo`
 --
 
@@ -222,14 +191,7 @@ CREATE TABLE IF NOT EXISTS `incentivo` (
   `estadoIncentivo` varchar(12) NOT NULL,
   `descripcionIncentivo` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`codIncentivo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `incentivo`
---
-
-INSERT INTO `incentivo` (`codIncentivo`, `tipoIncentivo`, `nombreIncentivo`, `cantidadIncentivo`, `sueldoVenta`, `estadoIncentivo`, `descripcionIncentivo`) VALUES
-(1, 'Bono', 'BONO SETIEMBRE', '20%', 'Sueldo', 'Activo', '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -267,19 +229,7 @@ CREATE TABLE IF NOT EXISTS `precios` (
   PRIMARY KEY (`codPrecio`),
   KEY `codProducto` (`codProducto`),
   KEY `fk_precios_producto1_idx` (`codProducto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Volcado de datos para la tabla `precios`
---
-
-INSERT INTO `precios` (`codPrecio`, `nombre`, `valorVenta`, `codProducto`) VALUES
-(2, 'unidad', 1.9, 1),
-(3, 'unidad', 2.5, 2),
-(4, 'UNIDAD', 6.5, 3),
-(5, 'retornable', 1.8, 4),
-(6, 'vidrio', 2, 4),
-(7, 'tarro', 3.2, 5);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -289,7 +239,7 @@ INSERT INTO `precios` (`codPrecio`, `nombre`, `valorVenta`, `codProducto`) VALUE
 
 CREATE TABLE IF NOT EXISTS `producto` (
   `codProducto` int(20) NOT NULL AUTO_INCREMENT,
-  `codigoProducto` varchar(20) NOT NULL,
+  `codigoProducto` int(20) NOT NULL,
   `descripcionProducto` varchar(70) NOT NULL,
   `marca` varchar(20) DEFAULT NULL,
   `stock` int(11) NOT NULL,
@@ -305,18 +255,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
   KEY `fk_producto_proveedor1_idx` (`codProveedor`),
   KEY `codEmpleado` (`codEmpleado`),
   KEY `fk_producto_empleado1_idx` (`codEmpleado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`codProducto`, `codigoProducto`, `descripcionProducto`, `marca`, `stock`, `puntoPedido`, `fechaRegistro`, `codCategoria`, `codProveedor`, `codEmpleado`) VALUES
-(1, '586456', 'coca cola 125 ml', 'COCA COLA', 40, 10, '18/08/2017', 2, 2, 1),
-(2, '1254684854', 'pepsi 500 ml', 'PEPSI', 50, 10, '18/08/2017', 2, 2, 1),
-(3, '241515341', 'COCA COLA 2L', 'COCA COLA', 60, 10, '18/08/2017', 2, 2, 1),
-(4, '3546541', 'PEPSI 1.50L', 'PEPSI', 30, 15, '18/08/2017', 2, 2, 1),
-(5, '214325152', 'GLORIA 400 ML', 'GLORIA', 50, 20, '18/08/2017', 1, 14, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -408,16 +347,7 @@ CREATE TABLE IF NOT EXISTS `recarga` (
   PRIMARY KEY (`codigoRecarga`),
   KEY `codOperador` (`codOperador`),
   KEY `fk_recarga_operador1_idx` (`codOperador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `recarga`
---
-
-INSERT INTO `recarga` (`codigoRecarga`, `numeroCelular`, `codOperador`, `cantidadRecargada`) VALUES
-(1, '987821639', 1, 13),
-(2, '987562563', 3, 5),
-(3, '921365214', 2, 5);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -433,15 +363,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `tipoUsuario` varchar(15) NOT NULL,
   `estadoUsuario` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`codUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`codUsuario`, `usuario`, `password`, `fechaRegistro`, `tipoUsuario`, `estadoUsuario`) VALUES
-(1, 'syarcorp', '123456', '15/08/2017', 'Administrador', 1),
-(2, 'alex', '123456', '17/08/2017', 'Trabajador', 1);
+(1, 'syarcorp', '123456', '15/08/2017', 'Administrador', 1);
 
 -- --------------------------------------------------------
 
@@ -493,12 +422,6 @@ ALTER TABLE `comprobante`
 --
 ALTER TABLE `empleado`
   ADD CONSTRAINT `fk_empleado_usuario1` FOREIGN KEY (`codUsuario`) REFERENCES `usuario` (`codUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `fechavencimiento`
---
-ALTER TABLE `fechavencimiento`
-  ADD CONSTRAINT `fk_fechavencimiento_producto` FOREIGN KEY (`codProducto`) REFERENCES `producto` (`codProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `precios`

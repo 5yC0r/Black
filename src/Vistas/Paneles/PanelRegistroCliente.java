@@ -1,21 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas.Paneles;
 
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- *
- * @author MARIANA
- */
+
 public class PanelRegistroCliente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form PanelRegistroCliente1
-     */
+    
     public PanelRegistroCliente() {
         initComponents();
         
@@ -105,8 +98,44 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Correo Electrónico:");
 
+        jtfNombresApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombresApellidosKeyTyped(evt);
+            }
+        });
+
+        jtfRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfRazonSocialKeyTyped(evt);
+            }
+        });
+
+        jtfCelularCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCelularClienteKeyTyped(evt);
+            }
+        });
+
+        jtfCorreoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCorreoClienteKeyTyped(evt);
+            }
+        });
+
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Dirección:");
+
+        jtfDireccionCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDireccionClienteKeyTyped(evt);
+            }
+        });
+
+        jtfNumDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNumDocKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("Fecha Nacimiento:");
 
@@ -124,6 +153,12 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         });
 
         jLabel17.setText("Telefono:");
+
+        jtfTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfTelefonoClienteKeyTyped(evt);
+            }
+        });
 
         jcbTipoDoc.setEditable(false);
 
@@ -226,10 +261,10 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
         );
 
         jLabel15.setText("Datos del Cliente");
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel19.setText("Datos del Registro");
-        jLabel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel19.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -293,7 +328,7 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -321,6 +356,107 @@ public class PanelRegistroCliente extends javax.swing.JInternalFrame {
            }
         }
     }//GEN-LAST:event_jcbTipoClienteActionPerformed
+
+    private void jtfNumDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNumDocKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        String numDoc  = jtfNumDoc.getText();  
+        if (Character.isDigit(c)) {
+            //Permite ingreso
+            if(numDoc.length() == 15){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNumDocKeyTyped
+
+    private void jtfRazonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfRazonSocialKeyTyped
+        char c = evt.getKeyChar();
+        String razS = jtfRazonSocial.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(razS.length() == 60){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtfRazonSocialKeyTyped
+
+    private void jtfNombresApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombresApellidosKeyTyped
+        char c = evt.getKeyChar();
+        String nomApe = jtfNombresApellidos.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomApe.length() == 60){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtfNombresApellidosKeyTyped
+
+    private void jtfTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTelefonoClienteKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        String telC  = jtfTelefonoCliente.getText();  
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(telC.length() == 20){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfTelefonoClienteKeyTyped
+
+    private void jtfCorreoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCorreoClienteKeyTyped
+        char c = evt.getKeyChar();
+        String corCli = jtfCorreoCliente.getText();
+        
+             if(corCli.length() == 50){
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtfCorreoClienteKeyTyped
+
+    private void jtfDireccionClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDireccionClienteKeyTyped
+       char c = evt.getKeyChar();
+        String dirCli = jtfDireccionCliente.getText();
+        
+             if(dirCli.length() == 60){
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtfDireccionClienteKeyTyped
+
+    private void jtfCelularClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCelularClienteKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        String celCli  = jtfCelularCliente.getText();  
+        if (Character.isDigit(c)) {
+            //Permite ingreso
+            if(celCli .length() == 20){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtfCelularClienteKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

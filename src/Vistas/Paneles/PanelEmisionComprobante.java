@@ -5,10 +5,9 @@
 package Vistas.Paneles;
 
 import Modelo.DAO.ComprobanteDAO;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,32 +22,22 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
      * Creates new form PanelEmisionComprobante1
      */
     ComprobanteDAO comprobanteDao = new ComprobanteDAO();
-    
-    public String fechaActual()
-    {
-        Date fecha = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat();
-        
-        return formatoFecha.format(fecha);
-    }
     public PanelEmisionComprobante() {
         initComponents();
         
-        fechaEmision.setText(fechaActual());
         
         
-        
-         //Calendar c2 = new GregorianCalendar();
-        //jdcFechaEmisionComprobante.setCalendar(c2);
+         Calendar c2 = new GregorianCalendar();
+        jdcFechaEmisionComprobante.setCalendar(c2);
         //jtfCorrelativoComprobante.setEditable(false);
        // jtfIGV.setEditable(false);
-       // jtfSerieComprobante. setEditable(false);
+        jtfSerieComprobante. setEditable(false);
         
         
         
     }
     
-    /*public void tipoComprobante(String cb){
+    public void tipoComprobante(String cb){
         
         if(cb.equals("Boleta")){
             try {
@@ -78,7 +67,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
            }
         }
     
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,14 +81,15 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jtfTipoComprobante = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jtfSerieComprobante = new javax.swing.JTextField();
         jtfCorrelativoComprobante = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jtfIGV = new javax.swing.JTextField();
-        tipoComprobante = new javax.swing.JTextField();
-        fechaEmision = new javax.swing.JTextField();
+        jdcFechaEmisionComprobante = new com.toedter.calendar.JDateChooser();
         jLabel19 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -128,27 +118,30 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setTitle("Emision de Comprobante");
 
         jLabel18.setText("Datos del Comprobante");
-        jLabel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel18.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jLabel1.setText("Tipo de Comprobante:");
 
-        jLabel2.setText("# Ticket: ");
+        jtfTipoComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Boleta", "Factura" }));
+        jtfTipoComprobante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfTipoComprobanteActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Num. de Cpte.:");
 
         jLabel3.setText("Fecha de Emisión:");
 
         jLabel7.setText("IGV:");
-
-        tipoComprobante.setEditable(false);
-        tipoComprobante.setText("TICKET");
-
-        fechaEmision.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -164,16 +157,18 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fechaEmision)
-                            .addComponent(tipoComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfTipoComprobante, 0, 119, Short.MAX_VALUE)
+                            .addComponent(jdcFechaEmisionComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(67, 67, 67)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfSerieComprobante, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jtfIGV))
+                .addGap(4, 4, 4)
+                .addComponent(jtfCorrelativoComprobante)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -181,33 +176,30 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfTipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jtfSerieComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfCorrelativoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(tipoComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jdcFechaEmisionComprobante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7))
-                                    .addComponent(fechaEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jLabel7)
+                            .addComponent(jtfIGV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jLabel19.setText("Datos de la Venta");
-        jLabel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel19.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -249,7 +241,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         );
 
         jLabel20.setText("Datos del Cliente");
-        jLabel20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel20.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -258,6 +250,18 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         jLabel9.setText("DNI/RUC:");
 
         jLabel10.setText("Dirección:");
+
+        jtfDniRucCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDniRucClienteKeyTyped(evt);
+            }
+        });
+
+        jtfNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreClienteKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -297,7 +301,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         );
 
         jLabel11.setText("Productos Vendidos");
-        jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -406,7 +410,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -420,9 +424,39 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIGVfinalActionPerformed
 
+    private void jtfTipoComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTipoComprobanteActionPerformed
+        // TODO add your handling code here:
+        String cb = jtfTipoComprobante.getSelectedItem().toString();
+        tipoComprobante(cb);
+        
+    }//GEN-LAST:event_jtfTipoComprobanteActionPerformed
+
+    private void jtfDniRucClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDniRucClienteKeyTyped
+        
+    }//GEN-LAST:event_jtfDniRucClienteKeyTyped
+
+    private void jtfNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreClienteKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        String nomCli = jtfNombreCliente.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomCli.length() == 60){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreClienteKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnTraerDatosVenta;
-    public javax.swing.JTextField fechaEmision;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -446,6 +480,7 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    public com.toedter.calendar.JDateChooser jdcFechaEmisionComprobante;
     public com.toedter.calendar.JDateChooser jdcFechaVenta;
     public javax.swing.JTextField jtfCodigoVenta;
     public javax.swing.JTextField jtfCorrelativoComprobante;
@@ -454,8 +489,9 @@ public class PanelEmisionComprobante extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfIGV;
     public javax.swing.JTextField jtfIGVfinal;
     public javax.swing.JTextField jtfNombreCliente;
+    public javax.swing.JTextField jtfSerieComprobante;
     public javax.swing.JTextField jtfSubtotalComprobante;
+    public javax.swing.JComboBox jtfTipoComprobante;
     public javax.swing.JTextField jtfTotalComprobante;
-    public javax.swing.JTextField tipoComprobante;
     // End of variables declaration//GEN-END:variables
 }

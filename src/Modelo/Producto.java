@@ -7,10 +7,11 @@ public class Producto {
 
     
     int codProducto;
-    String codigoProducto;
-    
-    String descripcion; 
+    int codigoProducto;
+    String nombreProducto;
     String marca;
+    String descripcion;
+    String fechaVencimiento;    
     int stock;
     int puntoPedido;
     String fechaRegistro;
@@ -26,12 +27,20 @@ public class Producto {
         this.codProducto = codProducto;
     }
 
-    public String getCodigoProducto() {
+    public int getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(String codigoProducto) {
+    public void setCodigoProducto(int codigoProducto) {
         this.codigoProducto = codigoProducto;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public String getMarca() {
@@ -50,7 +59,13 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    
+    public String getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(String fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
 
     public int getStock() {
         return stock;
@@ -113,15 +128,18 @@ public class Producto {
     
     public Producto(){
         codProducto=0;
-        codigoProducto = "";
-        descripcion = ""; 
+        codigoProducto = 1;
+        nombreProducto= "";
         marca = "";
+        descripcion = "";
+        fechaVencimiento = "";
         stock = 0;
         puntoPedido= 0;
         fechaRegistro = "";
         codCategoria = 0;
         codProveedor=0;
-        codEmpleado=0;        
+        codEmpleado=0;
+        
         
         listaPrecios = new ArrayList();
     }
