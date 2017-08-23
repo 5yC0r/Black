@@ -64,7 +64,7 @@ public class PrecioProductoDAO {
         Connection accesoBD = null;
         PreparedStatement ps = null;
         try {
-            String consulta = "SELECT nombre,valorVenta FROM precios WHERE ='"+codigo+"'";
+            String consulta = "SELECT nombre,valorVenta FROM precios WHERE codProducto='"+codigo+"'";
             accesoBD = conexion.getConnection();
             ps = accesoBD.prepareStatement(consulta);        
             ResultSet rs = ps.executeQuery();

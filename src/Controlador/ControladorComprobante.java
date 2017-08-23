@@ -31,7 +31,7 @@ public class ControladorComprobante {
        String tipoComprobante = pec.tipoComprobante.getText();
         //String tipoComprobante = pec.jtfTipoComprobante.getSelectedItem().toString();
         //String serie = pec.jtfSerieComprobante.getText();
-        String numero = pec.jtfCorrelativoComprobante.getText();
+        String numero = pec.jtfNumeroTicket.getText();
         int igv = Integer.parseInt(pec.jtfIGV.getText());
         String fechaEmision = pec.fechaEmision.getText();
         int codVenta = Integer.parseInt(pec.jtfCodigoVenta.getText());

@@ -81,7 +81,6 @@ public class Principal extends javax.swing.JFrame {
         miRegistroProducto = new javax.swing.JMenuItem();
         miListadoProducto = new javax.swing.JMenuItem();
         misPromociones = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
         miNuevaCategoria = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
         miNuevaCompra = new javax.swing.JMenuItem();
@@ -216,7 +215,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(btnAgregarCliente)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistroProducto)
@@ -224,15 +223,15 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnVenta)
                 .addGap(18, 18, 18)
                 .addComponent(btnReporte)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnMiCompra)
-                .addGap(14, 14, 14)
+                .addGap(18, 18, 18)
                 .addComponent(btnCumpleaños)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(btnNuevaRecarga)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton10)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,12 +467,8 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu6.add(jMenu9);
 
-        jMenu10.setText("Categoria");
-
-        miNuevaCategoria.setText("Nueva Categoria");
-        jMenu10.add(miNuevaCategoria);
-
-        jMenu6.add(jMenu10);
+        miNuevaCategoria.setText("Categoria");
+        jMenu6.add(miNuevaCategoria);
 
         menuBarPrincipal.add(jMenu6);
 
@@ -518,7 +513,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelPrincipal))
         );
@@ -528,8 +523,8 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-                    .addComponent(panelPrincipal)))
+                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -570,7 +565,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;

@@ -29,8 +29,6 @@ public class ControladorPrincipal implements ActionListener {
     }
     
     Login login;
-    
-    
     ControladorEmpresa ce;
     
     String numDocActualizar = "";
@@ -166,8 +164,7 @@ public class ControladorPrincipal implements ActionListener {
                         PanelRegistroVentas prv = new PanelRegistroVentas();
                         banderaGuardar = 1;
                         v = 12;
-                        setPanelActual(prv);
-                        
+                        setPanelActual(prv);                        
                         UsuarioDAO usuarioDao = new UsuarioDAO();
                         VentaDAO ventaDao = new VentaDAO();
                         
@@ -176,19 +173,15 @@ public class ControladorPrincipal implements ActionListener {
                         crv.setPrv(prv);
                         ccp.setPrv(prv);
                         crv.darEventoBoton();
-                        ccp.darEventoBoton();
-                        //ccp.CargarSpinner();
-                        try {
+                        ccp.darEventoBoton();                        
+                        try {                            
                             int id = ventaDao.obtenerUltimo()+1;
                             prv.jtfCodigoVenta.setText(Integer.toString(id));
                             prv.jtfResponsableVenta.setText(usuarioDao.obtenerNombre(usuarioDao.obtenerCodigo(login.tfUsuario.getText(), String.valueOf(login.tfContra.getPassword()))));
-
                         } catch (SQLException ex) {
                             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        //pv.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                         principal.panelPrincipal.removeAll();
-                        //principal.panelPrincipal.add(pv, BorderLayout.CENTER);
                         this.principal.panelPrincipal.add(prv);
                         prv.show();
                         prv.setLocation(5, 5);
@@ -221,6 +214,7 @@ public class ControladorPrincipal implements ActionListener {
                             } catch (SQLException ex) {
                                 Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                            
                             for (int i = 0; i < numRegistros; i++) {
                                 try {
                                     columna[0] = clienteDao.listarClientes().get(i).getTipoDoc();
@@ -259,15 +253,11 @@ public class ControladorPrincipal implements ActionListener {
                                     pde.jtfRazonSocial.setText(empresaDao.obtenerDatosBB(codEmpresa).getRazonSocial());
                                     pde.jtfRepresentanteLegal.setText(empresaDao.obtenerDatosBB(codEmpresa).getRepresentanteLegal());
                                     pde.jtfRuc.setText(String.valueOf(empresaDao.obtenerDatosBB(codEmpresa).getRuc()));
-                                    pde.jtfTelefono.setText(empresaDao.obtenerDatosBB(codEmpresa).getTelefono());                                   
-                                    
+                                    pde.jtfTelefono.setText(empresaDao.obtenerDatosBB(codEmpresa).getTelefono());
                                 } catch (SQLException ex) {
                                     Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                
-                                //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                 principal.panelPrincipal.removeAll();
-                                //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                 pde.setLocation(5, 5);
                                 this.principal.panelPrincipal.add(pde);
                                 pde.show();
@@ -316,9 +306,7 @@ public class ControladorPrincipal implements ActionListener {
                                 } else {
                                     if (ae.getSource() == principal.miListadoVentas) {
                                         PanelListadoVentas plv = new PanelListadoVentas();
-                                        //pde.setSize(principal.panelPrincipal.getWidth()-10, principal.panelPrincipal.getHeight()-10);
                                         principal.panelPrincipal.removeAll();
-                                        //principal.panelPrincipal.add(pde, BorderLayout.CENTER);
                                         plv.setLocation(5, 5);
                                         this.principal.panelPrincipal.add(plv);
                                         VentaDAO ventaDao = new VentaDAO();

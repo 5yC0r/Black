@@ -4,9 +4,9 @@
  */
 package Modelo.DAO;
 
-import Modelo.Cliente;
 import Modelo.Conexion;
-import Modelo.Empleado;
+import Modelo.Producto;
+import Modelo.Usuario;
 import Modelo.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -113,13 +113,10 @@ public class VentaDAO {
             
             while (rs.next()) {
                 venta.setCodVenta(rs.getInt(1));
-                
-                //operador.setNombreOperador(rs.getString(2));
              }
-             codigo = venta.getCodVenta();
-             
-             System.out.println(codigo);
-             
+            
+             codigo = venta.getCodVenta();             
+             System.out.println(codigo);             
             
         } catch (SQLException e) {
             System.out.println("Error al obtener el codigo del operador: "+e.toString());
@@ -131,9 +128,29 @@ public class VentaDAO {
                 accesoBD.close();
             }
         }
-        //System.out.println(operador.getCodigoOperador());
-        //System.out.println(cliente.getFechaRegistroCliente());
+        
        return codigo;
     }
     
+
+public ResultSet listaProductosPrecios( ) throws SQLException {
+        Conexion conexion = new Conexion();
+        Connection accesoBD = null;
+        PreparedStatement ps = null;
+        
+        String consulta = "SELECT MAX(codVenta) AS id FROM venta";
+        accesoBD = conexion.getConnection();
+        ps = accesoBD.prepareStatement(consulta);
+        ResultSet rs = ps.executeQuery();
+        
+        
+       // String seleccion = "SELECT c.nombre, c.precio ";
+        //seleccion +="FROM comidas c ";
+ 
+        //PreparedStatement ps = con.prepareStatement(seleccion);
+ 
+        //ResultSet rs = ps.executeQuery();
+ 
+        return rs;
+}
 }

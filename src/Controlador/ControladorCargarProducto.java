@@ -47,10 +47,8 @@ public class ControladorCargarProducto implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == prv.btnCargarProducto){
             setCodigoProducto(prv.jtfCodigoProducto.getText());
-            Producto producto = null;
-            
-            //String codigoProducto = prv.jtfCodigoProducto.getText();
-            
+            Producto producto = null;            
+            //String codigoProducto = prv.jtfCodigoProducto.getText();            
             try {
                  producto = retornarDatosProducto();        
                  
@@ -59,11 +57,10 @@ public class ControladorCargarProducto implements ActionListener{
             }
             codigo = producto.getCodProducto();
             System.out.println(codigo);
-            cargarPrecios(codigo);
-            cargarSpinner(producto.getStock());
-            //prv.jtfNombreCliente.setText(cliente.getNombresApellidos());
+            
+           
         }
-        if(ae.getSource() == prv.btnAgregarProducto){
+        /*if(ae.getSource() == prv.btnAgregarProducto){
             PrecioProducto precio = null;
             prv.jtfCodigoProducto.getText();
             nombre = prv.jcbUnidadPrecio.getSelectedItem().toString();
@@ -84,15 +81,12 @@ public class ControladorCargarProducto implements ActionListener{
             prv.jtfSubtotalVenta.setText(String.valueOf(subTotal));
             prv.jtfDescuento.setText("0");
             Total = subTotal + Float.parseFloat(prv.jtfDescuento.getText());
-            prv.jtfTotalVenta.setText(String.valueOf(Total));
-                     
-            
-
-           
-        }
+            prv.jtfTotalVenta.setText(String.valueOf(Total));          
+        }*/
     }
     
-    public void cargarPrecios(int codigo){
+    
+    /*public void cargarPrecios(int codigo){
     
         prv.jcbUnidadPrecio.removeAllItems();
             
@@ -123,9 +117,14 @@ public class ControladorCargarProducto implements ActionListener{
         spin.setMaximum(stock);
         spin.setMinimum(0);
         prv.spinCantidad.setModel(spin);
+    }*/
+    
+    public Producto retornarProductoPrecios() throws SQLException{
+        Producto producto;
+        ProductoDAO productoDao = new ProductoDAO();
+        producto = productoDao.obtenerProducto(codigoProducto);
+        return producto;
     }
-    
-    
     public Producto retornarDatosProducto() throws SQLException{
         Producto producto;
         ProductoDAO productoDao = new ProductoDAO();

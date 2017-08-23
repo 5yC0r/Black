@@ -4,12 +4,9 @@
  */
 package Modelo.DAO;
 
-import Modelo.Comprobante;
 import Modelo.Conexion;
-import Modelo.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -149,7 +146,7 @@ public class ComprobanteDAO {
     /*public void generarCoorelativo(int serie, int corelativo) throws SQLException{
         
         // validar cuando se terminenn las series
-        // ---------------------------------------------
+        -- -----------------------------------------------------
         if(corelativo<99999999)
         {
             // la misma serie al q pertenece ese cooreclativo
@@ -208,6 +205,24 @@ public class ComprobanteDAO {
        //return /*codigo//"";
     }*/
     
-    
+    public void generarSiguiente(String numero){
+        
+        // validar cuando se terminenn las series
+        int num = Integer.parseInt(numero);
+              
+        if(num < 9)
+        {
+            num++;
+        }
+        else{
+            num = 1;            
+        }
+        /*String id = String.valueOf(num);
+        int longitud = id.length();
+        for(int i=0; longitud <5;i++){
+            id = "0"+id;
+        }*/
+        System.out.println(num);
+    }
 }
 
