@@ -40,7 +40,7 @@ public class ControladorProducto {
             //int codProducto =1;
             int i;
             
-            String codigoProducto = prp.jtfCodigoProducto.getText();
+            int codigoProducto = Integer.parseInt(prp.jtfCodigoProducto.getText());
             //String nombreProducto = prp.jtfNombreProducto.getText();
             String marca = prp.jtfMarcaProducto.getText();
             String descripcion = prp.jtfDescripcionProducto.getText();
@@ -49,11 +49,20 @@ public class ControladorProducto {
             int stock = Integer.parseInt(prp.jtfStock.getText());
             int puntoPedido = Integer.parseInt(prp.jtfPuntoPedido.getText());
             //String numeroBoleta = "";// ya no se ingresa por c/producto pertenece a diferentes boletas
-            String fechaRegistro = prp.fechaRegistro.getText();
+            String fechaRegistro = df.format(prp.jdcFechaRegistroProducto.getDate());
             String nomProveedor = prp.cbxProveedor.getSelectedItem().toString();
             String nomTrabajador = prp.jtfResponsable.getText();
-           
-                     
+            
+            /*for(i =0 ; prp.tablePrecios.getRowCount()>0 ; i++){
+               System.out.println(prp.tablePrecios.getValueAt(i,0));
+            try {
+                precioDao.registrarPreciosProducto(prp.tablePrecios.getValueAt(i,0).toString(), Float.parseFloat(prp.tablePrecios.getValueAt(i,1).toString()),Float.parseFloat(prp.tablePrecios.getValueAt(i,2).toString()),1);
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            } */ // prp.tablePrecios.getValueAt(i,0),prp.tablePrecios.getValueAt(i,1),prp.tablePrecios.getValueAt(i,2);
+            
+            
         try {
             codProveedor = proveedorDao.obtenerCodigo(nomProveedor);
             codCategoria = categoriaDao.obtenerCodigo(categoria);

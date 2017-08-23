@@ -4,6 +4,8 @@
  */
 package Vistas.Paneles;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author MARIANA
@@ -46,6 +48,7 @@ public class PanelReporteCompras extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setTitle("Reporte de Compras");
 
@@ -58,6 +61,12 @@ public class PanelReporteCompras extends javax.swing.JInternalFrame {
         jLabel4.setText("Proveedor:");
 
         jButton1.setText("jButton1");
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Estado");
 
@@ -113,7 +122,7 @@ public class PanelReporteCompras extends javax.swing.JInternalFrame {
         );
 
         jLabel5.setText("Reporte de Compras");
-        jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,6 +191,26 @@ public class PanelReporteCompras extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        char c = evt.getKeyChar();
+        String nomPro = jTextField2.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomPro.length() == 30){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;

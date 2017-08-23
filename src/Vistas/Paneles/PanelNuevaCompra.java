@@ -6,6 +6,7 @@ package Vistas.Paneles;
 
 import Controlador.ControladorPrincipal;
 import Modelo.Conexion;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -127,6 +128,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setTitle("Registro de Compra");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -138,6 +140,18 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jLabel4.setText("Proveedor:");
 
         jLabel5.setText("Fecha:");
+
+        jtfNumeroComprobante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNumeroComprobanteKeyTyped(evt);
+            }
+        });
+
+        jtfNombreVendedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombreVendedorKeyTyped(evt);
+            }
+        });
 
         jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 1", "Item 2", "Item 3" }));
         jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +251,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         );
 
         jLabel11.setText("Productos Comprados");
-        jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         tableCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,7 +264,7 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tableCompras);
 
         jLabel13.setText("Datos de la Compra");
-        jLabel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel13.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel12.setText("Total a Pagar");
 
@@ -338,6 +352,39 @@ public class PanelNuevaCompra extends javax.swing.JInternalFrame {
     private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbProveedorActionPerformed
+
+    private void jtfNumeroComprobanteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNumeroComprobanteKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        String numCom  = jtfNumeroComprobante.getText();  
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(numCom.length() == 15){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNumeroComprobanteKeyTyped
+
+    private void jtfNombreVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreVendedorKeyTyped
+        char c = evt.getKeyChar();
+        String nomVen = jtfNombreVendedor.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomVen.length() == 70){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfNombreVendedorKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JCheckBox cbxOtraCompra;

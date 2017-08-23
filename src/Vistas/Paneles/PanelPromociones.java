@@ -6,6 +6,7 @@ package Vistas.Paneles;
 
 import Controlador.ControladorPrincipal;
 import Modelo.Conexion;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -107,13 +108,14 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setTitle("Registro de Promociones");
 
         jLabel6.setText("Detalle de Promocion");
-        jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel7.setText("Listado de Promociones");
-        jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         tablePromociones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,6 +134,12 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nombre: ");
 
+        jtfNombrePromocion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNombrePromocionKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Categoria:");
 
         jLabel3.setText("Producto:");
@@ -149,9 +157,26 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
 
         jcbProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jtfUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfUnidadesKeyTyped(evt);
+            }
+        });
+
+        jtfImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfImporteKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("Descripcion:");
 
         jtpDescripcion.setBorder(null);
+        jtpDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtpDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtpDescripcion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -236,7 +261,7 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,6 +274,70 @@ public class PanelPromociones extends javax.swing.JInternalFrame {
         indexarProductos(cb);
         
     }//GEN-LAST:event_jcbCategoriaProductoActionPerformed
+
+    private void jtfNombrePromocionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombrePromocionKeyTyped
+        char c = evt.getKeyChar();
+        String nomPro = jtfNombrePromocion.getText();
+        if (Character.isLetter(c) || c == KeyEvent.VK_SPACE) {
+             if(nomPro.length() == 40){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtfNombrePromocionKeyTyped
+
+    private void jtpDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtpDescripcionKeyTyped
+         char c = evt.getKeyChar();
+        String desP = jtpDescripcion.getText();
+        
+             if(desP.length() == 60){
+                evt.consume();
+            }
+        
+    }//GEN-LAST:event_jtpDescripcionKeyTyped
+
+    private void jtfUnidadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfUnidadesKeyTyped
+        char c = evt.getKeyChar();// 1 2 3 4 5 6
+        String und  = jtfUnidades.getText();  
+        if (Character.isDigit(c)  || c == '-') {
+            //Permite ingreso
+            if(und.length() == 8){
+                evt.consume();
+            }
+        }else{
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfUnidadesKeyTyped
+
+    private void jtfImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfImporteKeyTyped
+        char c = evt.getKeyChar();
+        String impo = jtfImporte.getText();
+        if (Character.isDigit(c)) {
+             if(impo.length() == 10){
+                evt.consume();
+            }
+            //Permite ingreso
+            if (Character.isLowerCase(c)) {
+                String cadena = (""+c).toUpperCase();
+                c = cadena.charAt(0);
+                evt.setKeyChar(c);
+            }
+        }else{
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtfImporteKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

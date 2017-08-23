@@ -5,13 +5,9 @@
 package Modelo.DAO;
 
 import Modelo.Conexion;
-import Modelo.Empleado;
-import Modelo.PrecioProducto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
@@ -55,6 +51,7 @@ public class PrecioProductoDAO {
         }
     }
     
+<<<<<<< HEAD
     
     public ArrayList<PrecioProducto> listarPrecios(int codigo) throws SQLException{
         ArrayList<PrecioProducto> listaPrecios = new ArrayList();
@@ -116,4 +113,6 @@ public class PrecioProductoDAO {
         return precio;
     }
     
+=======
+>>>>>>> 321ed3412726aa4140fbe526626ceb6a572bc60b
 }
